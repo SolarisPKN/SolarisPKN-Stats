@@ -1,21 +1,9 @@
-# ================================================================
-# compile.yml
-# ================================================================
-# Este workflow:
-# 1. Se ejecuta automáticamente todos los días a las 23:30 UTC
-# 2. También se puede ejecutar manualmente desde GitHub
-# 3. Ejecuta compile-worker.js para compilar y subir el Worker
-# ================================================================
-
 name: Compilar Worker
 
 on:
-  # Ejecución automática diaria a las 23:30 UTC
   schedule:
-    - cron: '30 23 * * *'
-  
-  # Ejecución manual desde la interfaz de GitHub
-  workflow_dispatch:
+    - cron: '30 23 * * *'   # Todos los días a las 23:30 UTC
+  workflow_dispatch:        # Ejecución manual desde GitHub
 
 jobs:
   compile:
@@ -26,18 +14,13 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
       
-      # 2. Configurar Node.js
+      # 2. Configurar Node.js (necesario para ejecutar compile-worker.js)
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      # 3. Instalar dependencias (si las hubiera)
-      - name: Instalar dependencias
-        run: npm install
-        # Nota: Si no usas dependencias externas, puedes eliminar este paso
-      
-      # 4. Ejecutar el compilador
+      # 3. EJECUTAR EL COMPILADOR (sin npm install)
       - name: Compilar y subir Worker
         run: node compile-worker.js
         env:
@@ -45,7 +28,7 @@ jobs:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           WORKER_NAME: 'solarispkn-stats'  # Opcional, puedes cambiarlo
       
-      # 5. (Opcional) Notificar éxito/fallo
+      # 4. Notificar resultado (opcional)
       - name: Notificar resultado
         if: always()
         run: |

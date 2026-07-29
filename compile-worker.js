@@ -4,7 +4,7 @@
 // Este script:
 // 1. Lee registry.json (configuración de proyectos)
 // 2. Lee todos los conectores en la carpeta connectors/
-// 3. Compila el executionPlan (tareas por hora)
+// 3. Compila el executionPlan (tareas por hora) incluyendo URLs
 // 4. Genera el código completo del Worker (con plan incrustado)
 // 5. Sube el Worker a Cloudflare usando la API
 // ================================================================
@@ -17,11 +17,10 @@ const crypto = require('crypto');
 // 1. CONFIGURACIÓN
 // ================================================================
 
-// Variables de entorno (deben estar configuradas en GitHub Actions)
 const {
   CF_ACCOUNT_ID,
   CF_API_TOKEN,
-  WORKER_NAME = 'solarispkn-stats'  // Nombre del Worker en Cloudflare
+  WORKER_NAME = 'solarispkn-stats'
 } = process.env;
 
 if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
@@ -71,6 +70,9 @@ for (const file of connectorFiles) {
 const plan = {};
 
 for (const project of registry.projects) {
+  const projectId = project.id;
+  const projectUrl = project.url || `https://${projectId}.solarispkn.com.ar`;
+
   for (const platform of project.platforms) {
     const connector = connectors[platform];
     if (!connector) {
@@ -81,8 +83,10 @@ for (const project of registry.projects) {
     for (const hour of hours) {
       if (!plan[hour]) plan[hour] = {};
       if (!plan[hour][platform]) plan[hour][platform] = [];
-      if (!plan[hour][platform].includes(project.id)) {
-        plan[hour][platform].push(project.id);
+      // Guardar tanto el id como la url en la tarea
+      const existing = plan[hour][platform].find(t => t.id === projectId);
+      if (!existing) {
+        plan[hour][platform].push({ id: projectId, url: projectUrl });
       }
     }
   }
@@ -126,7 +130,6 @@ const runtimeCode = `
 async function runRuntime(env, hour) {
   console.log(\`⏰ Ejecutando runtime para la hora \${hour}...\`);
 
-  // Obtener tareas de la hora actual desde el plan incrustado
   const tasks = EXECUTION_PLAN.plan[hour] || {};
 
   if (Object.keys(tasks).length === 0) {
@@ -139,17 +142,17 @@ async function runRuntime(env, hour) {
 ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
   };
 
-  // Ejecutar tareas
-  for (const [platform, projects] of Object.entries(tasks)) {
+  for (const [platform, taskList] of Object.entries(tasks)) {
     const connector = connectorMap[platform];
     if (!connector) {
       console.error(\`❌ Conector no encontrado: \${platform}\`);
       continue;
     }
-    for (const projectId of projects) {
+    for (const task of taskList) {
+      const { id: projectId, url } = task;
       try {
         console.log(\`📊 Consultando \${platform} para \${projectId}...\`);
-        const data = await connector.fetchData(projectId, env);
+        const data = await connector.fetchData(projectId, url, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
