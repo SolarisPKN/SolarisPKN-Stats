@@ -2,7 +2,8 @@
   "projects": [
     {
       "id": "solarispkn-labs",
-      "platforms": ["github", "cloudflare", "pagespeed"]
+      "platforms": ["github", "cloudflare", "pagespeed"],
+      "url": "https://labs.solarispkn.com.ar"
     },
     {
       "id": "solarispkn-control",
