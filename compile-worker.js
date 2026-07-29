@@ -355,5 +355,10 @@ async function deployWorker() {
 
 deployWorker().catch(error => {
   console.error('❌ Error inesperado:', error);
+  // Si falla, guardar el archivo como artefacto para depuración
+const fs = require('fs');
+const artifactPath = path.join(__dirname, 'worker-built-error.js');
+fs.copyFileSync(builtPath, artifactPath);
+console.error(`El archivo se ha guardado como ${artifactPath} para inspección.`);
   process.exit(1);
 });
