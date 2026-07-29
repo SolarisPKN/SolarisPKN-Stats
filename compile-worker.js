@@ -4,7 +4,7 @@
 // Este script:
 // 1. Lee registry.json (configuración de proyectos)
 // 2. Lee todos los conectores en la carpeta connectors/
-// 3. Compila el executionPlan (tareas por hora) incluyendo URLs
+// 3. Compila el executionPlan (tareas por hora)
 // 4. Genera el código completo del Worker (con plan incrustado)
 // 5. Sube el Worker a Cloudflare usando la API
 // ================================================================
@@ -56,10 +56,16 @@ const connectorCode = {};
 
 for (const file of connectorFiles) {
   const connectorPath = path.join(connectorsDir, file);
+  // Cargar el conector para obtener sus metadatos (id, hours)
   const module = require(connectorPath);
   const id = module.id || path.basename(file, '.js');
   connectors[id] = module;
-  connectorCode[id] = fs.readFileSync(connectorPath, 'utf8');
+  // Leer el código fuente original
+  let code = fs.readFileSync(connectorPath, 'utf8');
+  // Escapar caracteres problemáticos para la plantilla
+  // Reemplazar backticks y ${} para que no rompan la cadena
+  code = code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+  connectorCode[id] = code;
   console.log(`  🔌 Conector cargado: ${id} (horas: ${module.hours?.join(', ') || 'todas'})`);
 }
 
@@ -70,9 +76,6 @@ for (const file of connectorFiles) {
 const plan = {};
 
 for (const project of registry.projects) {
-  const projectId = project.id;
-  const projectUrl = project.url || `https://${projectId}.solarispkn.com.ar`;
-
   for (const platform of project.platforms) {
     const connector = connectors[platform];
     if (!connector) {
@@ -83,22 +86,22 @@ for (const project of registry.projects) {
     for (const hour of hours) {
       if (!plan[hour]) plan[hour] = {};
       if (!plan[hour][platform]) plan[hour][platform] = [];
-      // Guardar tanto el id como la url en la tarea
-      const existing = plan[hour][platform].find(t => t.id === projectId);
-      if (!existing) {
-        plan[hour][platform].push({ id: projectId, url: projectUrl });
+      // Guardamos el objeto con id y url (si existe)
+      const task = { id: project.id };
+      if (project.url) task.url = project.url;
+      if (!plan[hour][platform].some(t => t.id === project.id)) {
+        plan[hour][platform].push(task);
       }
     }
   }
 }
 
-// Ordenar horas numéricamente
+// Ordenar horas
 const sortedPlan = {};
 Object.keys(plan).sort((a, b) => Number(a) - Number(b)).forEach(hour => {
   sortedPlan[Number(hour)] = plan[hour];
 });
 
-// Generar hash del registry para detectar cambios
 const registryHash = crypto
   .createHash('sha256')
   .update(JSON.stringify(registry))
@@ -121,7 +124,21 @@ console.log(`  - Horas con tareas: ${Object.keys(sortedPlan).length}`);
 // 5. GENERAR CÓDIGO DEL WORKER
 // ================================================================
 
-// Código del runtime (se ejecuta cada hora)
+// Generar código para los conectores envueltos en IIFE
+const connectorsCode = Object.entries(connectorCode).map(([id, code]) => {
+  return `
+// --- Conector: ${id} ---
+const ${id}Connector = (function() {
+  let module = { exports: {} };
+  (function(module, exports) {
+    ${code}
+  })(module, module.exports);
+  return module.exports;
+})();
+`;
+}).join('\n');
+
+// Código del runtime
 const runtimeCode = `
 // ================================================================
 // RUNTIME
@@ -131,13 +148,11 @@ async function runRuntime(env, hour) {
   console.log(\`⏰ Ejecutando runtime para la hora \${hour}...\`);
 
   const tasks = EXECUTION_PLAN.plan[hour] || {};
-
   if (Object.keys(tasks).length === 0) {
     console.log(\`⏸️ No hay tareas para la hora \${hour}\`);
     return;
   }
 
-  // Mapeo de plataformas a sus conectores
   const connectorMap = {
 ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
   };
@@ -149,9 +164,11 @@ ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
       continue;
     }
     for (const task of taskList) {
-      const { id: projectId, url } = task;
+      const projectId = task.id;
+      const url = task.url || null;
       try {
         console.log(\`📊 Consultando \${platform} para \${projectId}...\`);
+        // Llamar al conector pasando projectId, url y env
         const data = await connector.fetchData(projectId, url, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
@@ -160,11 +177,9 @@ ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
     }
   }
 
-  // Si es la hora 0 (medianoche), crear snapshot histórico
   if (hour === 0) {
     await createDailySnapshot(env);
   }
-
   console.log(\`✅ Runtime completado para la hora \${hour}\`);
 }
 
@@ -237,7 +252,7 @@ async function createDailySnapshot(env) {
 }
 `;
 
-// Código del index (punto de entrada)
+// Código del punto de entrada (index)
 const indexCode = `
 // ================================================================
 // WORKER - PUNTO DE ENTRADA
@@ -284,20 +299,29 @@ const EXECUTION_PLAN = ${JSON.stringify(executionPlan, null, 2)};
 // ================================================================
 // CONECTORES
 // ================================================================
-${Object.entries(connectorCode).map(([id, code]) => `
-// --- Conector: ${id} ---
-${code}
-`).join('\n')}
+${connectorsCode}
 
+// ================================================================
+// RUNTIME Y HELPERS
 // ================================================================
 ${runtimeCode}
 
+// ================================================================
+// PUNTO DE ENTRADA
 // ================================================================
 ${indexCode}
 `;
 
 // ================================================================
-// 6. SUBIR WORKER A CLOUDFLARE
+// 6. GUARDAR WORKER GENERADO (para depuración)
+// ================================================================
+
+const builtPath = path.join(__dirname, 'worker-built.js');
+fs.writeFileSync(builtPath, workerCode);
+console.log(`📝 Worker generado guardado en: ${builtPath}`);
+
+// ================================================================
+// 7. SUBIR WORKER A CLOUDFLARE
 // ================================================================
 
 async function deployWorker() {
@@ -326,7 +350,7 @@ async function deployWorker() {
 }
 
 // ================================================================
-// 7. EJECUTAR
+// 8. EJECUTAR
 // ================================================================
 
 deployWorker().catch(error => {
