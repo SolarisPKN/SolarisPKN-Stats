@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "id": "solarispkn-labs",
+      "platforms": ["github", "cloudflare", "pagespeed"]
+    },
+    {
+      "id": "solarispkn-control",
+      "platforms": ["github"]
+    }
+  ]
+}
