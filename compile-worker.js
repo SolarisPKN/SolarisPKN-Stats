@@ -188,7 +188,7 @@ async function getFromGitHub(env, path) {
   const url = \`https://api.github.com/repos/SolarisPKN/SolarisPKN-Stats/contents/\${path}\`;
   const response = await fetch(url, {
     headers: {
-      'Authorization': \`Bearer \${env.GITHUB_TOKEN}\`,
+      'Authorization': \`Bearer \${env.GITHUB_TOKEN_WRITE}\`,
       'Accept': 'application/vnd.github.v3+json'
     }
   });
@@ -210,7 +210,7 @@ async function saveToGitHub(env, path, content, message = 'Update stats') {
   const response = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Authorization': \`Bearer \${env.GITHUB_TOKEN}\`,
+      'Authorization': \`Bearer \${env.GITHUB_TOKEN_WRITE}\`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
