@@ -331,7 +331,11 @@ async function deployWorker() {
   const scriptFile = `${WORKER_NAME}.js`;
   const metadata = {
     main_module: scriptFile,
-    compatibility_date: new Date().toISOString().split('T')[0]
+    compatibility_date: new Date().toISOString().split('T')[0],
+    // Buffer.from(...) se usa en getFromGitHub/saveToGitHub para
+    // leer y escribir Stats.json. Sin este flag, Buffer no existe
+    // en el runtime de Workers y esas funciones tiran ReferenceError.
+    compatibility_flags: ['nodejs_compat']
   };
 
   const formData = new FormData();
@@ -362,10 +366,42 @@ async function deployWorker() {
 }
 
 // ================================================================
+// 7b. CONFIGURAR CRON TRIGGER
+// ================================================================
+// Esto es un recurso separado del script: subir el código NO alcanza
+// para que scheduled() se dispare solo. Hay que registrar el cron acá
+// (o una vez a mano desde el dashboard). Como es idempotente, no pasa
+// nada por reenviarlo en cada deploy.
+async function setCronTrigger() {
+  console.log(`⏰ Configurando Cron Trigger...`);
+
+  const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/schedules`;
+
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${CF_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify([{ cron: '0 * * * *' }]) // cada hora en punto (UTC)
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`❌ Error al configurar Cron Trigger: ${response.status} - ${errorText}`);
+    process.exit(1);
+  }
+
+  console.log(`✅ Cron Trigger configurado: "0 * * * *" (cada hora en punto, UTC)`);
+}
+
+// ================================================================
 // 8. EJECUTAR
 // ================================================================
 
-deployWorker().catch(error => {
+deployWorker()
+  .then(() => setCronTrigger())
+  .catch(error => {
   console.error('❌ Error inesperado:', error);
   // Si falla, guardar el archivo como artefacto para depuración
 const fs = require('fs');
