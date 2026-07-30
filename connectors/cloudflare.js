@@ -16,10 +16,11 @@ module.exports = {
   /**
    * Obtiene métricas de Cloudflare para una zona específica
    * @param {string} projectId - ID del proyecto (nombre del subdominio o zona)
+   * @param {string} projectUrl - URL del proyecto desde registry.json (no se usa acá)
    * @param {object} env - Variables de entorno del Worker
    * @returns {object} Métricas de Cloudflare
    */
-  async fetchData(projectId, env) {
+  async fetchData(projectId, projectUrl, env) {
     // ============================================================
     // 1. CONFIGURACIÓN
     // ============================================================

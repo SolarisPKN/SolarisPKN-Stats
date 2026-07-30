@@ -40,11 +40,12 @@ module.exports = {
     const params = new URLSearchParams({
       url: url,
       key: apiKey,
-      strategy: 'desktop',
-      category: 'performance',
-      category: 'accessibility',
-      category: 'best-practices',
-      category: 'seo'
+      strategy: 'desktop'
+    });
+    // URLSearchParams permite claves repetidas via .append(), a diferencia
+    // del objeto de arriba (donde 'category' repetido solo se queda con 'seo').
+    ['performance', 'accessibility', 'best-practices', 'seo'].forEach(cat => {
+      params.append('category', cat);
     });
 
     const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?${params.toString()}`;

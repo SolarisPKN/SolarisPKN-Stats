@@ -16,10 +16,11 @@ module.exports = {
   /**
    * Obtiene métricas de un repositorio de GitHub
    * @param {string} projectId - ID del proyecto (nombre del repositorio)
+   * @param {string} projectUrl - URL del proyecto desde registry.json (no se usa acá, github.js arma su propia URL de API)
    * @param {object} env - Variables de entorno del Worker
    * @returns {object} Métricas del repositorio
    */
-  async fetchData(projectId, env) {
+  async fetchData(projectId, projectUrl, env) {
     // Construir URL de la API de GitHub
     // Asumimos que el repositorio está en la organización SolarisPKN
     const repoName = projectId; // El ID del proyecto es el nombre del repo

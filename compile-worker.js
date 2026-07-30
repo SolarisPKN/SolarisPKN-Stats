@@ -62,9 +62,6 @@ for (const file of connectorFiles) {
   connectors[id] = module;
   // Leer el código fuente original
   let code = fs.readFileSync(connectorPath, 'utf8');
-  // Escapar caracteres problemáticos para la plantilla
-  // Reemplazar backticks y ${} para que no rompan la cadena
-  code = code.replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
   connectorCode[id] = code;
   console.log(`  🔌 Conector cargado: ${id} (horas: ${module.hours?.join(', ') || 'todas'})`);
 }
@@ -327,15 +324,30 @@ console.log(`📝 Worker generado guardado en: ${builtPath}`);
 async function deployWorker() {
   console.log(`🚀 Subiendo Worker a Cloudflare...`);
 
+  // El worker generado usa sintaxis de ES Modules (export default { scheduled, fetch }),
+  // así que hay que subirlo como multipart/form-data con metadata.main_module.
+  // Con Content-Type: application/javascript a secas, Cloudflare lo trata como
+  // Service Worker legacy y devuelve: "Uncaught SyntaxError: Unexpected token 'export'".
+  const scriptFile = `${WORKER_NAME}.js`;
+  const metadata = {
+    main_module: scriptFile,
+    compatibility_date: new Date().toISOString().split('T')[0]
+  };
+
+  const formData = new FormData();
+  formData.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+  formData.append(scriptFile, new Blob([workerCode], { type: 'application/javascript+module' }), scriptFile);
+
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}`;
-  
+
   const response = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${CF_API_TOKEN}`,
-      'Content-Type': 'application/javascript'
+      'Authorization': `Bearer ${CF_API_TOKEN}`
+      // OJO: no seteamos Content-Type a mano acá, fetch arma el
+      // multipart/form-data con el boundary correcto solo.
     },
-    body: workerCode
+    body: formData
   });
 
   if (!response.ok) {
