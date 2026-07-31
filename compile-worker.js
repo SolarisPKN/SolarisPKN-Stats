@@ -4,9 +4,13 @@
 // Este script:
 // 1. Lee registry.json (configuración de proyectos)
 // 2. Lee todos los conectores en la carpeta connectors/
-// 3. Compila el executionPlan (tareas por hora)
-// 4. Genera el código completo del Worker (con plan incrustado)
-// 5. Sube el Worker a Cloudflare usando la API
+// 3. Resuelve el Zone ID de Cloudflare de cada proyecto a partir de su
+//    URL (NO se guarda en registry.json — se resuelve en build time y
+//    solo queda incrustado dentro del Worker compilado)
+// 4. Compila el executionPlan (tareas por hora)
+// 5. Genera el código completo del Worker (con plan incrustado)
+// 6. Sube el Worker a Cloudflare usando la API
+// 7. Configura el Cron Trigger
 // ================================================================
 
 const fs = require('fs');
@@ -56,74 +60,147 @@ const connectorCode = {};
 
 for (const file of connectorFiles) {
   const connectorPath = path.join(connectorsDir, file);
-  // Cargar el conector para obtener sus metadatos (id, hours)
-  const module = require(connectorPath);
-  const id = module.id || path.basename(file, '.js');
-  connectors[id] = module;
-  // Leer el código fuente original
-  let code = fs.readFileSync(connectorPath, 'utf8');
+  const connectorModule = require(connectorPath);
+  const id = connectorModule.id || path.basename(file, '.js');
+  connectors[id] = connectorModule;
+  const code = fs.readFileSync(connectorPath, 'utf8');
   connectorCode[id] = code;
-  console.log(`  🔌 Conector cargado: ${id} (horas: ${module.hours?.join(', ') || 'todas'})`);
+  console.log(`  🔌 Conector cargado: ${id} (horas: ${connectorModule.hours?.join(', ') || 'todas'})`);
 }
 
 // ================================================================
-// 4. COMPILAR EXECUTION PLAN
+// 4. RESOLVER ZONE IDs DE CLOUDFLARE (sin guardarlos en registry.json)
 // ================================================================
+// El zoneId de cada proyecto con plataforma "cloudflare" no vive en
+// ningún archivo del repo. Se resuelve acá, en build time, contra la
+// API de Cloudflare (List Zones) a partir del hostname de "url", y
+// queda incrustado ÚNICAMENTE dentro del Worker compilado — que no es
+// público como sí lo es este repo de GitHub.
+//
+// Requisito: el CF_API_TOKEN de este Action necesita, además del
+// permiso que ya tenía (Workers Scripts: Edit), el permiso de zona
+// Zone → Zone → Read (alcanza con "Read" para listar zonas).
 
-const plan = {};
+async function listZonesByName(name) {
+  const url = `https://api.cloudflare.com/client/v4/zones?name=${encodeURIComponent(name)}`;
+  const response = await fetch(url, {
+    headers: { 'Authorization': `Bearer ${CF_API_TOKEN}` }
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Cloudflare Zones API error: ${response.status} - ${errorText}`);
+  }
+  const json = await response.json();
+  return json.result || [];
+}
 
-for (const project of registry.projects) {
-  for (const platform of project.platforms) {
-    const connector = connectors[platform];
-    if (!connector) {
-      console.warn(`⚠️ Plataforma "${platform}" no tiene conector. Ignorando.`);
-      continue;
+async function resolveZoneId(hostname) {
+  const parts = hostname.split('.');
+  // Probamos desde el hostname completo hacia arriba, sacando un label
+  // de la izquierda cada vez:
+  //   labs.solarispkn.com.ar -> solarispkn.com.ar -> com.ar
+  // hasta encontrar una zona que exista de verdad en la cuenta. Así no
+  // hace falta adivinar dónde termina el dominio en ccTLDs compuestos
+  // (.com.ar, .co.uk, etc.) sin depender de una lista pública de sufijos.
+  for (let i = 0; i < parts.length - 1; i++) {
+    const candidate = parts.slice(i).join('.');
+    const zones = await listZonesByName(candidate);
+    if (zones.length > 0) {
+      return zones[0].id;
     }
-    const hours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
-    for (const hour of hours) {
-      if (!plan[hour]) plan[hour] = {};
-      if (!plan[hour][platform]) plan[hour][platform] = [];
-      // Guardamos el objeto con id y url (si existe)
-      const task = { id: project.id };
-      if (project.url) task.url = project.url;
-      if (!plan[hour][platform].some(t => t.id === project.id)) {
-        plan[hour][platform].push(task);
+  }
+  return null;
+}
+
+const zoneIdCache = {}; // por si dos proyectos comparten el mismo dominio
+
+async function getZoneIdForProject(project) {
+  if (!project.url) return null;
+  const hostname = new URL(project.url).hostname;
+  if (hostname in zoneIdCache) return zoneIdCache[hostname];
+
+  console.log(`  🔍 Resolviendo Zone ID para ${hostname}...`);
+  const zoneId = await resolveZoneId(hostname);
+  if (!zoneId) {
+    throw new Error(
+      `No se encontró ninguna zona de Cloudflare para "${hostname}" (proyecto "${project.id}"). ` +
+      `Verificá que el dominio esté en la misma cuenta de Cloudflare que CF_ACCOUNT_ID, ` +
+      `y que CF_API_TOKEN tenga el permiso Zone → Zone → Read.`
+    );
+  }
+  console.log(`  ✅ Zone ID resuelto para ${hostname}`);
+  zoneIdCache[hostname] = zoneId;
+  return zoneId;
+}
+
+// ================================================================
+// 5. COMPILAR EXECUTION PLAN Y DESPLEGAR
+// ================================================================
+// Todo lo que sigue necesita await (resolver zone ids, y más adelante
+// subir el Worker), así que va adentro de main().
+
+async function main() {
+  const plan = {};
+
+  for (const project of registry.projects) {
+    for (const platform of project.platforms) {
+      const connector = connectors[platform];
+      if (!connector) {
+        console.warn(`⚠️ Plataforma "${platform}" no tiene conector. Ignorando.`);
+        continue;
+      }
+
+      // Solo resolvemos zoneId para proyectos que efectivamente usan
+      // la plataforma cloudflare — no pegamos contra la API al pedo.
+      let zoneId = null;
+      if (platform === 'cloudflare') {
+        zoneId = await getZoneIdForProject(project);
+      }
+
+      const hours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
+      for (const hour of hours) {
+        if (!plan[hour]) plan[hour] = {};
+        if (!plan[hour][platform]) plan[hour][platform] = [];
+        const task = { id: project.id };
+        if (project.url) task.url = project.url;
+        if (zoneId) task.zoneId = zoneId;
+        if (!plan[hour][platform].some(t => t.id === project.id)) {
+          plan[hour][platform].push(task);
+        }
       }
     }
   }
-}
 
-// Ordenar horas
-const sortedPlan = {};
-Object.keys(plan).sort((a, b) => Number(a) - Number(b)).forEach(hour => {
-  sortedPlan[Number(hour)] = plan[hour];
-});
+  // Ordenar horas
+  const sortedPlan = {};
+  Object.keys(plan).sort((a, b) => Number(a) - Number(b)).forEach(hour => {
+    sortedPlan[Number(hour)] = plan[hour];
+  });
 
-const registryHash = crypto
-  .createHash('sha256')
-  .update(JSON.stringify(registry))
-  .digest('hex');
+  const registryHash = crypto
+    .createHash('sha256')
+    .update(JSON.stringify(registry))
+    .digest('hex');
 
-const executionPlan = {
-  version: Date.now(),
-  generatedAt: new Date().toISOString(),
-  registryHash,
-  plan: sortedPlan
-};
+  const executionPlan = {
+    version: Date.now(),
+    generatedAt: new Date().toISOString(),
+    registryHash,
+    plan: sortedPlan
+  };
 
-console.log(`📦 Plan compilado:`);
-console.log(`  - Versión: ${executionPlan.version}`);
-console.log(`  - Generado: ${executionPlan.generatedAt}`);
-console.log(`  - Hash: ${executionPlan.registryHash.slice(0, 8)}...`);
-console.log(`  - Horas con tareas: ${Object.keys(sortedPlan).length}`);
+  console.log(`📦 Plan compilado:`);
+  console.log(`  - Versión: ${executionPlan.version}`);
+  console.log(`  - Generado: ${executionPlan.generatedAt}`);
+  console.log(`  - Hash: ${executionPlan.registryHash.slice(0, 8)}...`);
+  console.log(`  - Horas con tareas: ${Object.keys(sortedPlan).length}`);
 
-// ================================================================
-// 5. GENERAR CÓDIGO DEL WORKER
-// ================================================================
+  // ================================================================
+  // 5b. GENERAR CÓDIGO DEL WORKER
+  // ================================================================
 
-// Generar código para los conectores envueltos en IIFE
-const connectorsCode = Object.entries(connectorCode).map(([id, code]) => {
-  return `
+  const connectorsCode = Object.entries(connectorCode).map(([id, code]) => {
+    return `
 // --- Conector: ${id} ---
 const ${id}Connector = (function() {
   let module = { exports: {} };
@@ -133,10 +210,9 @@ const ${id}Connector = (function() {
   return module.exports;
 })();
 `;
-}).join('\n');
+  }).join('\n');
 
-// Código del runtime
-const runtimeCode = `
+  const runtimeCode = `
 // ================================================================
 // RUNTIME
 // ================================================================
@@ -162,11 +238,10 @@ ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
     }
     for (const task of taskList) {
       const projectId = task.id;
-      const url = task.url || null;
       try {
         console.log(\`📊 Consultando \${platform} para \${projectId}...\`);
-        // Llamar al conector pasando projectId, url y env
-        const data = await connector.fetchData(projectId, url, env);
+        // Le pasamos al conector projectId, la tarea completa (id/url/zoneId/lo que traiga) y env
+        const data = await connector.fetchData(projectId, task, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
@@ -249,8 +324,7 @@ async function createDailySnapshot(env) {
 }
 `;
 
-// Código del punto de entrada (index)
-const indexCode = `
+  const indexCode = `
 // ================================================================
 // WORKER - PUNTO DE ENTRADA
 // ================================================================
@@ -282,8 +356,7 @@ export default {
 };
 `;
 
-// Generar el código completo del Worker
-const workerCode = `
+  const workerCode = `
 // ================================================================
 // WORKER GENERADO AUTOMÁTICAMENTE POR compile-worker.js
 // ================================================================
@@ -309,19 +382,32 @@ ${runtimeCode}
 ${indexCode}
 `;
 
+  // ================================================================
+  // 6. GUARDAR WORKER GENERADO (para depuración)
+  // ================================================================
+
+  const builtPath = path.join(__dirname, 'worker-built.js');
+  fs.writeFileSync(builtPath, workerCode);
+  console.log(`📝 Worker generado guardado en: ${builtPath}`);
+
+  // ================================================================
+  // 7. SUBIR WORKER A CLOUDFLARE
+  // ================================================================
+
+  await deployWorker(workerCode, executionPlan, builtPath);
+
+  // ================================================================
+  // 8. CONFIGURAR CRON TRIGGER
+  // ================================================================
+
+  await setCronTrigger();
+}
+
 // ================================================================
-// 6. GUARDAR WORKER GENERADO (para depuración)
+// deployWorker / setCronTrigger
 // ================================================================
 
-const builtPath = path.join(__dirname, 'worker-built.js');
-fs.writeFileSync(builtPath, workerCode);
-console.log(`📝 Worker generado guardado en: ${builtPath}`);
-
-// ================================================================
-// 7. SUBIR WORKER A CLOUDFLARE
-// ================================================================
-
-async function deployWorker() {
+async function deployWorker(workerCode, executionPlan, builtPath) {
   console.log(`🚀 Subiendo Worker a Cloudflare...`);
 
   // El worker generado usa sintaxis de ES Modules (export default { scheduled, fetch }),
@@ -344,19 +430,26 @@ async function deployWorker() {
 
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}`;
 
-  const response = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${CF_API_TOKEN}`
-      // OJO: no seteamos Content-Type a mano acá, fetch arma el
-      // multipart/form-data con el boundary correcto solo.
-    },
-    body: formData
-  });
+  let response;
+  try {
+    response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${CF_API_TOKEN}`
+        // OJO: no seteamos Content-Type a mano acá, fetch arma el
+        // multipart/form-data con el boundary correcto solo.
+      },
+      body: formData
+    });
+  } catch (err) {
+    guardarArtefactoDeError(builtPath);
+    throw err;
+  }
 
   if (!response.ok) {
     const errorText = await response.text();
     console.error(`❌ Error al subir Worker: ${response.status} - ${errorText}`);
+    guardarArtefactoDeError(builtPath);
     process.exit(1);
   }
 
@@ -365,9 +458,6 @@ async function deployWorker() {
   console.log(`📌 Versión: ${executionPlan.version}`);
 }
 
-// ================================================================
-// 7b. CONFIGURAR CRON TRIGGER
-// ================================================================
 // Esto es un recurso separado del script: subir el código NO alcanza
 // para que scheduled() se dispare solo. Hay que registrar el cron acá
 // (o una vez a mano desde el dashboard). Como es idempotente, no pasa
@@ -395,18 +485,21 @@ async function setCronTrigger() {
   console.log(`✅ Cron Trigger configurado: "0 * * * *" (cada hora en punto, UTC)`);
 }
 
+function guardarArtefactoDeError(builtPath) {
+  try {
+    const artifactPath = path.join(__dirname, 'worker-built-error.js');
+    fs.copyFileSync(builtPath, artifactPath);
+    console.error(`El archivo se ha guardado como ${artifactPath} para inspección.`);
+  } catch (_) {
+    // si ni esto se puede guardar, no hay mucho más para hacer acá
+  }
+}
+
 // ================================================================
-// 8. EJECUTAR
+// EJECUTAR
 // ================================================================
 
-deployWorker()
-  .then(() => setCronTrigger())
-  .catch(error => {
+main().catch(error => {
   console.error('❌ Error inesperado:', error);
-  // Si falla, guardar el archivo como artefacto para depuración
-const fs = require('fs');
-const artifactPath = path.join(__dirname, 'worker-built-error.js');
-fs.copyFileSync(builtPath, artifactPath);
-console.error(`El archivo se ha guardado como ${artifactPath} para inspección.`);
   process.exit(1);
 });
