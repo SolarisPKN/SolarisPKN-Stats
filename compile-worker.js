@@ -341,7 +341,8 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.searchParams.has('run')) {
-      const hour = parseInt(url.searchParams.get('hour') || new Date().getHours());
+      const hourParam = url.searchParams.get('hour');
+      const hour = hourParam !== null ? parseInt(hourParam, 10) : new Date().getHours();
       await runRuntime(env, hour);
       return new Response(\`Runtime ejecutado para la hora \${hour}\`);
     }
@@ -356,7 +357,13 @@ export default {
 };
 `;
 
-  const workerCode = `
+  const workerCode = `// @ts-nocheck
+// El editor de Cloudflare (Quick Edit) corre un chequeo de TypeScript
+// incluso sobre archivos .js. Sin esta línea tira falsos positivos:
+// "Promise<T>" en los métodos async de los conectores, y "Cannot find
+// name 'Buffer'" (porque Buffer solo existe en runtime gracias al flag
+// nodejs_compat del deploy, cosa que el editor no sabe). No son errores
+// reales — el Worker ya corre así en producción — esto es solo estético.
 // ================================================================
 // WORKER GENERADO AUTOMÁTICAMENTE POR compile-worker.js
 // ================================================================
