@@ -15,11 +15,13 @@ module.exports = {
   /**
    * Obtiene métricas de PageSpeed Insights para una URL
    * @param {string} projectId - ID del proyecto (para logs)
-   * @param {string} url - URL del proyecto a analizar (desde registry.json)
+   * @param {object} task - Tarea del plan (trae .url desde registry.json)
    * @param {object} env - Variables de entorno del Worker
    * @returns {object} Métricas de rendimiento, SEO, accesibilidad y mejores prácticas
    */
-  async fetchData(projectId, url, env) {
+  async fetchData(projectId, task, env) {
+    const url = task && task.url;
+
     // ============================================================
     // 1. VALIDAR QUE TENEMOS URL
     // ============================================================

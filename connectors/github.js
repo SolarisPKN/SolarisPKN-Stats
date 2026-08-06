@@ -19,11 +19,11 @@ module.exports = {
   /**
    * Obtiene métricas de un repositorio de GitHub vía GraphQL (1 sola petición)
    * @param {string} projectId - ID del proyecto (nombre del repositorio)
-   * @param {string} projectUrl - URL del proyecto desde registry.json (no se usa acá)
+   * @param {object} task - Tarea del plan (no se usa acá, github.js arma su propia URL de API)
    * @param {object} env - Variables de entorno del Worker
    * @returns {object} Métricas del repositorio
    */
-  async fetchData(projectId, projectUrl, env) {
+  async fetchData(projectId, task, env) {
     const owner = 'SolarisPKN';
     const repoName = projectId; // El ID del proyecto es el nombre del repo
 
