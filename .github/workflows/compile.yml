@@ -2,7 +2,13 @@ name: Compilar Worker
 
 on:
   schedule:
-    - cron: '30 23 * * *'   # Todos los días a las 23:30 UTC
+    # Hora local de Argentina directo, sin convertir a UTC a mano
+    # (soporte de "timezone:" en schedule triggers, GitHub, marzo 2026).
+    # 23:17 en vez de 23:30 en punto: los horarios redondos (:00, :30)
+    # son los de mayor carga en la infraestructura de GitHub Actions,
+    # así que correr en un minuto "raro" reduce (no elimina) la demora.
+    - cron: '17 23 * * *'
+      timezone: 'America/Argentina/Buenos_Aires'
   workflow_dispatch:        # Ejecución manual desde GitHub
 
 jobs:
