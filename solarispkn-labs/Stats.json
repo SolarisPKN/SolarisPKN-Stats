@@ -1,0 +1,75 @@
+{
+  "updatedAt": "2026-08-07T11:00:43.906Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 1,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 0,
+    "releases": 2,
+    "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
+    "homepageUrl": "https://labs.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 180736,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 76015
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 31957
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 31379
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 5854
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 375
+      }
+    ],
+    "topics": [
+      "astro",
+      "automation",
+      "cloud",
+      "cloudflare-pages",
+      "development",
+      "documentation",
+      "embedded-systems",
+      "engineering",
+      "esp32",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 91,
+    "lastCommit": {
+      "sha": "c61bbc0a15155c65929f5f2a1f61c8b3ea8db833",
+      "message": "Add Place schema and organization location\n\nUpdate src/components/SEO.astro JSON-LD: add a Place object (@id https://labs.solarispkn.com.ar/#place) and set Organization.location to reference it. Includes name and sameAs (Google Maps link) so the site's structured data exposes the physical location.",
+      "date": "2026-08-06T07:22:37Z"
+    },
+    "createdAt": "2026-06-13T20:34:39Z",
+    "updatedAt": "2026-08-06T07:22:54Z",
+    "pushedAt": "2026-08-06T07:22:39Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4999,
+      "resetAt": "2026-08-07T12:00:43Z"
+    }
+  }
+}
