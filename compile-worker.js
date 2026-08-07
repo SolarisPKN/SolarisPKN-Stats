@@ -264,11 +264,17 @@ async function getFromGitHub(env, path) {
   const response = await fetch(url, {
     headers: {
       'Authorization': \`Bearer \${env.GITHUB_TOKEN_WRITE}\`,
+      // GitHub rechaza CUALQUIER request REST sin este header (403
+      // Forbidden), sin excepción. No es opcional.
+      'User-Agent': 'SolarisPKN-Stats/1.0',
       'Accept': 'application/vnd.github.v3+json'
     }
   });
   if (response.status === 404) return null;
-  if (!response.ok) throw new Error(\`GitHub GET error: \${response.status}\`);
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(\`GitHub GET error: \${response.status} - \${errorText}\`);
+  }
   const data = await response.json();
   return Buffer.from(data.content, 'base64').toString('utf-8');
 }
@@ -286,11 +292,15 @@ async function saveToGitHub(env, path, content, message = 'Update stats') {
     method: 'PUT',
     headers: {
       'Authorization': \`Bearer \${env.GITHUB_TOKEN_WRITE}\`,
+      'User-Agent': 'SolarisPKN-Stats/1.0',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
   });
-  if (!response.ok) throw new Error(\`GitHub PUT error: \${response.status}\`);
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(\`GitHub PUT error: \${response.status} - \${errorText}\`);
+  }
   return response.json();
 }
 
@@ -446,7 +456,15 @@ async function deployWorker(workerCode, executionPlan, builtPath) {
     // Buffer.from(...) se usa en getFromGitHub/saveToGitHub para
     // leer y escribir Stats.json. Sin este flag, Buffer no existe
     // en el runtime de Workers y esas funciones tiran ReferenceError.
-    compatibility_flags: ['nodejs_compat']
+    compatibility_flags: ['nodejs_compat'],
+    // Como deployamos por API cruda (no wrangler), no hay wrangler.jsonc
+    // que active esto por default — lo seteamos acá explícitamente para
+    // que los console.log/console.error queden guardados y sean
+    // consultables después en el dashboard, no solo mientras mirás en vivo.
+    observability: {
+      enabled: true,
+      head_sampling_rate: 1 // logueá el 100% de las invocaciones
+    }
   };
 
   const formData = new FormData();
