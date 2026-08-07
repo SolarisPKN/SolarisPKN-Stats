@@ -333,6 +333,11 @@ export default {
   async scheduled(event, env, ctx) {
     const now = new Date();
     const hour = now.getHours();
+    // La hora 0 (github+cloudflare+pagespeed + snapshot a History/) NO se
+    // dispara acá — la dispara compile-worker.js justo después de cada
+    // deploy (programado o manual), así el deploy siempre deja Stats.json
+    // fresco. Este cron solo cubre las horas 1-23.
+    if (hour === 0) return;
     if (now.getMinutes() === 0) {
       await runRuntime(env, hour);
     }
@@ -408,6 +413,19 @@ ${indexCode}
   // ================================================================
 
   await setCronTrigger();
+
+  // ================================================================
+  // 9. DISPARAR LA HORA 0 (github+cloudflare+pagespeed + snapshot)
+  // ================================================================
+  // No fatal: si esto falla, el deploy en sí ya está hecho y el cron
+  // de las horas 1-23 va a seguir andando solo. Un fallo acá solo
+  // significa "no hubo refresh inmediato", no "el sistema está roto".
+  try {
+    await triggerInitialRun();
+  } catch (err) {
+    console.warn(`⚠️ No se pudo disparar la corrida inicial (hora 0): ${err.message}`);
+    console.warn(`⚠️ El deploy y el cron ya están OK — esto solo afecta el refresh inmediato.`);
+  }
 }
 
 // ================================================================
@@ -490,6 +508,52 @@ async function setCronTrigger() {
   }
 
   console.log(`✅ Cron Trigger configurado: "0 * * * *" (cada hora en punto, UTC)`);
+}
+
+// Resuelve https://{WORKER_NAME}.{subdominio}.workers.dev y le pega a
+// ?run&hour=0 para forzar el refresh completo (github+cloudflare+pagespeed
+// + snapshot a History/) apenas termina el deploy — sin esperar a que
+// llegue la próxima hora en punto.
+async function triggerInitialRun() {
+  console.log(`🔥 Disparando corrida inicial (hora 0)...`);
+
+  // 1. Resolver el subdominio workers.dev de la cuenta
+  const subdomainUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/subdomain`;
+  const subdomainRes = await fetch(subdomainUrl, {
+    headers: { 'Authorization': `Bearer ${CF_API_TOKEN}` }
+  });
+  if (!subdomainRes.ok) {
+    throw new Error(`No se pudo resolver el subdominio workers.dev: ${subdomainRes.status} - ${await subdomainRes.text()}`);
+  }
+  const subdomainJson = await subdomainRes.json();
+  const subdomain = subdomainJson.result && subdomainJson.result.subdomain;
+  if (!subdomain) {
+    throw new Error('La cuenta no tiene un subdominio workers.dev configurado');
+  }
+
+  // 2. Asegurar que este Worker tenga habilitada la ruta *.workers.dev
+  //    (si solo lo estabas usando con un dominio propio, puede estar apagada)
+  const routeUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/subdomain`;
+  const routeRes = await fetch(routeUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${CF_API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ enabled: true })
+  });
+  if (!routeRes.ok) {
+    throw new Error(`No se pudo habilitar la ruta workers.dev: ${routeRes.status} - ${await routeRes.text()}`);
+  }
+
+  // 3. Pegarle al endpoint ?run&hour=0 del Worker recién deployado
+  const runUrl = `https://${WORKER_NAME}.${subdomain}.workers.dev/?run&hour=0`;
+  const runRes = await fetch(runUrl);
+  if (!runRes.ok) {
+    throw new Error(`El Worker respondió ${runRes.status} al disparar la hora 0`);
+  }
+  const runText = await runRes.text();
+  console.log(`✅ Corrida inicial completada: ${runText}`);
 }
 
 function guardarArtefactoDeError(builtPath) {
