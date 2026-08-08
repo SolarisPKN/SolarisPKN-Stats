@@ -7,6 +7,11 @@
 // una sola petición trae totales de tráfico, bandwidth, amenazas y
 // varios desgloses (países, status codes, tipos de contenido, browsers).
 //
+// Dataset: httpRequestsAdaptiveGroups (no httpRequests1mGroups). Los dos
+// tienen el mismo shape de campos, pero 1mGroups requiere plan Pro+ —
+// en zona Free tira "does not have access to the path" (403). Adaptive
+// está disponible en todos los planes.
+//
 // Soporta MÚLTIPLES zonas: compile-worker.js resuelve el zoneId de cada
 // proyecto a partir de su "url" (llamando a la API de Zones de Cloudflare
 // en build time) y lo incrusta acá en la tarea — nunca vive en registry.json,
@@ -54,7 +59,7 @@ module.exports = {
       query ZoneStats($zoneTag: string, $start: Time, $end: Time) {
         viewer {
           zones(filter: { zoneTag: $zoneTag }) {
-            httpRequests1mGroups(
+            httpRequestsAdaptiveGroups(
               limit: 1
               filter: { datetime_geq: $start, datetime_lt: $end }
             ) {
@@ -119,7 +124,7 @@ module.exports = {
     // ============================================================
 
     const zones = json.data && json.data.viewer && json.data.viewer.zones;
-    const group = zones && zones[0] && zones[0].httpRequests1mGroups && zones[0].httpRequests1mGroups[0];
+    const group = zones && zones[0] && zones[0].httpRequestsAdaptiveGroups && zones[0].httpRequestsAdaptiveGroups[0];
 
     if (!group) {
       // Sin tráfico en la ventana pedida no es un error, es una zona tranquila
