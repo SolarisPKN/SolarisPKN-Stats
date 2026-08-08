@@ -276,17 +276,24 @@ async function getFromGitHub(env, path) {
     throw new Error(\`GitHub GET error: \${response.status} - \${errorText}\`);
   }
   const data = await response.json();
-  return Buffer.from(data.content, 'base64').toString('utf-8');
+  // Devolvemos content Y sha — el sha vive en la respuesta de la API
+  // (metadata de GitHub), NUNCA dentro del contenido del archivo en sí.
+  return {
+    content: Buffer.from(data.content, 'base64').toString('utf-8'),
+    sha: data.sha
+  };
 }
 
 async function saveToGitHub(env, path, content, message = 'Update stats') {
   const url = \`https://api.github.com/repos/SolarisPKN/SolarisPKN-Stats/contents/\${path}\`;
   const existing = await getFromGitHub(env, path);
-  const sha = existing ? JSON.parse(existing).sha : undefined;
   const body = {
     message: \`\${message} - \${new Date().toISOString()}\`,
     content: Buffer.from(content).toString('base64'),
-    sha: sha
+    // Antes esto siempre daba undefined (buscaba .sha adentro del
+    // contenido parseado, que nunca lo tiene). Ahora sale de la
+    // metadata real que devuelve getFromGitHub.
+    sha: existing ? existing.sha : undefined
   };
   const response = await fetch(url, {
     method: 'PUT',
@@ -306,8 +313,8 @@ async function saveToGitHub(env, path, content, message = 'Update stats') {
 
 async function updateProjectStats(env, projectId, platform, data) {
   const statsPath = \`\${projectId}/Stats.json\`;
-  const content = await getFromGitHub(env, statsPath);
-  let stats = content ? JSON.parse(content) : { updatedAt: new Date().toISOString() };
+  const existing = await getFromGitHub(env, statsPath);
+  let stats = existing ? JSON.parse(existing.content) : { updatedAt: new Date().toISOString() };
   stats[platform] = data;
   stats.updatedAt = new Date().toISOString();
   await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`);
@@ -316,18 +323,18 @@ async function updateProjectStats(env, projectId, platform, data) {
 async function createDailySnapshot(env) {
   console.log('📸 Creando snapshot histórico...');
   const today = new Date().toISOString().split('T')[0];
-  const registryContent = await getFromGitHub(env, 'registry.json');
-  if (!registryContent) {
+  const registryFile = await getFromGitHub(env, 'registry.json');
+  if (!registryFile) {
     console.error('❌ No se pudo leer registry.json para snapshots');
     return;
   }
-  const registry = JSON.parse(registryContent);
+  const registry = JSON.parse(registryFile.content);
   for (const project of registry.projects) {
     const statsPath = \`\${project.id}/Stats.json\`;
     const historyPath = \`\${project.id}/History/\${today}.json\`;
-    const statsContent = await getFromGitHub(env, statsPath);
-    if (statsContent) {
-      await saveToGitHub(env, historyPath, statsContent, \`Snapshot \${today} for \${project.id}\`);
+    const statsFile = await getFromGitHub(env, statsPath);
+    if (statsFile) {
+      await saveToGitHub(env, historyPath, statsFile.content, \`Snapshot \${today} for \${project.id}\`);
       console.log(\`  ✅ Snapshot guardado para \${project.id}\`);
     }
   }
