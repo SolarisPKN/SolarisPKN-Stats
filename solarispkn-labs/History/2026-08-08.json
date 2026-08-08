@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T11:00:43.906Z",
+  "updatedAt": "2026-08-08T14:40:18.006Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180736,
+    "sizeKB": 180738,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 76015
+        "bytes": 76066
       },
       {
         "name": "CSS",
@@ -56,20 +56,40 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 91,
+    "totalCommits": 92,
     "lastCommit": {
-      "sha": "c61bbc0a15155c65929f5f2a1f61c8b3ea8db833",
-      "message": "Add Place schema and organization location\n\nUpdate src/components/SEO.astro JSON-LD: add a Place object (@id https://labs.solarispkn.com.ar/#place) and set Organization.location to reference it. Includes name and sameAs (Google Maps link) so the site's structured data exposes the physical location.",
-      "date": "2026-08-06T07:22:37Z"
+      "sha": "fadfb763765c5cb6910851664cf1664e28bd90cf",
+      "message": "Add nimo.tv URL to SEO sameAs list\n\nAdd 'https://www.nimo.tv/live/6943165843' to the sameAs array in src/components/SEO.astro so the site's structured author/profile data includes the Nimo live stream URL.",
+      "date": "2026-08-08T03:49:05Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-06T07:22:54Z",
-    "pushedAt": "2026-08-06T07:22:39Z",
+    "updatedAt": "2026-08-08T03:49:10Z",
+    "pushedAt": "2026-08-08T03:49:06Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-08-07T12:00:43Z"
+      "remaining": 4949,
+      "resetAt": "2026-08-08T15:33:15Z"
     }
+  },
+  "cloudflare": {
+    "requests": 956,
+    "visitors": 49,
+    "bandwidth": 6851971,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "pagespeed": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 92,
+    "seo": 100,
+    "firstContentfulPaint": 472,
+    "largestContentfulPaint": 803,
+    "totalBlockingTime": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndex": 472,
+    "timeToInteractive": 803,
+    "url": "https://labs.solarispkn.com.ar",
+    "strategy": "desktop"
   }
 }
