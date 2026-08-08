@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T14:40:03.331Z",
+  "updatedAt": "2026-08-08T14:40:07.045Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -71,5 +71,11 @@
       "remaining": 4949,
       "resetAt": "2026-08-08T15:33:15Z"
     }
+  },
+  "cloudflare": {
+    "requests": 956,
+    "visitors": 49,
+    "bandwidth": 6851971,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
   }
 }
