@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-09T16:00:14.051Z",
+  "updatedAt": "2026-08-09T17:00:14.443Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180738,
+    "sizeKB": 180739,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 76066
+        "bytes": 76071
       },
       {
         "name": "CSS",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 92,
+    "totalCommits": 93,
     "lastCommit": {
-      "sha": "fadfb763765c5cb6910851664cf1664e28bd90cf",
-      "message": "Add nimo.tv URL to SEO sameAs list\n\nAdd 'https://www.nimo.tv/live/6943165843' to the sameAs array in src/components/SEO.astro so the site's structured author/profile data includes the Nimo live stream URL.",
-      "date": "2026-08-08T03:49:05Z"
+      "sha": "b5126e6244a3bfc807805ee628dde2057f5a4188",
+      "message": "Add trailing slashes to nav links\n\nNormalize navigation URLs by adding trailing slashes to all route paths. This ensures consistent URL routing patterns and aligns with directory-like URL structures used by the static site generator.",
+      "date": "2026-08-09T12:44:00Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-08T03:49:10Z",
-    "pushedAt": "2026-08-08T03:49:06Z",
+    "updatedAt": "2026-08-09T12:44:15Z",
+    "pushedAt": "2026-08-09T12:44:03Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-08-09T12:00:13Z"
+      "remaining": 4989,
+      "resetAt": "2026-08-09T17:37:42Z"
     }
   },
   "cloudflare": {
