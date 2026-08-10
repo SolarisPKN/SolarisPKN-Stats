@@ -1,0 +1,60 @@
+{
+  "updatedAt": "2026-08-10T04:09:21.604Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 0,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 0,
+    "pullRequestsMerged": 0,
+    "releases": 1,
+    "description": "ESP32-based automation system for remotely powering on, restarting, and controlling computers using Google Home and other smart assistants.",
+    "homepageUrl": null,
+    "license": null,
+    "sizeKB": 462,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "C++",
+    "languages": [
+      {
+        "name": "C++",
+        "color": "#f34b7d",
+        "bytes": 5338
+      },
+      {
+        "name": "C",
+        "color": "#555555",
+        "bytes": 317
+      }
+    ],
+    "topics": [
+      "arduino",
+      "arduino-iot-cloud",
+      "automation",
+      "computer-control",
+      "electronics",
+      "embedded-systems",
+      "esp32",
+      "google-home",
+      "home-automation",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 19,
+    "lastCommit": {
+      "sha": "595cfe7879037026fd2f8850782f3d691639fa38",
+      "message": "Actualizar README.md",
+      "date": "2026-06-30T06:19:10Z"
+    },
+    "createdAt": "2026-06-04T21:39:40Z",
+    "updatedAt": "2026-06-30T06:19:14Z",
+    "pushedAt": "2026-06-30T06:19:10Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4965,
+      "resetAt": "2026-08-10T04:39:42Z"
+    }
+  }
+}
