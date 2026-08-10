@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-08-10T04:09:32.191Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 1,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 0,
+    "releases": 2,
+    "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
+    "homepageUrl": "https://labs.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 180739,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 76071
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 31957
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 31379
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 5854
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 375
+      }
+    ],
+    "topics": [
+      "astro",
+      "automation",
+      "cloud",
+      "cloudflare-pages",
+      "development",
+      "documentation",
+      "embedded-systems",
+      "engineering",
+      "esp32",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 93,
+    "lastCommit": {
+      "sha": "b5126e6244a3bfc807805ee628dde2057f5a4188",
+      "message": "Add trailing slashes to nav links\n\nNormalize navigation URLs by adding trailing slashes to all route paths. This ensures consistent URL routing patterns and aligns with directory-like URL structures used by the static site generator.",
+      "date": "2026-08-09T12:44:00Z"
+    },
+    "createdAt": "2026-06-13T20:34:39Z",
+    "updatedAt": "2026-08-09T12:44:15Z",
+    "pushedAt": "2026-08-09T12:44:03Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4966,
+      "resetAt": "2026-08-10T04:39:42Z"
+    }
+  },
+  "cloudflare": {
+    "requests": 2719,
+    "visitors": 51,
+    "bandwidth": 39656206,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "pagespeed": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 92,
+    "seo": 100,
+    "firstContentfulPaint": 474,
+    "largestContentfulPaint": 766,
+    "totalBlockingTime": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndex": 474,
+    "timeToInteractive": 766,
+    "url": "https://labs.solarispkn.com.ar",
+    "strategy": "desktop"
+  }
+}
