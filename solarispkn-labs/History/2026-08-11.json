@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-08-11T03:56:54.564Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 1,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 0,
+    "releases": 2,
+    "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
+    "homepageUrl": "https://labs.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 180739,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 76118
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 31957
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 31770
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 5854
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 375
+      }
+    ],
+    "topics": [
+      "astro",
+      "automation",
+      "cloud",
+      "cloudflare-pages",
+      "development",
+      "documentation",
+      "embedded-systems",
+      "engineering",
+      "esp32",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 94,
+    "lastCommit": {
+      "sha": "403cc4819a1e3f0699dc5d34fd4d3eff83e25605",
+      "message": "SEO: add Pixelfed and tighten worker redirects\n\nAdd a Pixelfed profile URL to the SEO schema (src/components/SEO.astro). Improve src/worker.js language routing: serve requests that already have /es or /en, redirect to add a trailing slash when missing, and perform a single permanent (301) redirect when detecting preferred language. This prevents double-redirects and normalizes language-prefixed paths.",
+      "date": "2026-08-11T03:38:29Z"
+    },
+    "createdAt": "2026-06-13T20:34:39Z",
+    "updatedAt": "2026-08-11T03:38:38Z",
+    "pushedAt": "2026-08-11T03:38:33Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4965,
+      "resetAt": "2026-08-11T04:12:28Z"
+    }
+  },
+  "cloudflare": {
+    "requests": 985,
+    "visitors": 30,
+    "bandwidth": 74020980,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "pagespeed": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 92,
+    "seo": 100,
+    "firstContentfulPaint": 474,
+    "largestContentfulPaint": 474,
+    "totalBlockingTime": 0,
+    "cumulativeLayoutShift": 0.01,
+    "speedIndex": 488,
+    "timeToInteractive": 474,
+    "url": "https://labs.solarispkn.com.ar",
+    "strategy": "desktop"
+  }
+}
