@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T04:00:20.603Z",
+  "updatedAt": "2026-08-12T04:19:00.057Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180745,
+    "sizeKB": 180760,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 76118
+        "bytes": 97857
       },
       {
         "name": "CSS",
@@ -35,7 +35,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 5854
+        "bytes": 18873
       },
       {
         "name": "HTML",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 94,
+    "totalCommits": 96,
     "lastCommit": {
-      "sha": "403cc4819a1e3f0699dc5d34fd4d3eff83e25605",
-      "message": "SEO: add Pixelfed and tighten worker redirects\n\nAdd a Pixelfed profile URL to the SEO schema (src/components/SEO.astro). Improve src/worker.js language routing: serve requests that already have /es or /en, redirect to add a trailing slash when missing, and perform a single permanent (301) redirect when detecting preferred language. This prevents double-redirects and normalizes language-prefixed paths.",
-      "date": "2026-08-11T03:38:29Z"
+      "sha": "0f67fb6da7f7564af35cd6395903a88ccbf25373",
+      "message": "Add SolarisPKN-Labs project pages (EN/ES)\n\nAdd full English and Spanish project pages for SolarisPKN-Labs. index-en.mdx introduced with a detailed overview of the Labs (purpose, research-driven workflow, architecture example using SolarisPKN-Stats, and open-source ethos). index-es.mdx expanded from a short stub into a full Spanish translation matching the English content. These pages document goals, investigation approach, and the experimental lab philosophy.",
+      "date": "2026-08-12T03:10:16Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-11T03:38:38Z",
-    "pushedAt": "2026-08-11T03:38:33Z",
+    "updatedAt": "2026-08-12T03:10:30Z",
+    "pushedAt": "2026-08-12T03:10:18Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-08-11T23:46:02Z"
+      "remaining": 4974,
+      "resetAt": "2026-08-12T05:10:14Z"
     }
   },
   "cloudflare": {
