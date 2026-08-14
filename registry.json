@@ -8,6 +8,43 @@
     {
       "id": "solarispkn-control",
       "platforms": ["github"]
+    },
+    {
+      "id": "solarispkn-stats",
+      "platforms": ["github", "cloudflare"]
+    },
+    {
+      "id": "solarispkn-livetools",
+      "platforms": ["github"]
+    },
+    {
+      "id": "villars-informa",
+      "platforms": ["github", "cloudflare", "pagespeed"],
+      "url": "https://villars.solarispkn.com.ar"
+    },
+    {
+      "id": "lubricantes-villars",
+      "platforms": ["github"]
+    },
+    {
+      "id": "replit-test01-mystic-",
+      "platforms": ["github"]
+    },
+    {
+      "id": "replit-test02-soldiercards-",
+      "platforms": ["github"]
+    },
+    {
+      "id": "figma-lab",
+      "platforms": ["github"]
+    },
+    {
+      "id": "analia-orayen---terapeuta-integral",
+      "platforms": ["github"]
+    },
+    {
+      "id": "la-cascada-de-any-s",
+      "platforms": ["github"]
     }
   ]
 }
