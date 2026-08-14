@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T16:00:16.313Z",
+  "updatedAt": "2026-08-14T17:00:18.121Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180760,
+    "sizeKB": 180779,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,22 +20,22 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 97857
+        "bytes": 104797
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 59094
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 34368
       },
       {
         "name": "CSS",
         "color": "#663399",
         "bytes": 31957
-      },
-      {
-        "name": "JavaScript",
-        "color": "#f1e05a",
-        "bytes": 31770
-      },
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 18873
       },
       {
         "name": "HTML",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 96,
+    "totalCommits": 98,
     "lastCommit": {
-      "sha": "0f67fb6da7f7564af35cd6395903a88ccbf25373",
-      "message": "Add SolarisPKN-Labs project pages (EN/ES)\n\nAdd full English and Spanish project pages for SolarisPKN-Labs. index-en.mdx introduced with a detailed overview of the Labs (purpose, research-driven workflow, architecture example using SolarisPKN-Stats, and open-source ethos). index-es.mdx expanded from a short stub into a full Spanish translation matching the English content. These pages document goals, investigation approach, and the experimental lab philosophy.",
-      "date": "2026-08-12T03:10:16Z"
+      "sha": "18da85c17258040938b2ffed0d8bc456c9f2d8b5",
+      "message": "Add SolarisPKN-Stats project and Spanish locale\n\nCreate a new SolarisPKN-Stats project entry and add Spanish localization. Updated src/content/projects/SolarisPKN-Stats/project.json: changed id/type, added multilingual name/shortDescription, updated technologies, metrics, links, details (architecture, features, lastUpdated) and cleared heroImage. Added Spanish locale file src/locales/es/projects/solarispkn-stats.json containing full translations for hero, philosophy, features, architecture, connectors, tech stack, security, roadmap and CTA.",
+      "date": "2026-08-14T15:26:23Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-12T03:10:30Z",
-    "pushedAt": "2026-08-12T03:10:18Z",
+    "updatedAt": "2026-08-14T15:26:30Z",
+    "pushedAt": "2026-08-14T15:26:26Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4997,
-      "resetAt": "2026-08-14T11:47:50Z"
+      "remaining": 4966,
+      "resetAt": "2026-08-14T17:44:13Z"
     }
   },
   "cloudflare": {
