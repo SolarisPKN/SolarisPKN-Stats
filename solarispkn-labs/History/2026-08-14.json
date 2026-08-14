@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-08-14T04:20:02.494Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 1,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 0,
+    "releases": 2,
+    "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
+    "homepageUrl": "https://labs.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 180760,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 97857
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 31957
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 31770
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 18873
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 375
+      }
+    ],
+    "topics": [
+      "astro",
+      "automation",
+      "cloud",
+      "cloudflare-pages",
+      "development",
+      "documentation",
+      "embedded-systems",
+      "engineering",
+      "esp32",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 96,
+    "lastCommit": {
+      "sha": "0f67fb6da7f7564af35cd6395903a88ccbf25373",
+      "message": "Add SolarisPKN-Labs project pages (EN/ES)\n\nAdd full English and Spanish project pages for SolarisPKN-Labs. index-en.mdx introduced with a detailed overview of the Labs (purpose, research-driven workflow, architecture example using SolarisPKN-Stats, and open-source ethos). index-es.mdx expanded from a short stub into a full Spanish translation matching the English content. These pages document goals, investigation approach, and the experimental lab philosophy.",
+      "date": "2026-08-12T03:10:16Z"
+    },
+    "createdAt": "2026-06-13T20:34:39Z",
+    "updatedAt": "2026-08-12T03:10:30Z",
+    "pushedAt": "2026-08-12T03:10:18Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4999,
+      "resetAt": "2026-08-14T05:19:32Z"
+    }
+  },
+  "cloudflare": {
+    "requests": 1835,
+    "visitors": 165,
+    "bandwidth": 37211939,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "pagespeed": {
+    "performance": 99,
+    "accessibility": 100,
+    "bestPractices": 92,
+    "seo": 100,
+    "firstContentfulPaint": 521,
+    "largestContentfulPaint": 803,
+    "totalBlockingTime": 75,
+    "cumulativeLayoutShift": 0,
+    "speedIndex": 980,
+    "timeToInteractive": 803,
+    "url": "https://labs.solarispkn.com.ar",
+    "strategy": "desktop"
+  }
+}
