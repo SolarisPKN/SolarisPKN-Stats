@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T17:00:20.242Z",
+  "updatedAt": "2026-08-13T04:22:03.466Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -8,7 +8,7 @@
     "issuesClosed": 0,
     "pullRequestsOpen": 0,
     "pullRequestsMerged": 0,
-    "releases": 2,
+    "releases": 1,
     "description": "ESP32-based automation system for remotely powering on, restarting, and controlling computers using Google Home and other smart assistants.",
     "homepageUrl": null,
     "license": null,
@@ -53,8 +53,8 @@
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4965,
-      "resetAt": "2026-08-14T17:44:13Z"
+      "remaining": 4998,
+      "resetAt": "2026-08-13T05:22:01Z"
     }
   }
 }

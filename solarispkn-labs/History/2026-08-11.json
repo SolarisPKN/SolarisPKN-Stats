@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-14T17:00:21.762Z",
+  "updatedAt": "2026-08-11T03:56:54.564Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180779,
+    "sizeKB": 180739,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,22 +20,22 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 104797
-      },
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 59094
-      },
-      {
-        "name": "JavaScript",
-        "color": "#f1e05a",
-        "bytes": 34368
+        "bytes": 76118
       },
       {
         "name": "CSS",
         "color": "#663399",
         "bytes": 31957
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 31770
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 5854
       },
       {
         "name": "HTML",
@@ -56,39 +56,39 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 98,
+    "totalCommits": 94,
     "lastCommit": {
-      "sha": "18da85c17258040938b2ffed0d8bc456c9f2d8b5",
-      "message": "Add SolarisPKN-Stats project and Spanish locale\n\nCreate a new SolarisPKN-Stats project entry and add Spanish localization. Updated src/content/projects/SolarisPKN-Stats/project.json: changed id/type, added multilingual name/shortDescription, updated technologies, metrics, links, details (architecture, features, lastUpdated) and cleared heroImage. Added Spanish locale file src/locales/es/projects/solarispkn-stats.json containing full translations for hero, philosophy, features, architecture, connectors, tech stack, security, roadmap and CTA.",
-      "date": "2026-08-14T15:26:23Z"
+      "sha": "403cc4819a1e3f0699dc5d34fd4d3eff83e25605",
+      "message": "SEO: add Pixelfed and tighten worker redirects\n\nAdd a Pixelfed profile URL to the SEO schema (src/components/SEO.astro). Improve src/worker.js language routing: serve requests that already have /es or /en, redirect to add a trailing slash when missing, and perform a single permanent (301) redirect when detecting preferred language. This prevents double-redirects and normalizes language-prefixed paths.",
+      "date": "2026-08-11T03:38:29Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-14T15:26:30Z",
-    "pushedAt": "2026-08-14T15:26:26Z",
+    "updatedAt": "2026-08-11T03:38:38Z",
+    "pushedAt": "2026-08-11T03:38:33Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4966,
-      "resetAt": "2026-08-14T17:44:13Z"
+      "remaining": 4965,
+      "resetAt": "2026-08-11T04:12:28Z"
     }
   },
   "cloudflare": {
-    "requests": 1195,
-    "visitors": 122,
-    "bandwidth": 57638610,
+    "requests": 985,
+    "visitors": 30,
+    "bandwidth": 74020980,
     "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
   },
   "pagespeed": {
     "performance": 100,
     "accessibility": 100,
-    "bestPractices": 100,
+    "bestPractices": 92,
     "seo": 100,
-    "firstContentfulPaint": 319,
-    "largestContentfulPaint": 803,
+    "firstContentfulPaint": 474,
+    "largestContentfulPaint": 474,
     "totalBlockingTime": 0,
-    "cumulativeLayoutShift": 0,
-    "speedIndex": 457,
-    "timeToInteractive": 803,
+    "cumulativeLayoutShift": 0.01,
+    "speedIndex": 488,
+    "timeToInteractive": 474,
     "url": "https://labs.solarispkn.com.ar",
     "strategy": "desktop"
   }
