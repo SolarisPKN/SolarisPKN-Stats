@@ -1,0 +1,64 @@
+{
+  "updatedAt": "2026-08-15T05:00:27.364Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 0,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 1,
+    "pullRequestsMerged": 0,
+    "releases": 0,
+    "description": "Repository for https://replit.com/@SolarisPKN/Soldier-Power-Surge",
+    "homepageUrl": "https://replit.com/@SolarisPKN/Soldier-Power-Surge",
+    "license": null,
+    "sizeKB": 185,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "TypeScript",
+    "languages": [
+      {
+        "name": "TypeScript",
+        "color": "#3178c6",
+        "bytes": 209220
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 5760
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 4325
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 3455
+      },
+      {
+        "name": "Shell",
+        "color": "#89e051",
+        "bytes": 72
+      }
+    ],
+    "topics": [],
+    "defaultBranch": "main",
+    "totalCommits": 1,
+    "lastCommit": {
+      "sha": "9ef0b8fb9600a76b2d34c109c237117d4345d07f",
+      "message": "Initial commit",
+      "date": "2026-07-28T04:50:11Z"
+    },
+    "createdAt": "2026-08-14T07:12:29Z",
+    "updatedAt": "2026-08-14T07:13:15Z",
+    "pushedAt": "2026-08-14T07:15:27Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4988,
+      "resetAt": "2026-08-15T05:51:46Z"
+    }
+  }
+}
