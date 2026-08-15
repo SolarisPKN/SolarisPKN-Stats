@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-08-15T03:07:35.315Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 1,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 0,
+    "releases": 2,
+    "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
+    "homepageUrl": "https://labs.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 180779,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 104797
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 59094
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 34368
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 31957
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 375
+      }
+    ],
+    "topics": [
+      "astro",
+      "automation",
+      "cloud",
+      "cloudflare-pages",
+      "development",
+      "documentation",
+      "embedded-systems",
+      "engineering",
+      "esp32",
+      "homelab"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 98,
+    "lastCommit": {
+      "sha": "18da85c17258040938b2ffed0d8bc456c9f2d8b5",
+      "message": "Add SolarisPKN-Stats project and Spanish locale\n\nCreate a new SolarisPKN-Stats project entry and add Spanish localization. Updated src/content/projects/SolarisPKN-Stats/project.json: changed id/type, added multilingual name/shortDescription, updated technologies, metrics, links, details (architecture, features, lastUpdated) and cleared heroImage. Added Spanish locale file src/locales/es/projects/solarispkn-stats.json containing full translations for hero, philosophy, features, architecture, connectors, tech stack, security, roadmap and CTA.",
+      "date": "2026-08-14T15:26:23Z"
+    },
+    "createdAt": "2026-06-13T20:34:39Z",
+    "updatedAt": "2026-08-14T15:26:30Z",
+    "pushedAt": "2026-08-14T15:26:26Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4991,
+      "resetAt": "2026-08-15T03:50:39Z"
+    }
+  },
+  "cloudflare": {
+    "requests": 1064,
+    "visitors": 92,
+    "bandwidth": 25139676,
+    "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "pagespeed": {
+    "performance": 100,
+    "accessibility": 100,
+    "bestPractices": 92,
+    "seo": 100,
+    "firstContentfulPaint": 472,
+    "largestContentfulPaint": 763,
+    "totalBlockingTime": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndex": 472,
+    "timeToInteractive": 763,
+    "url": "https://labs.solarispkn.com.ar",
+    "strategy": "desktop"
+  }
+}
