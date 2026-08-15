@@ -1,0 +1,38 @@
+{
+  "updatedAt": "2026-08-15T05:00:24.101Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 0,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 0,
+    "pullRequestsMerged": 0,
+    "releases": 0,
+    "description": "Sitio web de Lubricantes Villars",
+    "homepageUrl": null,
+    "license": "GPL-3.0",
+    "sizeKB": 12,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": null,
+    "languages": [],
+    "topics": [],
+    "defaultBranch": "main",
+    "totalCommits": 1,
+    "lastCommit": {
+      "sha": "7d5edcfd8d3056a60f65ea1bbe07b0f5ffabb0f8",
+      "message": "Initial commit",
+      "date": "2026-07-10T22:25:02Z"
+    },
+    "createdAt": "2026-07-10T22:25:25Z",
+    "updatedAt": "2026-07-10T22:25:32Z",
+    "pushedAt": "2026-07-10T22:25:28Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4990,
+      "resetAt": "2026-08-15T05:51:46Z"
+    }
+  }
+}
