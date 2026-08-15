@@ -1,9 +1,81 @@
 {
-  "updatedAt": "2026-08-15T04:00:13.031Z",
+  "updatedAt": "2026-08-15T05:00:22.384Z",
   "cloudflare": {
     "requests": 1068,
     "visitors": 94,
     "bandwidth": 25584474,
     "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
+  },
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 0,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 1,
+    "pullRequestsMerged": 0,
+    "releases": 0,
+    "description": "Sitio web informativo de Villars",
+    "homepageUrl": "https://villars.solarispkn.com.ar",
+    "license": null,
+    "sizeKB": 88514,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": "Astro",
+    "languages": [
+      {
+        "name": "Astro",
+        "color": "#ff5a03",
+        "bytes": 49720
+      },
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 33179
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 6655
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 4419
+      },
+      {
+        "name": "TypeScript",
+        "color": "#3178c6",
+        "bytes": 1203
+      }
+    ],
+    "topics": [
+      "blog",
+      "comercios",
+      "community-platform",
+      "comunidad",
+      "dashboard",
+      "gtfs",
+      "health",
+      "local-business",
+      "mapa-interativo",
+      "news-platform"
+    ],
+    "defaultBranch": "main",
+    "totalCommits": 7,
+    "lastCommit": {
+      "sha": "5db01d048726add1c0d3d6811932821b7a3816f4",
+      "message": "Migrate to custom domain solarispkn.com.ar\n\nUpdate site URL from villars.pages.dev to villars.solarispkn.com.ar across all configuration and component files. Also update portfolio link to use labs.solarispkn.com.ar and update package name to reflect the new domain.",
+      "date": "2026-07-21T06:02:48Z"
+    },
+    "createdAt": "2026-07-10T22:42:05Z",
+    "updatedAt": "2026-07-22T22:18:20Z",
+    "pushedAt": "2026-07-30T06:36:59Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4991,
+      "resetAt": "2026-08-15T05:51:46Z"
+    }
   }
 }
