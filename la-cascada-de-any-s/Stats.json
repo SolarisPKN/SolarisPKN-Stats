@@ -1,0 +1,38 @@
+{
+  "updatedAt": "2026-08-15T05:00:32.524Z",
+  "github": {
+    "stars": 0,
+    "forks": 0,
+    "issues": 0,
+    "watchers": 0,
+    "issuesClosed": 0,
+    "pullRequestsOpen": 0,
+    "pullRequestsMerged": 0,
+    "releases": 0,
+    "description": "Artesanias y sabores",
+    "homepageUrl": null,
+    "license": "GPL-3.0",
+    "sizeKB": 14,
+    "isArchived": false,
+    "isFork": false,
+    "primaryLanguage": null,
+    "languages": [],
+    "topics": [],
+    "defaultBranch": "main",
+    "totalCommits": 1,
+    "lastCommit": {
+      "sha": "03134c7f0c0ee6948fc0f2509e92c07f7f3107ce",
+      "message": "Initial commit",
+      "date": "2026-07-23T22:31:26Z"
+    },
+    "createdAt": "2026-07-23T22:31:25Z",
+    "updatedAt": "2026-07-23T22:31:38Z",
+    "pushedAt": "2026-07-23T22:31:26Z",
+    "_rateLimit": {
+      "limit": 5000,
+      "cost": 1,
+      "remaining": 4985,
+      "resetAt": "2026-08-15T05:51:46Z"
+    }
+  }
+}
