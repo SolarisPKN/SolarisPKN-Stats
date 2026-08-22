@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T16:00:08.994Z",
+  "updatedAt": "2026-08-22T17:00:08.726Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180779,
+    "sizeKB": 180797,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 104797
+        "bytes": 116079
       },
       {
         "name": "MDX",
@@ -30,7 +30,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 34368
+        "bytes": 35496
       },
       {
         "name": "CSS",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 98,
+    "totalCommits": 99,
     "lastCommit": {
-      "sha": "18da85c17258040938b2ffed0d8bc456c9f2d8b5",
-      "message": "Add SolarisPKN-Stats project and Spanish locale\n\nCreate a new SolarisPKN-Stats project entry and add Spanish localization. Updated src/content/projects/SolarisPKN-Stats/project.json: changed id/type, added multilingual name/shortDescription, updated technologies, metrics, links, details (architecture, features, lastUpdated) and cleared heroImage. Added Spanish locale file src/locales/es/projects/solarispkn-stats.json containing full translations for hero, philosophy, features, architecture, connectors, tech stack, security, roadmap and CTA.",
-      "date": "2026-08-14T15:26:23Z"
+      "sha": "fdfedd47db35d46383f07f7b5ffc29de85c73eab",
+      "message": "Add category-based project pages and explainers\n\nIntroduces dedicated Core/Derived/External Labs landing pages and a shared project loader. Also adds localized explainer content and custom project detail rendering for SolarisPKN-Control and SolarisPKN-LiveTools, plus updated project metadata and category labels in English and Spanish.",
+      "date": "2026-08-22T14:42:16Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-14T15:26:30Z",
-    "pushedAt": "2026-08-14T15:26:26Z",
+    "updatedAt": "2026-08-22T14:42:24Z",
+    "pushedAt": "2026-08-22T14:42:19Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-08-22T12:00:08Z"
+      "resetAt": "2026-08-22T18:00:07Z"
     }
   },
   "cloudflare": {
