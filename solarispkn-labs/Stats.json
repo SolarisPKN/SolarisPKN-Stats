@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T22:00:08.323Z",
+  "updatedAt": "2026-08-22T23:00:08.815Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180797,
+    "sizeKB": 180799,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 116079
+        "bytes": 98340
       },
       {
         "name": "MDX",
@@ -30,7 +30,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 35496
+        "bytes": 35758
       },
       {
         "name": "CSS",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 99,
+    "totalCommits": 100,
     "lastCommit": {
-      "sha": "fdfedd47db35d46383f07f7b5ffc29de85c73eab",
-      "message": "Add category-based project pages and explainers\n\nIntroduces dedicated Core/Derived/External Labs landing pages and a shared project loader. Also adds localized explainer content and custom project detail rendering for SolarisPKN-Control and SolarisPKN-LiveTools, plus updated project metadata and category labels in English and Spanish.",
-      "date": "2026-08-22T14:42:16Z"
+      "sha": "ebaf7b2df6c9ec65b363562039ae11afec6ff03a",
+      "message": "Fix explainer lookup in project pages\n\nMove explainer file discovery into a dedicated utility so Astro getStaticPaths can import it safely without the top-level scope issue that broke deploys. This removes the duplicated recursive scan from [slug].astro and keeps matching custom explainers by file name regardless of category folder.\n\nThe change also renames the utility to expose a reusable `findExplainerAstroFiles` helper for consistent project explainer resolution across pages.",
+      "date": "2026-08-22T21:08:53Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-22T14:42:24Z",
-    "pushedAt": "2026-08-22T14:42:19Z",
+    "updatedAt": "2026-08-22T21:09:16Z",
+    "pushedAt": "2026-08-22T21:08:54Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-08-22T18:00:07Z"
+      "remaining": 4988,
+      "resetAt": "2026-08-22T23:09:02Z"
     }
   },
   "cloudflare": {
