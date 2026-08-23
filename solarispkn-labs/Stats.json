@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-08-23T22:00:08.328Z",
+  "updatedAt": "2026-08-23T23:00:07.726Z",
   "github": {
     "stars": 0,
     "forks": 0,
     "issues": 1,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 3,
+    "pullRequestsOpen": 0,
     "pullRequestsMerged": 0,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 180800,
+    "sizeKB": 181214,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,17 +20,17 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 98340
+        "bytes": 115136
       },
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 59094
+        "bytes": 58854
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 37020
+        "bytes": 43255
       },
       {
         "name": "CSS",
@@ -56,20 +56,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 101,
+    "totalCommits": 103,
     "lastCommit": {
-      "sha": "8f63b5c0c509d6229049ae266c9afe2baa64bf9c",
-      "message": "Add explainer file discovery util\n\nAdd src/utils/explainers.js exporting findExplainerAstroFiles(). The function walks src/components/Projects/explainers (skipping the content/ subfolder) and collects all .astro files (any nested category), returning a map keyed by lowercased filename to the file's absolute path. This utility lives in its own module because Astro's getStaticPaths runs in an isolated scope and requires importable functions.",
-      "date": "2026-08-23T13:40:50Z"
+      "sha": "bf3d843b2af1856eb5f0d5c12f37f3e11174804f",
+      "message": "Migrate site to Astro 7",
+      "date": "2026-08-23T21:56:16Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-23T13:41:24Z",
-    "pushedAt": "2026-08-23T13:40:53Z",
+    "updatedAt": "2026-08-23T22:18:22Z",
+    "pushedAt": "2026-08-23T22:20:22Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-08-23T17:39:42Z"
+      "remaining": 4999,
+      "resetAt": "2026-08-24T00:00:06Z"
     }
   },
   "cloudflare": {
