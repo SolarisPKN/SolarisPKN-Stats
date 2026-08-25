@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T10:00:07.686Z",
+  "updatedAt": "2026-08-25T11:00:08.458Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 181214,
+    "sizeKB": 181283,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,27 +20,32 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 115136
+        "bytes": 114592
       },
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 58854
+        "bytes": 89818
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 43255
+        "bytes": 61423
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 31957
+        "bytes": 37963
       },
       {
         "name": "HTML",
         "color": "#e34c26",
-        "bytes": 375
+        "bytes": 5270
+      },
+      {
+        "name": "Batchfile",
+        "color": "#C1F12E",
+        "bytes": 364
       }
     ],
     "topics": [
@@ -56,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 103,
+    "totalCommits": 104,
     "lastCommit": {
-      "sha": "bf3d843b2af1856eb5f0d5c12f37f3e11174804f",
-      "message": "Migrate site to Astro 7",
-      "date": "2026-08-23T21:56:16Z"
+      "sha": "4ada53f8b4a87bc984514d5df95a9255641edce8",
+      "message": "feat: publish conscious AI workflow article and local post editor",
+      "date": "2026-08-25T09:13:09Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-23T22:18:22Z",
-    "pushedAt": "2026-08-23T22:20:22Z",
+    "updatedAt": "2026-08-25T09:14:01Z",
+    "pushedAt": "2026-08-25T09:13:21Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-08-25T06:00:06Z"
+      "resetAt": "2026-08-25T12:00:07Z"
     }
   },
   "cloudflare": {
