@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T10:00:09.864Z",
+  "updatedAt": "2026-08-25T11:00:16.460Z",
   "cloudflare": {
     "requests": 1229,
     "visitors": 142,
@@ -12,7 +12,7 @@
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 1,
+    "pullRequestsOpen": 0,
     "pullRequestsMerged": 0,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
@@ -26,27 +26,27 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 49720
+        "bytes": 44523
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 33179
+        "bytes": 17211
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 6655
+        "bytes": 6231
       },
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 4419
+        "bytes": 4425
       },
       {
         "name": "TypeScript",
         "color": "#3178c6",
-        "bytes": 1203
+        "bytes": 1924
       }
     ],
     "topics": [
@@ -62,20 +62,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 7,
+    "totalCommits": 8,
     "lastCommit": {
-      "sha": "5db01d048726add1c0d3d6811932821b7a3816f4",
-      "message": "Migrate to custom domain solarispkn.com.ar\n\nUpdate site URL from villars.pages.dev to villars.solarispkn.com.ar across all configuration and component files. Also update portfolio link to use labs.solarispkn.com.ar and update package name to reflect the new domain.",
-      "date": "2026-07-21T06:02:48Z"
+      "sha": "459366dcf10621b73c99c2c51be3819ed86f0ce3",
+      "message": " migrates to Astro 7 and integrates real-time transportation schedules\n\nVillars Migrates to Astro 7 and adopts the modern structure implemented in SolarisPKN Labs.\n\nStructural changes:\n- Updates Astro to 7.2.6, MDX to 7.0.8, Sitemap to 3.7.3, Vite to 8.2.2, and TypeScript to 6.0.3.\n\n- Defines Node.js >=22.12 and npm >=9.6.5.\n\n- Incorporates astro check, tests, build validation, and dependency auditing.\n\n- Migrates news, local listings, premium content, and updates to the Astro 7 Content Layer.\n- Removes collection configuration inherited from Astro 4.\n- Removes React, React Flow, Marked, DOMPurify, Mermaid, and dependencies that had no real consumers.\n\n- Removes empty components and unused legacy scripts.\n\n- Fixes news and commerce generators.\n\n- Adds technical documentation and an ADR for the transport architecture.\n\nLayout and User Experience:\n- Replace ViewTransitions with ClientRouter.\n\n- Centralize navigation, active routes, footer, and accessibility.\n\n- Use local fonts and eliminate duplicate loading from Google Fonts.\n\n- Add skip link, focus states, and support for prefers-reduced-motion.\n\n- Maintain Villars' warm visual identity.\n\n- Make scripts compatible with Astro navigation using astro:page-load, astro:before-swap, and AbortController.\n\n- Fix legacy links like /directory and normalize paths with trailing slashes.\n\nSEO and Security:\n- Restructure titles, canonicals, Open Graph, and Twitter Cards.\n\n- Add schemas for Organization, Website, WebPage, Article, and LocalBusiness.\n\n- Automatically apply noindex to 404 pages.\n\n- Remove SearchAction that pointed to a non-existent route.\n\n- Remove references to non-existent icons and verifications. - Updates manifest.webmanifest and robots.txt.\n\n- Adds security.txt.\n\n- Incorporates CSP, HSTS, framing protection, nosniff, permissions policy, and immutable asset caching.\n\nTransportation:\n- Incorporates a versioned copy of schedules.db from SolarisPKN Transport.\n\n- Adds a deterministic SQLite to JSON exporter using node:sqlite.\n\n- Validates SQLite integrity, foreign keys, required tables, and SHA-256.\n\n- Exports 5 routes, 30 grids, and 1382 timetable records.\n\n- Displays routes with an actual stop in Villars: bus 322 Luján and Belgrano Sur train.\n\n- Allows selection of service, day, and direction.\n\n- Calculates the next service using America/Argentina/Buenos_Aires.\n\n- Includes services after midnight and identifies them with +1 day.\n\n- Reports operator, update method, validity period, snapshot source, and hash.\n\n- Clarifies that schedules are programmed and not real-time information.\n\n- Maintains an initial table rendered in HTML to function without JavaScript.\n\n- Removes all previously published fictitious schedules.\n\nAutomation:\n- Adds CI for push and pull requests.\n\n- Runs npm ci, tests, astro check, build, HTML validation, and npm audit.\n\n- Adds daily schedule synchronization at 7:07 AM Buenos Aires time.\n\n- Downloads schedules.db only from SolarisPKN/SolarisPKN-Transport.\n\n- Does not create commits when the database has not changed.\n\n- If changes occur, regenerates the JSON, validates the entire site, and publishes both files.\n\n- Uses minimal GitHub Actions permissions and avoids integrating code that is not automatically validated.\n\nHealth and Content:\n- Avoids publishing fictitious addresses, pharmacies, and professionals as real information.\n\n- Only the 911 alert and a notification of data pending official verification are retained.\n\n- The header hierarchy of the main content has been corrected.\n\n- README.md and README.es.md have been updated to properly document Villars Informa.\n\nRepository Hygiene:\n- No longer versioning node_modules and .astro.\n\n- 23,955 dependency files and Astro-generated files have been removed from the index.\n\n- A complete .gitignore file has been added for dependencies, builds, caches, environments, and local databases.\n\n- An explicit exception has been set for data/transport/horarios.db.\n\n- Package-lock.json has been regenerated through a clean installation.\n\nValidation:\n- npm ci: successful.\n\n- npm test: 4 tests passed.\n\n- astro check: 0 errors, 0 warnings, and 0 hints.\n\n- astro build: 8 static pages generated.\n\n- Dist validation: links, resources, IDs, and HTML structure are correct.\n\n- npm audit: 0 vulnerabilities.\n\n- YAML workflows: valid.\n\n- Transport export: deterministic.\n\n- SHA-256 of schedules.db: matches the source repository.\n\n- git diff --check: successful.",
+      "date": "2026-08-25T10:04:48Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-07-22T22:18:20Z",
-    "pushedAt": "2026-07-30T06:36:59Z",
+    "updatedAt": "2026-08-25T10:09:09Z",
+    "pushedAt": "2026-08-25T10:08:51Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-08-25T06:00:06Z"
+      "resetAt": "2026-08-25T12:00:07Z"
     }
   },
   "pagespeed": {
