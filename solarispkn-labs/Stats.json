@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-26T22:00:07.721Z",
+  "updatedAt": "2026-08-26T23:00:07.855Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -61,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 104,
+    "totalCommits": 106,
     "lastCommit": {
-      "sha": "4ada53f8b4a87bc984514d5df95a9255641edce8",
-      "message": "feat: publish conscious AI workflow article and local post editor",
-      "date": "2026-08-25T09:13:09Z"
+      "sha": "e81fa2da3b52f35598d1a419f18a14ef82054c5b",
+      "message": "Add workflow to mirror repository to Gitea\n\nAdds .github/workflows/mirror-gitea.yml: a GitHub Actions workflow that mirrors the repository to a Gitea instance. It runs weekly (Sundays 00:00 UTC) and supports manual dispatch, checks out full history (fetch-depth: 0), and force-pushes all branches and tags to the configured Gitea remote using the GITEA_TOKEN secret. Update USERNAME/REPO in the workflow and ensure GITEA_TOKEN is set in repository secrets before use.",
+      "date": "2026-08-26T22:42:53Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-25T09:14:01Z",
-    "pushedAt": "2026-08-25T09:13:21Z",
+    "updatedAt": "2026-08-26T22:44:17Z",
+    "pushedAt": "2026-08-26T22:42:57Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-08-26T18:00:07Z"
+      "remaining": 4945,
+      "resetAt": "2026-08-26T23:06:26Z"
     }
   },
   "cloudflare": {
