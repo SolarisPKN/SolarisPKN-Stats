@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-26T22:00:09.163Z",
+  "updatedAt": "2026-08-26T23:00:16.851Z",
   "cloudflare": {
     "requests": 1047,
     "visitors": 94,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 96536,
+    "sizeKB": 103649,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -26,12 +26,12 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 44523
+        "bytes": 46721
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 17211
+        "bytes": 45167
       },
       {
         "name": "CSS",
@@ -64,18 +64,18 @@
     "defaultBranch": "main",
     "totalCommits": 9,
     "lastCommit": {
-      "sha": "7c1447302d2e645858cbafd72b3c09463dfedd3f",
-      "message": "data(transport): actualizar horarios",
-      "date": "2026-08-26T10:42:40Z"
+      "sha": "f245807e99292a55a431b5deddcc042b277e2669",
+      "message": "corrige destinos de tren e incorpora el mapa de transporte en vivo\n\nCorrige el cálculo de horarios ferroviarios y amplía la sección de transporte con un mapa regional autocontenido y una arquitectura preparada para posiciones en vivo mediante Cloudflare Workers y R2.\n\nHorarios y destinos reales:\n- Actualiza el snapshot de transporte al schemaVersion 2.\n- Conserva cada formación individual, sus paradas efectivas, origen, destino y horarios.\n- Determina el destino real usando la última parada con horario de cada formación.\n- Evita utilizar el nombre general de una grilla como destino de todos sus servicios.\n- Corrige el caso de Lozano: las formaciones cortas de días hábiles que terminan en Marcos Paz o Villars ya no aparecen como trenes hacia Lozano.\n- Muestra únicamente los servicios que salen de Villars y realmente llegan al destino seleccionado.\n- Reemplaza el selector genérico de sentido por un selector de destinos disponibles.\n- Cuando no hay servicio para el día elegido, informa el próximo servicio válido dentro de los siguientes siete días.\n- Mantiene correctamente los servicios posteriores a medianoche y su indicador de +1 día.\n- Extrae la lógica de destinos, salidas, fechas y próximos servicios a una utilidad reutilizable y testeable.\n- Regenera transport-schedules.json con la información completa de las formaciones.\n\nMapa regional autocontenido:\n- Incorpora MapLibre GL JS para mostrar un mapa navegable con zoom y desplazamiento.\n- Añade soporte para archivos PMTiles mediante la biblioteca pmtiles.\n- Incluye un extracto regional de Protomaps/OpenStreetMap dentro del propio sitio.\n- Versiona public/maps/villars-region.pmtiles, de aproximadamente 7,2 MB.\n- Evita depender de los servidores públicos de mosaicos de OpenStreetMap durante las visitas.\n- Añade trazas diferenciadas para el tren Belgrano Sur y el colectivo 322.\n- Añade estaciones ferroviarias y paradas de colectivo como capas GeoJSON.\n- Incorpora controles de navegación, leyenda, atribución y ventanas informativas.\n- Mantiene disponibles el mapa y los horarios aunque falle la capa de posiciones en vivo.\n- Añade un exportador para regenerar transport-map.json con recorridos y paradas públicas.\n- Amplía la validación de dist para comprobar que el archivo PMTiles esté incluido y no esté vacío.\n\nCliente de posiciones:\n- Añade una capa GeoJSON independiente para representar vehículos informados.\n- Permite conectar el mapa con PUBLIC_TRANSPORT_LIVE_URL durante el build de Astro.\n- Consulta current.json cada 60 segundos sin llamar directamente a los proveedores desde el navegador.\n- Usa ETag e If-None-Match para evitar transferencias innecesarias.\n- Detiene las consultas cuando la pestaña queda en segundo plano.\n- Reanuda la actualización cuando el usuario vuelve a la página.\n- Limpia timers, solicitudes y mapas durante la navegación de Astro.\n- Diferencia posiciones observadas, estimadas y desactualizadas.\n- Mantiene un estado visible y accesible cuando el seguimiento está activo, vacío o temporalmente caído.\n\nCloudflare Worker y R2:\n- Añade el Worker villars-transport-live con una ejecución programada cada minuto.\n- Prepara bindings separados para los buckets villars-transport-live y villars-transport-live-preview.\n- Consulta la interfaz OneBusAway de Cuándo SUBO desde el Worker.\n- Limita los vehículos procesados a los ramales 135_1623 y 135_1624 de la línea 322.\n- Normaliza identificador, recorrido, coordenadas, orientación y hora de actualización.\n- Prioriza coordenadas observadas y distingue las posiciones estimadas.\n- Marca como viejo cualquier dato sin fecha verificable o con más de dos minutos.\n- Escribe un único snapshot current.json en R2.\n- Incluye generatedAt, expiresAt, estado general y estado individual de cada proveedor.\n- Declara explícitamente la cobertura ferroviaria de SOFSE como no disponible hasta contar con una fuente legítima y verificable.\n- Evita inventar posiciones ferroviarias derivadas de los horarios programados.\n- Configura metadatos de contenido y una caché corta de 45 segundos.\n- Añade una política CORS limitada al origen https://villars.solarispkn.com.ar.\n- Habilita observabilidad del Worker.\n- Incorpora comandos npm para desarrollo, dry-run y despliegue con Wrangler.\n- Añade .env.example con la dirección pública prevista para current.json.\n\nSeguridad y políticas del sitio:\n- Amplía la Content Security Policy exclusivamente para permitir la lectura del snapshot desde transport-data.solarispkn.com.ar.\n- Permite blob: para los recursos internos requeridos por MapLibre.\n- Añade worker-src para el procesamiento cartográfico de MapLibre.\n- No habilita llamadas directas del navegador a Cuándo SUBO ni a otros proveedores.\n- No agrega rutas del Worker sobre el dominio principal.\n- No modifica Workers, buckets, DNS ni proyectos de Cloudflare existentes.\n\nDocumentación:\n- Añade el ADR 0002 sobre el mapa autocontenido y las posiciones vivas degradables.\n- Documenta la separación entre horarios programados, cartografía local y posiciones recientes.\n- Documenta las decisiones sobre PMTiles, MapLibre, R2, caché y degradación ante fallos.\n- Explica por qué no se utilizan los servidores públicos de tiles como almacenamiento offline.\n- Explica por qué el navegador no consulta directamente a los proveedores.\n- Documenta la estimación de capacidad dentro de los niveles gratuitos de Workers y R2.\n- Actualiza el ADR del snapshot estático para explicar la matriz formación por parada.\n- Amplía README.es.md con la corrección de destinos, el funcionamiento del mapa y los pasos pendientes para activar Cloudflare.\n- Añade las nuevas dependencias y actualiza package-lock.json.\n\nPruebas:\n- Amplía las pruebas del snapshot para validar el nuevo schemaVersion 2.\n- Verifica que cada formación conserve origen, destino y paradas válidas.\n- Comprueba que Lozano no se ofrezca durante los días hábiles.\n- Comprueba que el próximo tren real hacia Lozano sea el servicio del sábado.\n- Verifica que el Worker descarte recorridos ajenos a la línea 322 de Villars.\n- Verifica que current.json se escriba en R2.\n- Verifica que SOFSE permanezca declarado como no disponible mientras no exista una fuente ferroviaria validada.\n- npm test: 7 pruebas superadas.\n- git diff --check: correcto.\n\nEstado de despliegue:\n- La integración de Cloudflare queda preparada y documentada en el repositorio.\n- El Worker, los buckets R2, el dominio personalizado y el cron todavía deben crearse o desplegarse manualmente en Cloudflare.\n- La página funciona con el mapa y los horarios estáticos aunque PUBLIC_TRANSPORT_LIVE_URL todavía no esté configurada.",
+      "date": "2026-08-26T14:48:10Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-26T10:46:43Z",
-    "pushedAt": "2026-08-26T10:42:42Z",
+    "updatedAt": "2026-08-26T17:34:31Z",
+    "pushedAt": "2026-08-26T17:31:03Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-08-26T18:00:07Z"
+      "remaining": 4941,
+      "resetAt": "2026-08-26T23:06:26Z"
     }
   },
   "pagespeed": {
