@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T16:00:04.633Z",
+  "updatedAt": "2026-08-27T17:00:04.122Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,20 +12,20 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 181287,
+    "sizeKB": 182717,
     "isArchived": false,
     "isFork": false,
-    "primaryLanguage": "Astro",
+    "primaryLanguage": "MDX",
     "languages": [
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 135431
+      },
       {
         "name": "Astro",
         "color": "#ff5a03",
         "bytes": 114592
-      },
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 106641
       },
       {
         "name": "JavaScript",
@@ -61,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 108,
+    "totalCommits": 110,
     "lastCommit": {
-      "sha": "67a1442a4193e1dd1c66e26f8c18844d9595fdc1",
-      "message": "Add bilingual StackBlitz blog post and assets\n\nAdd a new blog post (English and Spanish) about StackBlitz + GitHub, including content files (index-en.mdx, index-es.mdx), post metadata (post.json), hero image (public/images/posts/.../portadastackblitz.webp), and localization entries for en and es. Metadata sets id, date (2026-08-27), tags, category \"IA y Desarrollo\" and heroImage path.",
-      "date": "2026-08-27T12:37:37Z"
+      "sha": "bf2d8882ea7ba964fdcaea1750a28c9b0a262309",
+      "message": "Add hero image and update post metadata\n\nAdd VibeCoding.webp as the hero image and update the blog post metadata for orquestar-auditar-editar-vs-vibe-coding. The image was added at public/images/posts/orquestar-auditar-editar-vs-vibe-coding/VibeCoding.webp and src/content/blog/orquestar-auditar-editar-vs-vibe-coding/post.json now references it via the heroImage field.\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
+      "date": "2026-08-27T15:58:04Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-27T12:42:18Z",
-    "pushedAt": "2026-08-27T12:37:39Z",
+    "updatedAt": "2026-08-27T16:07:32Z",
+    "pushedAt": "2026-08-27T15:58:06Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-08-27T13:51:15Z"
+      "resetAt": "2026-08-27T18:00:03Z"
     }
   },
   "cloudflare": {
