@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T22:00:06.778Z",
+  "updatedAt": "2026-08-27T23:00:13.470Z",
   "cloudflare": {
     "requests": 3033,
     "visitors": 119,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 103667,
+    "sizeKB": 103738,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 58883
+        "bytes": 59619
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 47108
+        "bytes": 47313
       },
       {
         "name": "CSS",
@@ -62,20 +62,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 12,
+    "totalCommits": 14,
     "lastCommit": {
-      "sha": "4b118f7b021a6112c67a642e9e043fd3407ad717",
-      "message": "feat(transport): activa seguimiento ferroviario en vivo\n\nConecta el mapa estático a un snapshot R2 público, incorpora el Worker programado con SOFSE, validación de frescura y fallback seguro, y mantiene Cuándo SUBO deshabilitado hasta contar con autorización válida.\n\nAgrega pruebas del filtrado ferroviario y de colectivos, manejo de respuestas inválidas y operación SOFSE-only. Excluye además los directorios locales de Codex del repositorio.",
-      "date": "2026-08-27T04:29:50Z"
+      "sha": "95b3d2783a2b28b30ced9e0e527a34173fd3358e",
+      "message": "fix(transport): reemplaza el mapa WebGL por Canvas 2D",
+      "date": "2026-08-27T17:56:47Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-27T04:31:16Z",
-    "pushedAt": "2026-08-27T04:31:02Z",
+    "updatedAt": "2026-08-27T18:00:58Z",
+    "pushedAt": "2026-08-27T17:56:59Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-08-27T18:00:03Z"
+      "remaining": 4994,
+      "resetAt": "2026-08-27T23:50:12Z"
     }
   },
   "pagespeed": {
