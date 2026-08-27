@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-27T12:00:19.065Z",
+  "updatedAt": "2026-08-27T12:51:16.932Z",
   "github": {
     "stars": 0,
     "forks": 0,
-    "issues": 1,
+    "issues": 0,
     "watchers": 0,
-    "issuesClosed": 0,
+    "issuesClosed": 1,
     "pullRequestsOpen": 0,
     "pullRequestsMerged": 0,
     "releases": 2,
@@ -25,7 +25,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 89818
+        "bytes": 106641
       },
       {
         "name": "JavaScript",
@@ -61,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 107,
+    "totalCommits": 108,
     "lastCommit": {
-      "sha": "328c3c770ac9898b975341bb3da6b8850b7f1194",
-      "message": "Add GitHub Actions workflow to mirror to Launchpad\n\nAdds .github/workflows/mirror-lauchpad.yml which mirrors the repository to Launchpad on a weekly schedule (Sundays 00:00 UTC) and via manual dispatch. The job checks out the repo, configures an SSH key from secrets.LAUNCHPAD_SSH_KEY, updates known_hosts, adds a 'launchpad' remote (git+ssh://solarispkn@git.launchpad.net/~solarispkn/+git/SolarisPKN-Labs) and force-pushes all branches and tags. Ensure the LAUNCHPAD_SSH_KEY secret is configured and the remote URL matches the intended Launchpad target.",
-      "date": "2026-08-26T23:11:11Z"
+      "sha": "67a1442a4193e1dd1c66e26f8c18844d9595fdc1",
+      "message": "Add bilingual StackBlitz blog post and assets\n\nAdd a new blog post (English and Spanish) about StackBlitz + GitHub, including content files (index-en.mdx, index-es.mdx), post metadata (post.json), hero image (public/images/posts/.../portadastackblitz.webp), and localization entries for en and es. Metadata sets id, date (2026-08-27), tags, category \"IA y Desarrollo\" and heroImage path.",
+      "date": "2026-08-27T12:37:37Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-26T23:11:18Z",
-    "pushedAt": "2026-08-26T23:11:14Z",
+    "updatedAt": "2026-08-27T12:42:18Z",
+    "pushedAt": "2026-08-27T12:37:39Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-08-27T12:00:07Z"
+      "resetAt": "2026-08-27T13:51:15Z"
     }
   },
   "cloudflare": {
