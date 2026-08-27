@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T04:00:07.266Z",
+  "updatedAt": "2026-08-27T05:00:08.125Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 181283,
+    "sizeKB": 181287,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -61,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 106,
+    "totalCommits": 107,
     "lastCommit": {
-      "sha": "e81fa2da3b52f35598d1a419f18a14ef82054c5b",
-      "message": "Add workflow to mirror repository to Gitea\n\nAdds .github/workflows/mirror-gitea.yml: a GitHub Actions workflow that mirrors the repository to a Gitea instance. It runs weekly (Sundays 00:00 UTC) and supports manual dispatch, checks out full history (fetch-depth: 0), and force-pushes all branches and tags to the configured Gitea remote using the GITEA_TOKEN secret. Update USERNAME/REPO in the workflow and ensure GITEA_TOKEN is set in repository secrets before use.",
-      "date": "2026-08-26T22:42:53Z"
+      "sha": "328c3c770ac9898b975341bb3da6b8850b7f1194",
+      "message": "Add GitHub Actions workflow to mirror to Launchpad\n\nAdds .github/workflows/mirror-lauchpad.yml which mirrors the repository to Launchpad on a weekly schedule (Sundays 00:00 UTC) and via manual dispatch. The job checks out the repo, configures an SSH key from secrets.LAUNCHPAD_SSH_KEY, updates known_hosts, adds a 'launchpad' remote (git+ssh://solarispkn@git.launchpad.net/~solarispkn/+git/SolarisPKN-Labs) and force-pushes all branches and tags. Ensure the LAUNCHPAD_SSH_KEY secret is configured and the remote URL matches the intended Launchpad target.",
+      "date": "2026-08-26T23:11:11Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-26T22:44:17Z",
-    "pushedAt": "2026-08-26T22:42:57Z",
+    "updatedAt": "2026-08-26T23:11:18Z",
+    "pushedAt": "2026-08-26T23:11:14Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4945,
-      "resetAt": "2026-08-26T23:06:26Z"
+      "remaining": 4999,
+      "resetAt": "2026-08-27T06:00:07Z"
     }
   },
   "cloudflare": {
