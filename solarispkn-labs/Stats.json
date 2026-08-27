@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T22:00:04.824Z",
+  "updatedAt": "2026-08-27T23:00:04.141Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182717,
+    "sizeKB": 182720,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -61,20 +61,20 @@
       "homelab"
     ],
     "defaultBranch": "main",
-    "totalCommits": 110,
+    "totalCommits": 112,
     "lastCommit": {
-      "sha": "bf2d8882ea7ba964fdcaea1750a28c9b0a262309",
-      "message": "Add hero image and update post metadata\n\nAdd VibeCoding.webp as the hero image and update the blog post metadata for orquestar-auditar-editar-vs-vibe-coding. The image was added at public/images/posts/orquestar-auditar-editar-vs-vibe-coding/VibeCoding.webp and src/content/blog/orquestar-auditar-editar-vs-vibe-coding/post.json now references it via the heroImage field.\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
-      "date": "2026-08-27T15:58:04Z"
+      "sha": "d04842ee46d2f348845de3a08178728b8f23970d",
+      "message": "Fix GitFlic mirror remote URL\n\nUpdate .github/workflows/mirror-gitflic.yml to use the fixed GitFlic repository URL (solarispkn-labs.git) instead of relying on github.event.repository.name. Ensures mirrors are pushed to the correct target repository on GitFlic.",
+      "date": "2026-08-27T19:38:04Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-27T16:07:32Z",
-    "pushedAt": "2026-08-27T15:58:06Z",
+    "updatedAt": "2026-08-27T19:41:46Z",
+    "pushedAt": "2026-08-27T19:38:08Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-08-27T18:00:03Z"
+      "remaining": 4998,
+      "resetAt": "2026-08-27T23:50:12Z"
     }
   },
   "cloudflare": {
