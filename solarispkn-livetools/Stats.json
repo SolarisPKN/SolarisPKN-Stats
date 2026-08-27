@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T12:51:21.935Z",
+  "updatedAt": "2026-08-27T17:00:12.013Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,15 +12,35 @@
     "description": "🚀 Solaris Media Production Suite is a modular toolkit for audiovisual production, live streaming, and digital content creation. It combines scripts, automation, configurations, and production resources to optimize workflows, simplify operations, and support scalable, multi-platform content delivery. 🎥📡⚙️",
     "homepageUrl": null,
     "license": null,
-    "sizeKB": 61,
+    "sizeKB": 102,
     "isArchived": false,
     "isFork": false,
-    "primaryLanguage": "C#",
+    "primaryLanguage": "JavaScript",
     "languages": [
+      {
+        "name": "JavaScript",
+        "color": "#f1e05a",
+        "bytes": 45141
+      },
       {
         "name": "C#",
         "color": "#7355dd",
         "bytes": 30761
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 14594
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 8416
+      },
+      {
+        "name": "Batchfile",
+        "color": "#C1F12E",
+        "bytes": 1211
       }
     ],
     "topics": [
@@ -36,20 +56,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 11,
+    "totalCommits": 12,
     "lastCommit": {
-      "sha": "3dbcf9a83cc2086363dae5c927269d4c765887ae",
-      "message": "add First Chatter Module and Full Action Suite",
-      "date": "2026-06-25T15:33:41Z"
+      "sha": "3b0ab88ff65755e932a70b5cf809a293a27073c5",
+      "message": "Add LinkedIn MDX publisher\n\nAdds a local Markdown/MDX converter for LinkedIn articles with a browser UI, CLI export flow, metadata support, diagnostics, and HTML/TXT/JSON exports. It sanitizes unsafe MDX content, warns on compatibility issues, and includes a Windows launcher, build/server scripts, documentation, and test coverage for conversion and safety behavior.",
+      "date": "2026-08-27T12:53:26Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
-    "updatedAt": "2026-06-25T15:33:49Z",
-    "pushedAt": "2026-06-25T15:33:44Z",
+    "updatedAt": "2026-08-27T12:57:32Z",
+    "pushedAt": "2026-08-27T12:53:32Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4996,
-      "resetAt": "2026-08-27T13:51:15Z"
+      "resetAt": "2026-08-27T18:00:03Z"
     }
   }
 }
