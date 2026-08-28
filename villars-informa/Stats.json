@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T10:00:06.861Z",
+  "updatedAt": "2026-08-28T11:00:13.626Z",
   "cloudflare": {
     "requests": 4380,
     "visitors": 218,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 103754,
+    "sizeKB": 103796,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 76507
+        "bytes": 95192
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 54181
+        "bytes": 66995
       },
       {
         "name": "CSS",
@@ -47,6 +47,11 @@
         "name": "TypeScript",
         "color": "#3178c6",
         "bytes": 1924
+      },
+      {
+        "name": "Batchfile",
+        "color": "#C1F12E",
+        "bytes": 758
       }
     ],
     "topics": [
@@ -62,20 +67,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 16,
+    "totalCommits": 20,
     "lastCommit": {
-      "sha": "d00233ea4635d5827305b0132332afe4aac463aa",
-      "message": "Add per-station schedule grid & directions\n\nReplace the old scheduleGrid with stationScheduleGrid and add directionsFor to extract available route directions. stationScheduleGrid builds a per-direction view of services and stations (services, stations, direction) for a given day, allowing rendering of stops per service. Update transporte.astro to initialize directions, pass the selected direction into the new grid function, and adjust route button labels (use 'Línea 322' / route.name and 'Belgrano Sur'). These changes enable direction-aware, station-level timetables.",
-      "date": "2026-08-28T00:38:30Z"
+      "sha": "54ee947dc382d77f5a7b65bd04cb4991a80fbd18",
+      "message": "feat(transport): agrega visor movil paginado de horarios",
+      "date": "2026-08-28T09:31:27Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-28T00:38:41Z",
-    "pushedAt": "2026-08-28T00:38:34Z",
+    "updatedAt": "2026-08-28T09:34:02Z",
+    "pushedAt": "2026-08-28T09:31:40Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-08-28T06:00:03Z"
+      "resetAt": "2026-08-28T12:00:03Z"
     }
   },
   "pagespeed": {
