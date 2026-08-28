@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T14:00:07.113Z",
+  "updatedAt": "2026-08-28T14:24:07.508Z",
   "cloudflare": {
     "requests": 4250,
     "visitors": 223,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 103796,
+    "sizeKB": 103894,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,17 +26,22 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 95192
+        "bytes": 122942
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 66995
+        "bytes": 76868
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 6231
+        "bytes": 28507
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 6822
       },
       {
         "name": "MDX",
@@ -46,12 +51,12 @@
       {
         "name": "TypeScript",
         "color": "#3178c6",
-        "bytes": 1924
+        "bytes": 2185
       },
       {
         "name": "Batchfile",
         "color": "#C1F12E",
-        "bytes": 758
+        "bytes": 1494
       }
     ],
     "topics": [
@@ -67,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 20,
+    "totalCommits": 22,
     "lastCommit": {
-      "sha": "54ee947dc382d77f5a7b65bd04cb4991a80fbd18",
-      "message": "feat(transport): agrega visor movil paginado de horarios",
-      "date": "2026-08-28T09:31:27Z"
+      "sha": "c523ea9851e2e97c08b6310d2f33c4c252524571",
+      "message": "refactor(health): centraliza datos y admite múltiples teléfonos\n\nMueve todos los textos, centros, farmacias, urgencias y fuentes a src/locales/salud.json y elimina el JSON duplicado.\n\nModela cada contacto como una lista de teléfonos, deja los números vacíos hasta su verificación y oculta enlaces tel inválidos mostrando estados pendientes.",
+      "date": "2026-08-28T12:15:32Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-28T09:34:02Z",
-    "pushedAt": "2026-08-28T09:31:40Z",
+    "updatedAt": "2026-08-28T12:18:25Z",
+    "pushedAt": "2026-08-28T12:15:47Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-08-28T12:00:03Z"
+      "resetAt": "2026-08-28T15:23:58Z"
     }
   },
   "pagespeed": {
