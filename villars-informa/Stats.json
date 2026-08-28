@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T04:00:06.216Z",
+  "updatedAt": "2026-08-28T05:00:13.047Z",
   "cloudflare": {
     "requests": 3622,
     "visitors": 161,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 103738,
+    "sizeKB": 103754,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 59619
+        "bytes": 76507
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 47313
+        "bytes": 54181
       },
       {
         "name": "CSS",
@@ -62,20 +62,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 14,
+    "totalCommits": 16,
     "lastCommit": {
-      "sha": "95b3d2783a2b28b30ced9e0e527a34173fd3358e",
-      "message": "fix(transport): reemplaza el mapa WebGL por Canvas 2D",
-      "date": "2026-08-27T17:56:47Z"
+      "sha": "d00233ea4635d5827305b0132332afe4aac463aa",
+      "message": "Add per-station schedule grid & directions\n\nReplace the old scheduleGrid with stationScheduleGrid and add directionsFor to extract available route directions. stationScheduleGrid builds a per-direction view of services and stations (services, stations, direction) for a given day, allowing rendering of stops per service. Update transporte.astro to initialize directions, pass the selected direction into the new grid function, and adjust route button labels (use 'Línea 322' / route.name and 'Belgrano Sur'). These changes enable direction-aware, station-level timetables.",
+      "date": "2026-08-28T00:38:30Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-27T18:00:58Z",
-    "pushedAt": "2026-08-27T17:56:59Z",
+    "updatedAt": "2026-08-28T00:38:41Z",
+    "pushedAt": "2026-08-28T00:38:34Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4994,
-      "resetAt": "2026-08-27T23:50:12Z"
+      "remaining": 4995,
+      "resetAt": "2026-08-28T06:00:03Z"
     }
   },
   "pagespeed": {
