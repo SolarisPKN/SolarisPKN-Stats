@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T09:00:05.804Z",
+  "updatedAt": "2026-08-29T09:07:32.423Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -57,8 +57,8 @@
       "documentation",
       "embedded-systems",
       "engineering",
-      "esp32",
-      "homelab"
+      "homelab",
+      "infrasctructure"
     ],
     "defaultBranch": "main",
     "totalCommits": 112,
@@ -68,13 +68,13 @@
       "date": "2026-08-27T19:38:04Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-27T19:41:46Z",
+    "updatedAt": "2026-08-29T06:09:38Z",
     "pushedAt": "2026-08-27T19:38:08Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-08-29T06:00:02Z"
+      "resetAt": "2026-08-29T10:07:31Z"
     }
   },
   "cloudflare": {
