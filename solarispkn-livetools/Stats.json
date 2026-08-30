@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T17:00:47.530Z",
+  "updatedAt": "2026-08-30T23:00:47.399Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -20,7 +20,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 45141
+        "bytes": 148282
       },
       {
         "name": "C#",
@@ -28,19 +28,19 @@
         "bytes": 30761
       },
       {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 19467
+      },
+      {
         "name": "CSS",
         "color": "#663399",
         "bytes": 14594
       },
       {
-        "name": "HTML",
-        "color": "#e34c26",
-        "bytes": 8416
-      },
-      {
         "name": "Batchfile",
         "color": "#C1F12E",
-        "bytes": 1211
+        "bytes": 3681
       }
     ],
     "topics": [
@@ -56,20 +56,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 12,
+    "totalCommits": 13,
     "lastCommit": {
-      "sha": "3b0ab88ff65755e932a70b5cf809a293a27073c5",
-      "message": "Add LinkedIn MDX publisher\n\nAdds a local Markdown/MDX converter for LinkedIn articles with a browser UI, CLI export flow, metadata support, diagnostics, and HTML/TXT/JSON exports. It sanitizes unsafe MDX content, warns on compatibility issues, and includes a Windows launcher, build/server scripts, documentation, and test coverage for conversion and safety behavior.",
-      "date": "2026-08-27T12:53:26Z"
+      "sha": "0b1feb5c25e5d0d6628cc9dda46f938636d70f67",
+      "message": "Add Multiplatform and Video publishers\n\nIntroduces two new local publishing modules: a Multiplatform Markdown/MDX publisher with platform adapters, SHA-256 review, local server, and security controls, and a Video Publisher for long/short videos with serial publishing limits and official API adapters. This change also adds configs, launchers, docs, tests, and README updates for both suites.",
+      "date": "2026-08-30T22:14:41Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
-    "updatedAt": "2026-08-27T12:57:32Z",
-    "pushedAt": "2026-08-27T12:53:32Z",
+    "updatedAt": "2026-08-30T22:15:52Z",
+    "pushedAt": "2026-08-30T22:14:43Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-08-30T18:00:41Z"
+      "remaining": 4994,
+      "resetAt": "2026-08-30T23:33:33Z"
     }
   }
 }
