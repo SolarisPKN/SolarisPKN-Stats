@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T16:00:43.408Z",
+  "updatedAt": "2026-08-30T17:00:49.076Z",
   "cloudflare": {
     "requests": 3709,
     "visitors": 103,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 103894,
+    "sizeKB": 104277,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 122942
+        "bytes": 126295
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 76868
+        "bytes": 84865
       },
       {
         "name": "CSS",
@@ -46,12 +46,12 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 4425
+        "bytes": 4427
       },
       {
         "name": "TypeScript",
         "color": "#3178c6",
-        "bytes": 2185
+        "bytes": 2229
       },
       {
         "name": "Batchfile",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 22,
+    "totalCommits": 23,
     "lastCommit": {
-      "sha": "c523ea9851e2e97c08b6310d2f33c4c252524571",
-      "message": "refactor(health): centraliza datos y admite múltiples teléfonos\n\nMueve todos los textos, centros, farmacias, urgencias y fuentes a src/locales/salud.json y elimina el JSON duplicado.\n\nModela cada contacto como una lista de teléfonos, deja los números vacíos hasta su verificación y oculta enlaces tel inválidos mostrando estados pendientes.",
-      "date": "2026-08-28T12:15:32Z"
+      "sha": "ad766eb0a52d5e58c09d928695c96eb4c314dbd7",
+      "message": "Enhance SEO, accessibility and content schemas\n\nExpand and harden site SEO and accessibility: rewrite src/components/SEO.astro to support multiple schema types (article, localBusiness, collection, medical, transport), breadcrumbs, ItemList, richer ImageObject and Organization nodes, canonical/full-URL handling and noindex logic. Improve Layout and pages to pass new SEO props (schema, breadcrumbs, items, wordCount, section, noindex) and set lang=es-AR. Add stricter HTML validations in scripts/validate-dist.mjs (lang, single H1/title/meta description/canonical/robots, image alt, JSON-LD graph and references). Small accessibility/performance tweaks (decoding, fetchpriority, rel noopener), content.config added 'modificada', README and public headers/robots updated, and removed an unused OG image.",
+      "date": "2026-08-30T15:39:32Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-28T12:18:25Z",
-    "pushedAt": "2026-08-28T12:15:47Z",
+    "updatedAt": "2026-08-30T15:39:49Z",
+    "pushedAt": "2026-08-30T15:39:34Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4993,
-      "resetAt": "2026-08-30T11:58:29Z"
+      "remaining": 4995,
+      "resetAt": "2026-08-30T18:00:41Z"
     }
   },
   "pagespeed": {
