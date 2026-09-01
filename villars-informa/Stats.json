@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T10:00:43.915Z",
+  "updatedAt": "2026-09-01T11:00:50.038Z",
   "cloudflare": {
     "requests": 1262,
     "visitors": 82,
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 126295
+        "bytes": 154472
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 84865
+        "bytes": 87077
       },
       {
         "name": "CSS",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 23,
+    "totalCommits": 24,
     "lastCommit": {
-      "sha": "ad766eb0a52d5e58c09d928695c96eb4c314dbd7",
-      "message": "Enhance SEO, accessibility and content schemas\n\nExpand and harden site SEO and accessibility: rewrite src/components/SEO.astro to support multiple schema types (article, localBusiness, collection, medical, transport), breadcrumbs, ItemList, richer ImageObject and Organization nodes, canonical/full-URL handling and noindex logic. Improve Layout and pages to pass new SEO props (schema, breadcrumbs, items, wordCount, section, noindex) and set lang=es-AR. Add stricter HTML validations in scripts/validate-dist.mjs (lang, single H1/title/meta description/canonical/robots, image alt, JSON-LD graph and references). Small accessibility/performance tweaks (decoding, fetchpriority, rel noopener), content.config added 'modificada', README and public headers/robots updated, and removed an unused OG image.",
-      "date": "2026-08-30T15:39:32Z"
+      "sha": "4c54ddcc985ec9e466d4fd6dcaaffcece45c91f9",
+      "message": "feat(transport): ampliar mapas, grillas y posiciones\n\nAgrega Sarmiento Merlo-Lobos y 136 Rapido/Villars con selectores jerarquicos, grillas responsivas y estimaciones claramente rotuladas. Amplia el PMTiles offline hasta Lobos/Navarro, actualiza el snapshot horario, extiende el Worker SOFSE y refuerza exportadores, pruebas e ignores.",
+      "date": "2026-09-01T10:44:00Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-08-30T15:39:49Z",
-    "pushedAt": "2026-08-30T15:39:34Z",
+    "updatedAt": "2026-09-01T10:49:23Z",
+    "pushedAt": "2026-09-01T10:44:18Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-01T08:51:43Z"
+      "resetAt": "2026-09-01T12:00:41Z"
     }
   },
   "pagespeed": {
