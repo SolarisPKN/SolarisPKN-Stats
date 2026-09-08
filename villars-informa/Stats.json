@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T16:00:17.025Z",
+  "updatedAt": "2026-09-08T17:00:24.987Z",
   "cloudflare": {
     "requests": 1023,
     "visitors": 58,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 118486,
+    "sizeKB": 118618,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 154472
+        "bytes": 204654
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 87077
+        "bytes": 92572
       },
       {
         "name": "CSS",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 24,
+    "totalCommits": 25,
     "lastCommit": {
-      "sha": "4c54ddcc985ec9e466d4fd6dcaaffcece45c91f9",
-      "message": "feat(transport): ampliar mapas, grillas y posiciones\n\nAgrega Sarmiento Merlo-Lobos y 136 Rapido/Villars con selectores jerarquicos, grillas responsivas y estimaciones claramente rotuladas. Amplia el PMTiles offline hasta Lobos/Navarro, actualiza el snapshot horario, extiende el Worker SOFSE y refuerza exportadores, pruebas e ignores.",
-      "date": "2026-09-01T10:44:00Z"
+      "sha": "0433a439c36e61691317ca1e0aa9b1126cf1d397",
+      "message": "feat: completar transporte en vivo y grillas locales\n\nIntegra Catán-Lozano y Merlo-Lobos desde SOFSE, separa los cuatro servicios de colectivo y agrega estados operativos veraces. Amplía el mapa y las grillas responsivas, incorpora los ramales E/F/G/H/I del 136 Villars, bridge firmado y fallbacks estimados. Actualiza la base estática y conserva el backup histórico sensible únicamente de forma local e ignorada.",
+      "date": "2026-09-08T14:14:01Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-01T10:49:23Z",
-    "pushedAt": "2026-09-01T10:44:18Z",
+    "updatedAt": "2026-09-08T14:34:48Z",
+    "pushedAt": "2026-09-08T14:29:42Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-08T12:00:13Z"
+      "resetAt": "2026-09-08T18:00:13Z"
     }
   },
   "pagespeed": {
