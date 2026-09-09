@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T16:00:55.104Z",
+  "updatedAt": "2026-09-09T17:01:01.247Z",
   "cloudflare": {
     "requests": 1878,
     "visitors": 109,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 118624,
+    "sizeKB": 118628,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 26,
+    "totalCommits": 27,
     "lastCommit": {
-      "sha": "bf52255e807c8c192e352722fb8b6b138178a941",
-      "message": "feat: sincronizar mapa de transporte con recorrido seleccionado\n\nSincroniza automáticamente el mapa con los selectores principales de tipo y\nrecorrido, manteniendo visibles las unidades de ambos sentidos.\n\n- Elimina los filtros manuales duplicados de transporte y recorrido.\n- Conserva checkboxes únicamente para ubicaciones, recorridos y paradas.\n- Emite un evento local cuando cambia el tipo o recorrido seleccionado.\n- Evita que el selector de sentido filtre o esconda unidades del mapa.\n- Enfoca automáticamente la geometría completa del recorrido seleccionado.\n- Colorea los SVG de trenes y colectivos según el sentido.\n- Usa azul para un sentido y naranja para el opuesto.\n- Mantiene gris neutral cuando la fuente no informa suficiente evidencia.\n- Normaliza destinos desde IDs, tripId, etiquetas SOFSE y patrones del 136.\n- Muestra el sentido y la calidad de la posición en los popups.\n- Separa visualmente color de sentido y estilo de borde GPS/estimado.\n- Actualiza el panel responsive y la leyenda del mapa.\n- Agrega pruebas para selección exclusiva, recorridos y colores direccionales.\n\nValidación:\n- 48/48 tests\n- Astro check sin diagnósticos\n- Build estático correcto\n- 8 páginas generadas\n- validate:dist correcto\n- Revisión visual local aprobada",
-      "date": "2026-09-09T03:10:57Z"
+      "sha": "d244db6a5eb48e14a7bf41c970f518bf179b5252",
+      "message": "data(transport): actualizar horarios",
+      "date": "2026-09-09T14:23:45Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-09T03:11:07Z",
-    "pushedAt": "2026-09-09T03:11:00Z",
+    "updatedAt": "2026-09-09T14:35:36Z",
+    "pushedAt": "2026-09-09T14:23:47Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-09T12:00:53Z"
+      "resetAt": "2026-09-09T18:00:53Z"
     }
   },
   "pagespeed": {
