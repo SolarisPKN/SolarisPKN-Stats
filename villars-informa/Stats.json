@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-09T04:00:15.519Z",
+  "updatedAt": "2026-09-09T05:00:24.275Z",
   "cloudflare": {
     "requests": 1596,
     "visitors": 118,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 118618,
+    "sizeKB": 118624,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,12 +26,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 204654
+        "bytes": 214615
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 92572
+        "bytes": 93110
       },
       {
         "name": "CSS",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 25,
+    "totalCommits": 26,
     "lastCommit": {
-      "sha": "0433a439c36e61691317ca1e0aa9b1126cf1d397",
-      "message": "feat: completar transporte en vivo y grillas locales\n\nIntegra Catán-Lozano y Merlo-Lobos desde SOFSE, separa los cuatro servicios de colectivo y agrega estados operativos veraces. Amplía el mapa y las grillas responsivas, incorpora los ramales E/F/G/H/I del 136 Villars, bridge firmado y fallbacks estimados. Actualiza la base estática y conserva el backup histórico sensible únicamente de forma local e ignorada.",
-      "date": "2026-09-08T14:14:01Z"
+      "sha": "bf52255e807c8c192e352722fb8b6b138178a941",
+      "message": "feat: sincronizar mapa de transporte con recorrido seleccionado\n\nSincroniza automáticamente el mapa con los selectores principales de tipo y\nrecorrido, manteniendo visibles las unidades de ambos sentidos.\n\n- Elimina los filtros manuales duplicados de transporte y recorrido.\n- Conserva checkboxes únicamente para ubicaciones, recorridos y paradas.\n- Emite un evento local cuando cambia el tipo o recorrido seleccionado.\n- Evita que el selector de sentido filtre o esconda unidades del mapa.\n- Enfoca automáticamente la geometría completa del recorrido seleccionado.\n- Colorea los SVG de trenes y colectivos según el sentido.\n- Usa azul para un sentido y naranja para el opuesto.\n- Mantiene gris neutral cuando la fuente no informa suficiente evidencia.\n- Normaliza destinos desde IDs, tripId, etiquetas SOFSE y patrones del 136.\n- Muestra el sentido y la calidad de la posición en los popups.\n- Separa visualmente color de sentido y estilo de borde GPS/estimado.\n- Actualiza el panel responsive y la leyenda del mapa.\n- Agrega pruebas para selección exclusiva, recorridos y colores direccionales.\n\nValidación:\n- 48/48 tests\n- Astro check sin diagnósticos\n- Build estático correcto\n- 8 páginas generadas\n- validate:dist correcto\n- Revisión visual local aprobada",
+      "date": "2026-09-09T03:10:57Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-08T14:34:48Z",
-    "pushedAt": "2026-09-08T14:29:42Z",
+    "updatedAt": "2026-09-09T03:11:07Z",
+    "pushedAt": "2026-09-09T03:11:00Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-09T00:00:12Z"
+      "resetAt": "2026-09-09T06:00:12Z"
     }
   },
   "pagespeed": {
