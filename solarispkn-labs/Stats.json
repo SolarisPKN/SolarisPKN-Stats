@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-09-09T21:00:53.658Z",
+  "updatedAt": "2026-09-10T07:21:11.061Z",
   "github": {
     "stars": 0,
     "forks": 0,
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 1,
-    "pullRequestsOpen": 0,
+    "pullRequestsOpen": 1,
     "pullRequestsMerged": 0,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182720,
+    "sizeKB": 182792,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -69,12 +69,12 @@
     },
     "createdAt": "2026-06-13T20:34:39Z",
     "updatedAt": "2026-08-29T06:09:38Z",
-    "pushedAt": "2026-08-27T19:38:08Z",
+    "pushedAt": "2026-09-10T01:38:42Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-09-09T18:00:53Z"
+      "resetAt": "2026-09-10T08:21:10Z"
     }
   },
   "cloudflare": {
