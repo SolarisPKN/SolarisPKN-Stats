@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T10:00:44.206Z",
+  "updatedAt": "2026-09-11T11:01:07.606Z",
   "cloudflare": {
     "requests": 2552,
     "visitors": 317,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 119984,
+    "sizeKB": 119946,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -85,7 +85,7 @@
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-11T08:19:46Z"
+      "resetAt": "2026-09-11T12:00:58Z"
     }
   },
   "pagespeed": {
