@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T12:00:56.727Z",
+  "updatedAt": "2026-09-11T12:02:36.364Z",
   "cloudflare": {
     "requests": 2575,
     "visitors": 322,
@@ -89,16 +89,16 @@
     }
   },
   "pagespeed": {
-    "performance": 100,
+    "performance": 98,
     "accessibility": 100,
-    "bestPractices": 92,
+    "bestPractices": 100,
     "seo": 100,
-    "firstContentfulPaint": 432,
-    "largestContentfulPaint": 682,
+    "firstContentfulPaint": 263,
+    "largestContentfulPaint": 561,
     "totalBlockingTime": 0,
     "cumulativeLayoutShift": 0,
-    "speedIndex": 785,
-    "timeToInteractive": 682,
+    "speedIndex": 1588,
+    "timeToInteractive": 561,
     "url": "https://villars.solarispkn.com.ar",
     "strategy": "desktop"
   }
