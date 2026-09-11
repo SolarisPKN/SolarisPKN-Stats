@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T07:21:19.088Z",
+  "updatedAt": "2026-09-11T07:19:53.597Z",
   "cloudflare": {
     "requests": 1479,
     "visitors": 88,
@@ -12,13 +12,13 @@
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 0,
+    "pullRequestsOpen": 1,
     "pullRequestsMerged": 0,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 118628,
+    "sizeKB": 119984,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,32 +26,32 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 214615
+        "bytes": 268746
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 93110
+        "bytes": 106555
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 28507
-      },
-      {
-        "name": "HTML",
-        "color": "#e34c26",
-        "bytes": 6822
+        "bytes": 36023
       },
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 4427
+        "bytes": 33162
+      },
+      {
+        "name": "HTML",
+        "color": "#e34c26",
+        "bytes": 13299
       },
       {
         "name": "TypeScript",
         "color": "#3178c6",
-        "bytes": 2229
+        "bytes": 3526
       },
       {
         "name": "Batchfile",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 27,
+    "totalCommits": 37,
     "lastCommit": {
-      "sha": "d244db6a5eb48e14a7bf41c970f518bf179b5252",
-      "message": "data(transport): actualizar horarios",
-      "date": "2026-09-09T14:23:45Z"
+      "sha": "9c620553f143d0fbb95f35e131d79ac60295a1bf",
+      "message": "Add handball FEMEBAL news article and images\n\nAdd a new news post about General Las Heras handball season at src/content/noticias/handball-de-general-las-heras-cerro-una-gran-temporada-en-femebal/index.mdx (metadata, content, portada and images, source link). Also add three related .webp images under public/images/noticias/handball-de-general-las-heras-cerro-una-gran-temporada-en-femebal/. Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
+      "date": "2026-09-11T06:50:33Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-09T14:35:36Z",
-    "pushedAt": "2026-09-09T14:23:47Z",
+    "updatedAt": "2026-09-11T06:50:45Z",
+    "pushedAt": "2026-09-11T06:50:42Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-10T08:21:10Z"
+      "resetAt": "2026-09-11T08:19:46Z"
     }
   },
   "pagespeed": {
