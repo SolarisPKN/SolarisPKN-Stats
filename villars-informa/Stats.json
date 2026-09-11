@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T22:00:37.117Z",
+  "updatedAt": "2026-09-11T23:00:57.755Z",
   "cloudflare": {
     "requests": 2919,
     "visitors": 370,
@@ -12,13 +12,13 @@
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 1,
+    "pullRequestsOpen": 0,
     "pullRequestsMerged": 0,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 119946,
+    "sizeKB": 121098,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,22 +26,22 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 268746
+        "bytes": 272172
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 106555
-      },
-      {
-        "name": "CSS",
-        "color": "#663399",
-        "bytes": 36023
+        "bytes": 106899
       },
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 33162
+        "bytes": 54977
+      },
+      {
+        "name": "CSS",
+        "color": "#663399",
+        "bytes": 41085
       },
       {
         "name": "HTML",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 37,
+    "totalCommits": 40,
     "lastCommit": {
-      "sha": "9c620553f143d0fbb95f35e131d79ac60295a1bf",
-      "message": "Add handball FEMEBAL news article and images\n\nAdd a new news post about General Las Heras handball season at src/content/noticias/handball-de-general-las-heras-cerro-una-gran-temporada-en-femebal/index.mdx (metadata, content, portada and images, source link). Also add three related .webp images under public/images/noticias/handball-de-general-las-heras-cerro-una-gran-temporada-en-femebal/. Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>",
-      "date": "2026-09-11T06:50:33Z"
+      "sha": "968cdca7bcebddd5dbd47a067e616eb0c4b7a6f2",
+      "message": "Add three news articles and images\n\nAdd three new noticias as MDX content along with their header images. Files added under src/content/noticias/... for:\n- abrieron-las-inscripciones-para-la-diplomatura-en-procesamiento-agroalimentario-en-general-las-heras (includes event metadata and map coords)\n- jubilaciones-suben-2-11-pero-la-minima-sigue-perdiendo-poder-de-compra-que-ayudas-existen-en-provincia-y-municipios\n- las-heras-bike-dono-otra-bicicleta-para-que-una-estudiante-pueda-llegar-mejor-a-la-escuela\nCorresponding images placed in public/images/noticias/… (webp files).",
+      "date": "2026-09-11T20:54:20Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-11T06:50:45Z",
-    "pushedAt": "2026-09-11T06:50:42Z",
+    "updatedAt": "2026-09-11T20:54:27Z",
+    "pushedAt": "2026-09-11T20:54:23Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-09-11T18:00:44Z"
+      "remaining": 4994,
+      "resetAt": "2026-09-11T23:23:15Z"
     }
   },
   "pagespeed": {
