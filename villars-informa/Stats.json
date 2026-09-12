@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T16:00:31.450Z",
+  "updatedAt": "2026-09-12T17:00:48.313Z",
   "cloudflare": {
     "requests": 1229,
     "visitors": 130,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 121098,
+    "sizeKB": 360847,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -26,7 +26,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 272172
+        "bytes": 281255
       },
       {
         "name": "Astro",
@@ -36,12 +36,12 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 54977
+        "bytes": 59884
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 41085
+        "bytes": 41447
       },
       {
         "name": "HTML",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 40,
+    "totalCommits": 42,
     "lastCommit": {
-      "sha": "968cdca7bcebddd5dbd47a067e616eb0c4b7a6f2",
-      "message": "Add three news articles and images\n\nAdd three new noticias as MDX content along with their header images. Files added under src/content/noticias/... for:\n- abrieron-las-inscripciones-para-la-diplomatura-en-procesamiento-agroalimentario-en-general-las-heras (includes event metadata and map coords)\n- jubilaciones-suben-2-11-pero-la-minima-sigue-perdiendo-poder-de-compra-que-ayudas-existen-en-provincia-y-municipios\n- las-heras-bike-dono-otra-bicicleta-para-que-una-estudiante-pueda-llegar-mejor-a-la-escuela\nCorresponding images placed in public/images/noticias/… (webp files).",
-      "date": "2026-09-11T20:54:20Z"
+      "sha": "b267657c6f0cd431ddcf746238d9da6cf4a1a96b",
+      "message": "content(noticias): publicar encuentro multimarcas en Marcos Paz\n\nAgrega la noticia del 3er Encuentro Multimarcas, su informacion practica y la imagen asociada.",
+      "date": "2026-09-12T14:17:40Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-11T20:54:27Z",
-    "pushedAt": "2026-09-11T20:54:23Z",
+    "updatedAt": "2026-09-12T14:18:23Z",
+    "pushedAt": "2026-09-12T14:18:16Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-12T12:00:30Z"
+      "resetAt": "2026-09-12T18:00:41Z"
     }
   },
   "pagespeed": {
