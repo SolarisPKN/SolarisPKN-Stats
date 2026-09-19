@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T22:00:25.351Z",
+  "updatedAt": "2026-09-19T23:00:30.592Z",
   "cloudflare": {
     "requests": 5052,
     "visitors": 181,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 360847,
+    "sizeKB": 361482,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -36,7 +36,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 59884
+        "bytes": 84984
       },
       {
         "name": "CSS",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 42,
+    "totalCommits": 43,
     "lastCommit": {
-      "sha": "b267657c6f0cd431ddcf746238d9da6cf4a1a96b",
-      "message": "content(noticias): publicar encuentro multimarcas en Marcos Paz\n\nAgrega la noticia del 3er Encuentro Multimarcas, su informacion practica y la imagen asociada.",
-      "date": "2026-09-12T14:17:40Z"
+      "sha": "fa728216ed12184fe461e4df141e33567a705dc7",
+      "message": "Add two local news posts and images\n\nAdd new MDX articles covering El Niño preparedness and the recovered stolen Hilux, along with the related image assets for both stories. This publishes the latest local reporting for Villars, General Las Heras, and nearby rural areas.",
+      "date": "2026-09-19T18:52:33Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-12T14:18:23Z",
-    "pushedAt": "2026-09-12T14:18:16Z",
+    "updatedAt": "2026-09-19T18:52:47Z",
+    "pushedAt": "2026-09-19T18:52:43Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-19T18:00:22Z"
+      "resetAt": "2026-09-20T00:00:23Z"
     }
   },
   "pagespeed": {
