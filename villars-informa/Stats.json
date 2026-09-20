@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T04:00:26.613Z",
+  "updatedAt": "2026-09-20T05:00:30.835Z",
   "cloudflare": {
     "requests": 5378,
     "visitors": 140,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 361482,
+    "sizeKB": 362273,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -29,14 +29,14 @@
         "bytes": 281255
       },
       {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 132446
+      },
+      {
         "name": "Astro",
         "color": "#ff5a03",
         "bytes": 106899
-      },
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 84984
       },
       {
         "name": "CSS",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 43,
+    "totalCommits": 45,
     "lastCommit": {
-      "sha": "fa728216ed12184fe461e4df141e33567a705dc7",
-      "message": "Add two local news posts and images\n\nAdd new MDX articles covering El Niño preparedness and the recovered stolen Hilux, along with the related image assets for both stories. This publishes the latest local reporting for Villars, General Las Heras, and nearby rural areas.",
-      "date": "2026-09-19T18:52:33Z"
+      "sha": "25f780769b8db3b89daccb681fec87f84897a4f6",
+      "message": "Add two regional news articles\n\nThis change adds two new noticia entries: one on alcohol-testing delays affecting Trenes Argentinos and another on provincial funding for the Juegos Bonaerenses. It also includes the corresponding image assets and the new MDX article content with metadata, tags, and source sections.",
+      "date": "2026-09-20T04:37:58Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-19T18:52:47Z",
-    "pushedAt": "2026-09-19T18:52:43Z",
+    "updatedAt": "2026-09-20T04:38:08Z",
+    "pushedAt": "2026-09-20T04:38:05Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-20T00:00:23Z"
+      "resetAt": "2026-09-20T06:00:23Z"
     }
   },
   "pagespeed": {
