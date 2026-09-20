@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T16:00:30.865Z",
+  "updatedAt": "2026-09-20T17:00:30.098Z",
   "cloudflare": {
     "requests": 1485,
     "visitors": 93,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 362525,
+    "sizeKB": 363400,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -31,7 +31,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 156338
+        "bytes": 197414
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 47,
+    "totalCommits": 48,
     "lastCommit": {
-      "sha": "f03db3deaaeeb47eff6a1a13ff39c05f527b7d31",
-      "message": "Fix emergency contacts MDX block",
-      "date": "2026-09-20T05:23:09Z"
+      "sha": "6e7fbb88b9df737de4ebb8bef705fcf7e62088ae",
+      "message": "Add three local news articles\n\nAdded three new MDX news entries about ANSES family coverage, municipal roadwork in General Las Heras, and the provincial suicide-prevention plan. Each article includes a featured image asset, source references, and local-context reporting for the Villars Informa site.",
+      "date": "2026-09-20T14:30:49Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-20T05:23:13Z",
-    "pushedAt": "2026-09-20T05:23:10Z",
+    "updatedAt": "2026-09-20T14:30:57Z",
+    "pushedAt": "2026-09-20T14:30:54Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-20T12:00:22Z"
+      "resetAt": "2026-09-20T18:00:21Z"
     }
   },
   "pagespeed": {
