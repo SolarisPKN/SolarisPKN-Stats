@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T22:00:30.048Z",
+  "updatedAt": "2026-09-21T23:00:31.782Z",
   "cloudflare": {
     "requests": 1953,
     "visitors": 199,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 370232,
+    "sizeKB": 372500,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 308678
+        "bytes": 480154
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 50,
+    "totalCommits": 53,
     "lastCommit": {
-      "sha": "d5ceabc025a68a4a4cca3b2c6563ba935e83dc10",
-      "message": "Add seven local news articles\n\nThis commit adds multiple new noticia entries and associated media assets covering local sports, community events, transport, rural safety, and public service updates. It includes new MDX content under src/content/noticias plus the corresponding public image files for each story.",
-      "date": "2026-09-21T15:58:40Z"
+      "sha": "d7df275a536224597dc32c493b5d5aa2ea212cae",
+      "message": "Add four news articles and images\n\nAdd four new news posts (MDX) under src/content/noticias with full metadata and content dated 2026-09-21: a La Noche de los Lápices piece, a municipal adhesion to a provincial gender-violence program, a LED recambio/works update on Ruta 40, and a report on three emergency responses by Bomberos de Villars. Also add corresponding image assets under public/images/noticias to support the articles. Includes sources and illustrations for site publication.",
+      "date": "2026-09-21T22:59:26Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-21T15:58:48Z",
-    "pushedAt": "2026-09-21T15:58:44Z",
+    "updatedAt": "2026-09-21T22:59:34Z",
+    "pushedAt": "2026-09-21T22:59:30Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-21T18:00:22Z"
+      "resetAt": "2026-09-22T00:00:23Z"
     }
   },
   "pagespeed": {
