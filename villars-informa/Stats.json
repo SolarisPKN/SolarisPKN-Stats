@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T04:00:26.610Z",
+  "updatedAt": "2026-09-21T05:00:31.907Z",
   "cloudflare": {
     "requests": 2615,
     "visitors": 76,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 363400,
+    "sizeKB": 363964,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -31,7 +31,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 197414
+        "bytes": 210150
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 48,
+    "totalCommits": 49,
     "lastCommit": {
-      "sha": "6e7fbb88b9df737de4ebb8bef705fcf7e62088ae",
-      "message": "Add three local news articles\n\nAdded three new MDX news entries about ANSES family coverage, municipal roadwork in General Las Heras, and the provincial suicide-prevention plan. Each article includes a featured image asset, source references, and local-context reporting for the Villars Informa site.",
-      "date": "2026-09-20T14:30:49Z"
+      "sha": "f4d7a5d7efadf176c6b6c500f0f140535f922ca1",
+      "message": "Agregar nota sobre sirenazo nacional de bomberos\n\nSe incorpora una nueva nota periodística sobre el sirenazo nacional de Bomberos Voluntarios para reclamar fondos adeudados, con enfoque en la Ley 25.054, el reclamo del Sistema Nacional y la participación de la comunidad en General Las Heras. También se suma la imagen de portada asociada a la cobertura.",
+      "date": "2026-09-21T00:15:41Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-20T14:30:57Z",
-    "pushedAt": "2026-09-20T14:30:54Z",
+    "updatedAt": "2026-09-21T01:49:54Z",
+    "pushedAt": "2026-09-21T01:49:50Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-21T00:00:22Z"
+      "resetAt": "2026-09-21T06:00:25Z"
     }
   },
   "pagespeed": {
