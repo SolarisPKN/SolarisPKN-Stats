@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T16:00:24.237Z",
+  "updatedAt": "2026-09-21T17:00:32.276Z",
   "cloudflare": {
     "requests": 3388,
     "visitors": 144,
@@ -18,20 +18,20 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 363964,
+    "sizeKB": 370232,
     "isArchived": false,
     "isFork": false,
-    "primaryLanguage": "JavaScript",
+    "primaryLanguage": "MDX",
     "languages": [
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 308678
+      },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
         "bytes": 281255
-      },
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 210150
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 49,
+    "totalCommits": 50,
     "lastCommit": {
-      "sha": "f4d7a5d7efadf176c6b6c500f0f140535f922ca1",
-      "message": "Agregar nota sobre sirenazo nacional de bomberos\n\nSe incorpora una nueva nota periodística sobre el sirenazo nacional de Bomberos Voluntarios para reclamar fondos adeudados, con enfoque en la Ley 25.054, el reclamo del Sistema Nacional y la participación de la comunidad en General Las Heras. También se suma la imagen de portada asociada a la cobertura.",
-      "date": "2026-09-21T00:15:41Z"
+      "sha": "d5ceabc025a68a4a4cca3b2c6563ba935e83dc10",
+      "message": "Add seven local news articles\n\nThis commit adds multiple new noticia entries and associated media assets covering local sports, community events, transport, rural safety, and public service updates. It includes new MDX content under src/content/noticias plus the corresponding public image files for each story.",
+      "date": "2026-09-21T15:58:40Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-21T01:49:54Z",
-    "pushedAt": "2026-09-21T01:49:50Z",
+    "updatedAt": "2026-09-21T15:58:48Z",
+    "pushedAt": "2026-09-21T15:58:44Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-21T12:00:21Z"
+      "resetAt": "2026-09-21T18:00:22Z"
     }
   },
   "pagespeed": {
