@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T07:00:27.266Z",
+  "updatedAt": "2026-09-22T07:45:47.062Z",
   "cloudflare": {
     "requests": 3317,
     "visitors": 218,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 373341,
+    "sizeKB": 376510,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 480154
+        "bytes": 614671
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 53,
+    "totalCommits": 54,
     "lastCommit": {
-      "sha": "d7df275a536224597dc32c493b5d5aa2ea212cae",
-      "message": "Add four news articles and images\n\nAdd four new news posts (MDX) under src/content/noticias with full metadata and content dated 2026-09-21: a La Noche de los Lápices piece, a municipal adhesion to a provincial gender-violence program, a LED recambio/works update on Ruta 40, and a report on three emergency responses by Bomberos de Villars. Also add corresponding image assets under public/images/noticias to support the articles. Includes sources and illustrations for site publication.",
-      "date": "2026-09-21T22:59:26Z"
+      "sha": "38bf9615eeb1fe5851f49ac0fedd698c02cb95d9",
+      "message": "Add regional news articles and assets\n\nThis change adds several new local news articles under src/content/noticias covering housing regularization, social benefits, road safety, health prevention, teacher negotiations, police cadet graduations, and a Route 6 accident. It also includes the corresponding image assets in public/images for each story.",
+      "date": "2026-09-22T06:36:49Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-21T22:59:34Z",
-    "pushedAt": "2026-09-21T22:59:30Z",
+    "updatedAt": "2026-09-22T06:36:57Z",
+    "pushedAt": "2026-09-22T06:36:54Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-22T06:00:21Z"
+      "resetAt": "2026-09-22T08:45:38Z"
     }
   },
   "pagespeed": {
