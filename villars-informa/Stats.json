@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T12:00:26.496Z",
+  "updatedAt": "2026-09-22T12:00:59.696Z",
   "cloudflare": {
     "requests": 5653,
     "visitors": 204,
@@ -94,11 +94,11 @@
     "bestPractices": 92,
     "seo": 100,
     "firstContentfulPaint": 431,
-    "largestContentfulPaint": 701,
+    "largestContentfulPaint": 681,
     "totalBlockingTime": 0,
     "cumulativeLayoutShift": 0,
-    "speedIndex": 631,
-    "timeToInteractive": 703,
+    "speedIndex": 644,
+    "timeToInteractive": 681,
     "url": "https://villars.solarispkn.com.ar",
     "strategy": "desktop"
   }
