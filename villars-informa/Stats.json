@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T16:00:26.156Z",
+  "updatedAt": "2026-09-24T17:00:31.604Z",
   "cloudflare": {
     "requests": 1817,
     "visitors": 103,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 376751,
+    "sizeKB": 376764,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 629614
+        "bytes": 635329
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 55,
+    "totalCommits": 57,
     "lastCommit": {
-      "sha": "f16c74e6c904c65eb7b97fad9cbfd43c4470e39a",
-      "message": "Add article on October 15 university march\n\nAdd a new noticia entry and cover image for the FUA's October 15 march over university funding, scholarships, and salaries, including context on the 2027 budget and local impact.",
-      "date": "2026-09-22T12:17:58Z"
+      "sha": "2ba408c8016329fbd1e0243b60f05a42bc92c9b6",
+      "message": "Publicar agenda de la Feria del Libro de Marcos Paz 2026",
+      "date": "2026-09-24T11:14:51Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-22T12:18:07Z",
-    "pushedAt": "2026-09-22T12:18:04Z",
+    "updatedAt": "2026-09-24T11:14:55Z",
+    "pushedAt": "2026-09-24T11:14:51Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-09-24T12:00:21Z"
+      "resetAt": "2026-09-24T18:00:21Z"
     }
   },
   "pagespeed": {
