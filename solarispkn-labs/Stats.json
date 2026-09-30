@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T18:00:14.078Z",
+  "updatedAt": "2026-09-30T18:00:25.650Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -92,7 +92,7 @@
     "largestContentfulPaint": 765,
     "totalBlockingTime": 0,
     "cumulativeLayoutShift": 0,
-    "speedIndex": 504,
+    "speedIndex": 491,
     "timeToInteractive": 765,
     "url": "https://labs.solarispkn.com.ar",
     "strategy": "desktop"
