@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T16:00:18.198Z",
+  "updatedAt": "2026-10-05T17:00:22.828Z",
   "cloudflare": {
     "requests": 1185,
     "visitors": 84,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 376830,
+    "sizeKB": 376894,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 635329
+        "bytes": 649266
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 57,
+    "totalCommits": 69,
     "lastCommit": {
-      "sha": "2ba408c8016329fbd1e0243b60f05a42bc92c9b6",
-      "message": "Publicar agenda de la Feria del Libro de Marcos Paz 2026",
-      "date": "2026-09-24T11:14:51Z"
+      "sha": "f3163835c7bc57422b18b6d50b162fae30eff144",
+      "message": "news: publica resolucion del HCD sobre lineas 136 y 163",
+      "date": "2026-10-05T11:20:59Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-09-24T11:14:55Z",
-    "pushedAt": "2026-09-29T07:27:41Z",
+    "updatedAt": "2026-10-05T11:21:03Z",
+    "pushedAt": "2026-10-05T11:20:59Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-10-05T12:00:15Z"
+      "resetAt": "2026-10-05T18:00:12Z"
     }
   },
   "pagespeed": {
