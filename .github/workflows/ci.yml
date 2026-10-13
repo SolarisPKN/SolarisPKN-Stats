@@ -1,0 +1,27 @@
+name: Verify Stats (offline)
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check syntax
+        run: |
+          node --check compile-worker.js
+          for file in connectors/*.js; do node --check "$file"; done
+      - name: Run tests (no network or deployment)
+        run: node --test tests/*.test.cjs
