@@ -99,8 +99,9 @@ module.exports = {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`GitHub GraphQL API error: ${response.status} - ${errorText}`);
+      const error = new Error('GitHub GraphQL API HTTP ' + response.status);
+      error.httpStatus = response.status;
+      throw error;
     }
 
     const json = await response.json();
