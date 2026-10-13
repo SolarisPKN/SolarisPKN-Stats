@@ -269,7 +269,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
       // its credentials to be present. Never print missing tokens or call the API.
       const missing = (connector.requiredSecrets || []).filter(name => !env[name]);
       if (missing.length) {
-        console.log(`⏸️ Optional connector ${platform} not configured; skipped`);
+        console.log('Optional connector ' + platform + ' not configured; skipped');
         break;
       }
       try {
@@ -282,7 +282,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
         // Stop attempts against this provider for the remaining cron batch.
         if (error.httpStatus === 429 || error.status === 429) {
           rateLimited.add(platform);
-          console.warn(`🚦 Rate limit reached for ${platform}; no retries this run`);
+          console.warn('Rate limit reached for ' + platform + '; no retries this run');
         }
         failures.push({ platform, projectId });
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
