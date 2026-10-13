@@ -59,3 +59,17 @@ Referencias oficiales:
 ## Pruebas
 
 Compilación offline y tests: `STATS_BUILD_ONLY=true node compile-worker.js`, `node --test tests/*.test.cjs`. La CI del PR es de solo validación; no configura secretos ni despliega en Cloudflare.
+
+## Contrato de frescura para Labs
+
+Stats **recolecta datos**; Labs los representa visualmente. Los renders quedan en cada proyecto, no en Stats.
+
+Cada `<proyecto>/Stats.json` puede exponer:
+- `_sourceChangedAt[conector]`: cuándo cambió realmente el valor de las métricas.
+- `_sourceCheckedAt[conector]`: última comprobación exitosa **persistida**; si los valores se mantienen iguales, se actualiza como máximo una vez cada 24 horas para no generar commits horarios.
+- `_sourceUpdatedAt[conector]`: campo heredado para consumidores anteriores; describe el **último cambio de datos**, no necesariamente la última consulta.
+- `updatedAt`: última escritura del archivo Stats.json, que no equivale a última variación de las métricas.
+
+Para datos existentes sin `_sourceCheckedAt`, mostrar «última comprobación no disponible» y no inventar actualidad. Un error de consulta no adelanta ningún timestamp de éxito; el consumidor debe señalar el dato como potencialmente antiguo. Las mediciones no cambian por una actualización de heartbeat.
+
+Protección de privacidad: el conector GraphQL descarta repositorios que dejan de ser públicos; GitHub Actions primero comprueba la visibilidad **sin token** antes de consultar runs autenticados. Si GitHub devuelve 429 (o GraphQL comunica límite agotado dentro de HTTP 200), se suspenden por esa ejecución tanto GitHub GraphQL como GitHub Actions, porque comparten proveedor.
