@@ -2,49 +2,118 @@
   "projects": [
     {
       "id": "solarispkn-labs",
-      "platforms": ["github", "cloudflare", "pagespeed"],
+      "platforms": [
+        "github",
+        "cloudflare",
+        "pagespeed",
+        "github-actions"
+      ],
       "url": "https://labs.solarispkn.com.ar"
     },
     {
       "id": "solarispkn-control",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "solarispkn-stats",
-      "platforms": ["github", "cloudflare"]
+      "platforms": [
+        "github",
+        "cloudflare",
+        "github-actions"
+      ]
     },
     {
       "id": "solarispkn-livetools",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "villars-informa",
-      "platforms": ["github", "cloudflare", "pagespeed"],
+      "platforms": [
+        "github",
+        "cloudflare",
+        "pagespeed",
+        "github-actions"
+      ],
       "url": "https://villars.solarispkn.com.ar"
     },
     {
       "id": "lubricantes-villars",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "replit-test01-mystic-",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "replit-test02-soldiercards-",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "figma-lab",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "analia-orayen---terapeuta-integral",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "la-cascada-de-any-s",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-ia",
+      "platforms": [
+        "github",
+        "github-actions"
+      ]
+    },
+    {
+      "id": "solarispkn-engineer",
+      "platforms": [
+        "github",
+        "github-actions"
+      ]
+    },
+    {
+      "id": "solarispkn-os",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-arts",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-converter",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-transport",
+      "platforms": [
+        "github",
+        "github-actions"
+      ]
     }
   ]
 }
