@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { validateConnectorPolicies, analyzePlan } = require('./quota-policy');
 
 // ================================================================
 // 1. CONFIGURACIÓN
@@ -147,6 +148,7 @@ async function main() {
     const newlyFound = await discoverPublicRepos(registry.projects);
     console.log('Public repos added to this build: ' + newlyFound.length);
   }
+  validateConnectorPolicies(connectors);
   const plan = {};
 
   for (const [projectIndex, project] of registry.projects.entries()) {
@@ -173,6 +175,11 @@ async function main() {
         const task = { id: project.id };
         if (project.url) task.url = project.url;
         if (zoneId) task.zoneId = zoneId;
+        // Only public, non-secret account identifiers reach the Worker plan.
+        if (platform === 'youtube-public') task.youtubeHandle = project.youtubeHandle;
+        if (platform === 'twitch-public') task.twitchLogin = project.twitchLogin;
+        if (platform === 'cloudflare-workers') task.workerScript = project.workerScript;
+        if (platform === 'r2-public-health') task.r2PublicUrl = project.r2PublicUrl;
         if (!plan[hour][platform].some(t => t.id === project.id)) {
           plan[hour][platform].push(task);
         }
@@ -180,14 +187,11 @@ async function main() {
     }
   }
 
-  // Hard gate: Cloudflare Free permits 50 external subrequests per invocation.
-  // Allow at most 39 estimated calls, leaving headroom for redirects.
-  for (let h = 0; h < 24; h++) {
-    const taskCount = Object.values(plan[h] || {}).reduce((n, tasks) => n + tasks.length, 0);
-    const snapshots = registry.projects.filter((_, i) => i % 24 === h).length;
-    const estimated = 3 * (taskCount + snapshots);
-    if (estimated > 39) throw new Error('Hour ' + h + ': ~' + estimated + ' external requests exceeds safe budget of 39');
-  }
+  // One provider-aware budget gate before any deploy.
+  // GraphQL, OAuth and Twitch have different actual HTTP costs.
+  const quotaAnalysis = analyzePlan(plan, registry.projects, connectors);
+  console.log('📊 Daily API budgets: ' + JSON.stringify(quotaAnalysis.byConnector));
+
 
   // Ordenar horas
   const sortedPlan = {};
@@ -251,6 +255,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
   };
 
   const failures = [];
+  const rateLimited = new Set();
   for (const [platform, taskList] of Object.entries(tasks)) {
     const connector = connectorMap[platform];
     if (!connector) {
@@ -259,12 +264,26 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
     }
     for (const task of taskList) {
       const projectId = task.id;
+      if (rateLimited.has(platform)) continue;
+      // A connector is configured in the public registry without requiring
+      // its credentials to be present. Never print missing tokens or call the API.
+      const missing = (connector.requiredSecrets || []).filter(name => !env[name]);
+      if (missing.length) {
+        console.log(`⏸️ Optional connector ${platform} not configured; skipped`);
+        break;
+      }
       try {
         console.log(\`📊 Consultando \${platform} para \${projectId}...\`);
         // Le pasamos al conector projectId, la tarea completa (id/url/zoneId/lo que traiga) y env
         const data = await connector.fetchData(projectId, task, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
+        // No automatic retries or request storms on quota exhaustion.
+        // Stop attempts against this provider for the remaining cron batch.
+        if (error.httpStatus === 429 || error.status === 429) {
+          rateLimited.add(platform);
+          console.warn(`🚦 Rate limit reached for ${platform}; no retries this run`);
+        }
         failures.push({ platform, projectId });
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
       }
