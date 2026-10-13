@@ -6,7 +6,8 @@
         "github",
         "cloudflare",
         "pagespeed",
-        "github-actions"
+        "github-actions",
+        "http-health"
       ],
       "url": "https://labs.solarispkn.com.ar"
     },
@@ -36,7 +37,8 @@
         "github",
         "cloudflare",
         "pagespeed",
-        "github-actions"
+        "github-actions",
+        "http-health"
       ],
       "url": "https://villars.solarispkn.com.ar"
     },
