@@ -14,7 +14,9 @@ module.exports = {
   id: 'github',
 
   // Horas en las que se debe ejecutar este conector (formato 0-23)
-  hours: [0, 5, 11, 17, 23],
+  hours: [1, 7, 13, 19],
+  externalRequests: 1,
+  maxDailyCalls: 4,
   // Spread the five daily polls among six neighboring UTC hours per project.
   spreadWindow: 6,
 
