@@ -113,7 +113,16 @@ module.exports = {
     // el array "errors" del body además del status HTTP.
     if (json.errors && json.errors.length > 0) {
       const messages = json.errors.map(e => e.message).join('; ');
-      throw new Error(`GitHub GraphQL error: ${messages}`);
+      // GraphQL may return HTTP 200 with a rate-limit failure in the body.
+      // Treat that as the same provider circuit-breaker signal as HTTP 429.
+      const rateLimited = json.errors.some(e => {
+        const code = String(e?.extensions?.code || '').toUpperCase();
+        return code === 'RATE_LIMITED' || code === 'RATE_LIMIT' ||
+          /(?:rate[- ]limit|secondary rate limit|abuse detection|throttl)/i.test(String(e?.message || ''));
+      });
+      const error = new Error(`GitHub GraphQL error: ${messages}`);
+      if (rateLimited) error.httpStatus = 429;
+      throw error;
     }
 
     const repo = json.data && json.data.repository;
