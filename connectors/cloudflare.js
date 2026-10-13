@@ -24,7 +24,9 @@ module.exports = {
   id: 'cloudflare',
 
   // Horas en las que se debe ejecutar este conector (formato 0-23)
-  hours: Array.from({ length: 24 }, (_, i) => i), // [0,1,2,3,...,23]
+  hours: [2, 8, 14, 20], // every 6 hours; traffic is a rolling 24h aggregate
+  externalRequests: 1,
+  maxDailyCalls: 4,
 
   /**
    * Obtiene métricas de Cloudflare para una zona específica
