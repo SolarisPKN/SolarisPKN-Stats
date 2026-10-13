@@ -20,7 +20,9 @@ module.exports = {
     });
     if (!response.ok) {
       // Do not propagate raw API responses; they may contain sensitive metadata.
-      throw new Error('GitHub Actions API returned HTTP ' + response.status);
+      const error = new Error('GitHub Actions API HTTP ' + response.status);
+      error.httpStatus = response.status;
+      throw error;
     }
     const json = await response.json();
     const runs = Array.isArray(json.workflow_runs) ? json.workflow_runs : [];
