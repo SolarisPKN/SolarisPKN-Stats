@@ -1,5 +1,8 @@
 # SolarisPKN-Stats
 
+
+**Free API budgets, connector setup and credential guidance:** [Quota-aware connectors](docs/API-QUOTAS.md). Covers GitHub, Cloudflare, YouTube, Twitch, R2, and providers requiring additional authorization.
+
 ## Public repository coverage and safety (October 2026)
 
 The registry tracks reviewed **public** SolarisPKN projects only. At deployment time, `discover-public-repos.js` discovers additional public, non-archived, non-fork repositories from GitHub's public API; explicitly excluded training repositories are not added. Private repositories are never discovered or mirrored.
