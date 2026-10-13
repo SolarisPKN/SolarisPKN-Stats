@@ -1,5 +1,8 @@
 # SolarisPKN-Stats
 
+
+**Cuotas, conectores gratuitos y secretos:** [Guía de cuotas y conectores gratuitos](docs/API-QUOTAS.es.md). Incluye los horarios de GitHub, Cloudflare, YouTube, Twitch, R2 y las fuentes que todavía requieren autorización.
+
 ## Cobertura de repositorios públicos y seguridad (octubre de 2026)
 
 El registro sigue exclusivamente proyectos públicos revisados de SolarisPKN. En cada despliegue, `discover-public-repos.js` descubre nuevos repositorios públicos, no archivados y que no sean forks mediante la API pública de GitHub. Los proyectos de formación expresamente excluidos no se incorporan. **Nunca** se descubren ni exportan repositorios privados.
