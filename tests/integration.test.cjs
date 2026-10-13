@@ -181,8 +181,8 @@ test('a GitHub GraphQL 429 also stops GitHub Actions in the same cron invocation
     await assert.rejects(() => mod.default.scheduled(
       { scheduledTime: Date.UTC(2026, 9, 13, hour) },
       { GITHUB_TOKEN_READ: 'mock', GITHUB_TOKEN_WRITE: 'mock' }, {}));
-    assert.equal(graphqlCalls, 1, 'GraphQL should stop after the first 429');
-    assert.equal(actionsCalls, 0, 'Actions must share the GitHub rate-limit breaker');
+    assert.equal(graphqlCalls + actionsCalls, 1,
+      'GitHub GraphQL and Actions share a provider quota: either one may run first, but never both after 429');
   } finally {
     global.fetch = previous;
   }
