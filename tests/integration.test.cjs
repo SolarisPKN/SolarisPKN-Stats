@@ -154,7 +154,7 @@ test('generated Worker stops further GitHub GraphQL calls after HTTP 429', async
 
 test('a GitHub GraphQL 429 also stops GitHub Actions in the same cron invocation', async () => {
   const built = fs.readFileSync(path.join(root, 'worker-built.js'), 'utf8');
-  const match = built.match(/const EXECUTION_PLAN = ([\\s\\S]*?);\\nconst SNAPSHOT_PROJECTS/);
+  const match = built.match(/const EXECUTION_PLAN = ([\s\S]*?);\nconst SNAPSHOT_PROJECTS/);
   assert.ok(match);
   const plan = JSON.parse(match[1]).plan;
   const hour = Number(Object.keys(plan).find(h =>
