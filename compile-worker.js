@@ -241,7 +241,8 @@ async function runRuntime(env, hour, scheduledAt = new Date()) {
 
   const tasks = EXECUTION_PLAN.plan[hour] || {};
   if (Object.keys(tasks).length === 0) {
-    console.log(\`⏸️ No hay tareas para la hora \${hour}\`);
+    console.log(\`⏸️ No hay consultas para la hora \${hour}; revisando snapshots\`);
+    await createDailySnapshot(env, hour, scheduledAt);
     return;
   }
 
@@ -249,6 +250,7 @@ async function runRuntime(env, hour, scheduledAt = new Date()) {
 ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector`).join(',\n')}
   };
 
+  const failures = [];
   for (const [platform, taskList] of Object.entries(tasks)) {
     const connector = connectorMap[platform];
     if (!connector) {
@@ -263,12 +265,16 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
         const data = await connector.fetchData(projectId, task, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
+        failures.push({ platform, projectId });
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
       }
     }
   }
 
   await createDailySnapshot(env, hour, scheduledAt);
+  if (failures.length) {
+    throw new Error(\`Collector completed with \${failures.length} source failures: \${failures.map(f => f.platform + '/' + f.projectId).join(', ')}\`);
+  }
   console.log(\`✅ Runtime completado para la hora \${hour}\`);
 }
 
