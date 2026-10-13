@@ -371,14 +371,33 @@ async function updateProjectStats(env, projectId, platform, data) {
   const existing = await getFromGitHub(env, statsPath);
   let stats = existing ? JSON.parse(existing.content) : { updatedAt: new Date().toISOString() };
   const normalized = { ...data };
-  delete normalized._rateLimit; // telemetry counter changes even when the project doesn't
+  delete normalized._rateLimit; // transient telemetry must not trigger a commit
   const previous = stats[platform] ? { ...stats[platform] } : undefined;
   if (previous) delete previous._rateLimit;
-  if (JSON.stringify(previous) === JSON.stringify(normalized)) return;
-  stats[platform] = normalized;
-  stats.updatedAt = new Date().toISOString();
-  stats._sourceUpdatedAt = stats._sourceUpdatedAt || {};
-  stats._sourceUpdatedAt[platform] = stats.updatedAt;
+  const changed = JSON.stringify(previous) !== JSON.stringify(normalized);
+  const now = new Date();
+  const nowIso = now.toISOString();
+
+  // Successful fetches do not always change values. Persist a heartbeat at
+  // most once every 24 hours when metrics are unchanged. This is already
+  // covered by the worst-case PUT budget of each scheduled collection.
+  stats._sourceCheckedAt = stats._sourceCheckedAt || {};
+  const priorCheckMs = Date.parse(stats._sourceCheckedAt[platform] || '');
+  const heartbeatDue = !Number.isFinite(priorCheckMs) ||
+    now.getTime() - priorCheckMs >= 24 * 60 * 60 * 1000;
+  if (!changed && !heartbeatDue) return;
+
+  stats._sourceUpdatedAt = stats._sourceUpdatedAt || {}; // legacy: last change
+  stats._sourceChangedAt = stats._sourceChangedAt || {};
+  if (changed) {
+    stats[platform] = normalized;
+    stats._sourceUpdatedAt[platform] = nowIso;
+    stats._sourceChangedAt[platform] = nowIso;
+  } else if (!stats._sourceChangedAt[platform] && stats._sourceUpdatedAt[platform]) {
+    stats._sourceChangedAt[platform] = stats._sourceUpdatedAt[platform];
+  }
+  stats._sourceCheckedAt[platform] = nowIso;
+  stats.updatedAt = nowIso; // time when Stats.json was last persisted
   await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`, existing ? existing.sha : null);
 }
 
