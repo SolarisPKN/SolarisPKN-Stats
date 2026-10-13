@@ -70,6 +70,12 @@ test('GitHub Actions connector returns aggregate run health without logs', async
   const previousFetch = global.fetch;
   try {
     global.fetch = async (url, options) => {
+      if (!String(url).includes('/actions/runs')) {
+        assert.match(url, /api.github.com\/repos\/SolarisPKN/);
+        assert.equal(options.headers.Authorization, undefined,
+          'visibility check must not send a private-access token');
+        return { ok: true, json: async () => ({ private: false, visibility: 'public' }) };
+      }
       assert.match(url, /actions\/runs/);
       assert.equal(options.headers.Authorization, 'Bearer test-only');
       return { ok: true, json: async () => ({
@@ -88,6 +94,27 @@ test('GitHub Actions connector returns aggregate run health without logs', async
     assert.equal(result.workflows[0].latestFailure.id, 2);
     assert.equal(Object.hasOwn(result, 'logs'), false);
   } finally { global.fetch = previousFetch; }
+});
+
+test('GitHub Actions refuses private repositories even when authenticated token can read them', async () => {
+  const c = require('../connectors/github-actions.js');
+  const previous = global.fetch;
+  let calls = 0;
+  try {
+    global.fetch = async (url, options) => {
+      calls++;
+      assert.ok(!String(url).includes('/actions/runs'),
+        'must not read private workflow runs');
+      assert.equal(options.headers.Authorization, undefined,
+        'public visibility probe must be unauthenticated');
+      return { ok: true, json: async () => ({ private: true, visibility: 'private' }) };
+    };
+    await assert.rejects(
+      () => c.fetchData('now-private-repo', {}, { GITHUB_TOKEN_READ: 'mock' }),
+      /public-only policy/
+    );
+    assert.equal(calls, 1);
+  } finally { global.fetch = previous; }
 });
 
 test('public discovery excludes nonpublic, forks and unrelated training repos', async () => {
