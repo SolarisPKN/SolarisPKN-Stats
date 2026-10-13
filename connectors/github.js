@@ -129,6 +129,11 @@ module.exports = {
     if (!repo) {
       throw new Error(`Repositorio no encontrado o sin acceso: ${owner}/${repoName}`);
     }
+    // Stats publishes these metrics in a PUBLIC repository. Fail closed if a
+    // registered project has become private or privacy is not confirmed.
+    if (repo.isPrivate !== false) {
+      throw new Error(`Estadísticas privadas bloqueadas para ${owner}/${repoName}`);
+    }
 
     const commit = repo.defaultBranchRef && repo.defaultBranchRef.target;
     const languageEdges = (repo.languages && repo.languages.edges) || [];
