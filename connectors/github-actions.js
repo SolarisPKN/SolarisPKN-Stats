@@ -1,8 +1,10 @@
 // Public-repository GitHub Actions health. Read-only; never fetches logs or secrets.
 module.exports = {
   id: 'github-actions',
-  hours: [3, 15],
-  spreadWindow: 6,
+  hours: [4, 16],
+  spreadWindow: 8,
+  externalRequests: 1,
+  maxDailyCalls: 2,
   async fetchData(projectId, task, env) {
     const token = env.GITHUB_TOKEN_READ;
     if (!token) throw new Error('GITHUB_TOKEN_READ is required');
