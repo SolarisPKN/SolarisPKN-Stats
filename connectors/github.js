@@ -15,6 +15,8 @@ module.exports = {
 
   // Horas en las que se debe ejecutar este conector (formato 0-23)
   hours: [0, 5, 11, 17, 23],
+  // Spread the five daily polls among six neighboring UTC hours per project.
+  spreadWindow: 6,
 
   /**
    * Obtiene métricas de un repositorio de GitHub vía GraphQL (1 sola petición)
