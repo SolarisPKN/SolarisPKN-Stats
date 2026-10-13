@@ -142,7 +142,7 @@ async function getZoneIdForProject(project) {
 async function main() {
   const plan = {};
 
-  for (const project of registry.projects) {
+  for (const [projectIndex, project] of registry.projects.entries()) {
     for (const platform of project.platforms) {
       const connector = connectors[platform];
       if (!connector) {
@@ -157,7 +157,9 @@ async function main() {
         zoneId = await getZoneIdForProject(project);
       }
 
-      const hours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
+      const baseHours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
+      const spread = Math.max(1, Math.min(24, Number(connector.spreadWindow) || 1));
+      const hours = [...new Set(baseHours.map(h => (h + projectIndex % spread) % 24))];
       for (const hour of hours) {
         if (!plan[hour]) plan[hour] = {};
         if (!plan[hour][platform]) plan[hour][platform] = [];
@@ -169,6 +171,15 @@ async function main() {
         }
       }
     }
+  }
+
+  // Hard gate: Cloudflare Free permits 50 external subrequests per invocation.
+  // Allow at most 39 estimated calls, leaving headroom for redirects.
+  for (let h = 0; h < 24; h++) {
+    const taskCount = Object.values(plan[h] || {}).reduce((n, tasks) => n + tasks.length, 0);
+    const snapshots = registry.projects.filter((_, i) => i % 24 === h).length;
+    const estimated = 3 * (taskCount + snapshots);
+    if (estimated > 39) throw new Error('Hour ' + h + ': ~' + estimated + ' external requests exceeds safe budget of 39');
   }
 
   // Ordenar horas
@@ -199,10 +210,11 @@ async function main() {
   // 5b. GENERAR CÓDIGO DEL WORKER
   // ================================================================
 
+  const safeIdentifier = id => 'c_' + id.replace(/[^a-zA-Z0-9_$]/g, '_');
   const connectorsCode = Object.entries(connectorCode).map(([id, code]) => {
     return `
 // --- Conector: ${id} ---
-const ${id}Connector = (function() {
+const ${safeIdentifier(id)}Connector = (function() {
   let module = { exports: {} };
   (function(module, exports) {
     ${code}
@@ -227,7 +239,7 @@ async function runRuntime(env, hour) {
   }
 
   const connectorMap = {
-${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
+${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector`).join(',\n')}
   };
 
   for (const [platform, taskList] of Object.entries(tasks)) {
@@ -249,9 +261,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
     }
   }
 
-  if (hour === 0) {
-    await createDailySnapshot(env);
-  }
+  await createDailySnapshot(env, hour);
   console.log(\`✅ Runtime completado para la hora \${hour}\`);
 }
 
@@ -320,22 +330,17 @@ async function updateProjectStats(env, projectId, platform, data) {
   await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`);
 }
 
-async function createDailySnapshot(env) {
+async function createDailySnapshot(env, hour) {
   console.log('📸 Creando snapshot histórico...');
   const today = new Date().toISOString().split('T')[0];
-  const registryFile = await getFromGitHub(env, 'registry.json');
-  if (!registryFile) {
-    console.error('❌ No se pudo leer registry.json para snapshots');
-    return;
-  }
-  const registry = JSON.parse(registryFile.content);
-  for (const project of registry.projects) {
-    const statsPath = \`\${project.id}/Stats.json\`;
-    const historyPath = \`\${project.id}/History/\${today}.json\`;
+  for (const [projectIndex, projectId] of SNAPSHOT_PROJECTS.entries()) {
+    if (projectIndex % 24 !== hour) continue;
+    const statsPath = \`\${projectId}/Stats.json\`;
+    const historyPath = \`\${projectId}/History/\${today}.json\`;
     const statsFile = await getFromGitHub(env, statsPath);
     if (statsFile) {
-      await saveToGitHub(env, historyPath, statsFile.content, \`Snapshot \${today} for \${project.id}\`);
-      console.log(\`  ✅ Snapshot guardado para \${project.id}\`);
+      await saveToGitHub(env, historyPath, statsFile.content, \`Snapshot \${today} for \${projectId}\`);
+      console.log(\`  ✅ Snapshot guardado para \${projectId}\`);
     }
   }
 }
@@ -394,6 +399,7 @@ export default {
 
 // PLAN DE EJECUCIÓN INCRUSTADO
 const EXECUTION_PLAN = ${JSON.stringify(executionPlan, null, 2)};
+const SNAPSHOT_PROJECTS = ${JSON.stringify(registry.projects.map(p => p.id))};
 
 // ================================================================
 // CONECTORES
