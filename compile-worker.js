@@ -294,9 +294,11 @@ async function getFromGitHub(env, path) {
   };
 }
 
-async function saveToGitHub(env, path, content, message = 'Update stats') {
+async function saveToGitHub(env, path, content, message = 'Update stats', knownSha = undefined) {
   const url = \`https://api.github.com/repos/SolarisPKN/SolarisPKN-Stats/contents/\${path}\`;
-  const existing = await getFromGitHub(env, path);
+  // Avoid a duplicate GET when the caller already knows the current blob SHA.
+  const existing = knownSha === undefined ? await getFromGitHub(env, path)
+    : knownSha ? { sha: knownSha } : null;
   const body = {
     message: \`\${message} - \${new Date().toISOString()}\`,
     content: Buffer.from(content).toString('base64'),
@@ -325,9 +327,16 @@ async function updateProjectStats(env, projectId, platform, data) {
   const statsPath = \`\${projectId}/Stats.json\`;
   const existing = await getFromGitHub(env, statsPath);
   let stats = existing ? JSON.parse(existing.content) : { updatedAt: new Date().toISOString() };
-  stats[platform] = data;
+  const normalized = { ...data };
+  delete normalized._rateLimit; // telemetry counter changes even when the project doesn't
+  const previous = stats[platform] ? { ...stats[platform] } : undefined;
+  if (previous) delete previous._rateLimit;
+  if (JSON.stringify(previous) === JSON.stringify(normalized)) return;
+  stats[platform] = normalized;
   stats.updatedAt = new Date().toISOString();
-  await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`);
+  stats._sourceUpdatedAt = stats._sourceUpdatedAt || {};
+  stats._sourceUpdatedAt[platform] = stats.updatedAt;
+  await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`, existing ? existing.sha : null);
 }
 
 async function createDailySnapshot(env, hour) {
@@ -355,11 +364,7 @@ export default {
   async scheduled(event, env, ctx) {
     const now = new Date();
     const hour = now.getHours();
-    // La hora 0 (github+cloudflare+pagespeed + snapshot a History/) NO se
-    // dispara acá — la dispara compile-worker.js justo después de cada
-    // deploy (programado o manual), así el deploy siempre deja Stats.json
-    // fresco. Este cron solo cubre las horas 1-23.
-    if (hour === 0) return;
+    // All 24 UTC hours are eligible; snapshots are staggered across them.
     if (now.getMinutes() === 0) {
       await runRuntime(env, hour);
     }
@@ -368,10 +373,9 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.searchParams.has('run')) {
-      const hourParam = url.searchParams.get('hour');
-      const hour = hourParam !== null ? parseInt(hourParam, 10) : new Date().getHours();
-      await runRuntime(env, hour);
-      return new Response(\`Runtime ejecutado para la hora \${hour}\`);
+      return new Response('Manual collection disabled: use the Cloudflare cron event', {
+        status: 403, headers: { 'Cache-Control': 'no-store' }
+      });
     }
     return new Response(JSON.stringify({
       status: 'OK',
@@ -438,17 +442,8 @@ ${indexCode}
   await setCronTrigger();
 
   // ================================================================
-  // 9. DISPARAR LA HORA 0 (github+cloudflare+pagespeed + snapshot)
-  // ================================================================
-  // No fatal: si esto falla, el deploy en sí ya está hecho y el cron
-  // de las horas 1-23 va a seguir andando solo. Un fallo acá solo
-  // significa "no hubo refresh inmediato", no "el sistema está roto".
-  try {
-    await triggerInitialRun();
-  } catch (err) {
-    console.warn(`⚠️ No se pudo disparar la corrida inicial (hora 0): ${err.message}`);
-    console.warn(`⚠️ El deploy y el cron ya están OK — esto solo afecta el refresh inmediato.`);
-  }
+  // 9. Collection is handled by hourly cron, never by public unauthenticated HTTP.
+
 }
 
 // ================================================================
@@ -541,52 +536,7 @@ async function setCronTrigger() {
   console.log(`✅ Cron Trigger configurado: "0 * * * *" (cada hora en punto, UTC)`);
 }
 
-// Resuelve https://{WORKER_NAME}.{subdominio}.workers.dev y le pega a
-// ?run&hour=0 para forzar el refresh completo (github+cloudflare+pagespeed
-// + snapshot a History/) apenas termina el deploy — sin esperar a que
-// llegue la próxima hora en punto.
-async function triggerInitialRun() {
-  console.log(`🔥 Disparando corrida inicial (hora 0)...`);
-
-  // 1. Resolver el subdominio workers.dev de la cuenta
-  const subdomainUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/subdomain`;
-  const subdomainRes = await fetch(subdomainUrl, {
-    headers: { 'Authorization': `Bearer ${CF_API_TOKEN}` }
-  });
-  if (!subdomainRes.ok) {
-    throw new Error(`No se pudo resolver el subdominio workers.dev: ${subdomainRes.status} - ${await subdomainRes.text()}`);
-  }
-  const subdomainJson = await subdomainRes.json();
-  const subdomain = subdomainJson.result && subdomainJson.result.subdomain;
-  if (!subdomain) {
-    throw new Error('La cuenta no tiene un subdominio workers.dev configurado');
-  }
-
-  // 2. Asegurar que este Worker tenga habilitada la ruta *.workers.dev
-  //    (si solo lo estabas usando con un dominio propio, puede estar apagada)
-  const routeUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/subdomain`;
-  const routeRes = await fetch(routeUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${CF_API_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ enabled: true })
-  });
-  if (!routeRes.ok) {
-    throw new Error(`No se pudo habilitar la ruta workers.dev: ${routeRes.status} - ${await routeRes.text()}`);
-  }
-
-  // 3. Pegarle al endpoint ?run&hour=0 del Worker recién deployado
-  const runUrl = `https://${WORKER_NAME}.${subdomain}.workers.dev/?run&hour=0`;
-  const runRes = await fetch(runUrl);
-  if (!runRes.ok) {
-    throw new Error(`El Worker respondió ${runRes.status} al disparar la hora 0`);
-  }
-  const runText = await runRes.text();
-  console.log(`✅ Corrida inicial completada: ${runText}`);
-}
-
+// Manual public run endpoint intentionally removed.
 function guardarArtefactoDeError(builtPath) {
   try {
     const artifactPath = path.join(__dirname, 'worker-built-error.js');
