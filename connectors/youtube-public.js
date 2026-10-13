@@ -5,6 +5,7 @@ module.exports = {
   externalRequests: 1,
   maxDailyCalls: 2,
   quotaUnitsPerCall: 1, // YouTube Data API channels.list
+  requiredSecrets: ['YOUTUBE_API_KEY'],
   async fetchData(projectId, task, env) {
     const handle = task.youtubeHandle;
     if (!/^@[A-Za-z0-9._-]{3,100}$/.test(handle || ''))
