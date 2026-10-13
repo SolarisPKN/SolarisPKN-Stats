@@ -41,6 +41,52 @@ test('dry-run generates syntactically valid Worker within Free request budget', 
   }
 });
 
+test('Stats.json distinguishes metric changes from bounded successful-check heartbeats', async () => {
+  const built = fs.readFileSync(path.join(root, 'worker-built.js'), 'utf8');
+  assert.ok(built.includes('async function updateProjectStats('));
+  const exposed = built.replace('export default {',
+    'export { updateProjectStats };\nexport default {');
+  const mod = await import('data:text/javascript;base64,' +
+    Buffer.from(exposed).toString('base64'));
+  assert.equal(typeof mod.updateProjectStats, 'function');
+  const previousFetch = global.fetch;
+  let stored = null, puts = 0;
+  try {
+    global.fetch = async (url, opts = {}) => {
+      assert.match(String(url), /health-demo\/Stats\.json$/);
+      if (opts.method === 'PUT') {
+        puts++;
+        stored = Buffer.from(JSON.parse(opts.body).content, 'base64').toString('utf8');
+        return { ok: true, json: async () => ({}) };
+      }
+      if (!stored) return { status: 404, ok: false };
+      return { ok: true, json: async () => ({
+        content: Buffer.from(stored).toString('base64'), sha: 'mock-blob-sha'
+      }) };
+    };
+    const env = { GITHUB_TOKEN_WRITE: 'mock' };
+    await mod.updateProjectStats(env, 'health-demo', 'github', { stars: 3 });
+    const first = JSON.parse(stored);
+    assert.equal(puts, 1);
+    assert.equal(first.github.stars, 3);
+    assert.equal(typeof first._sourceCheckedAt.github, 'string');
+    const originalChanged = first._sourceChangedAt.github;
+
+    await mod.updateProjectStats(env, 'health-demo', 'github', { stars: 3 });
+    assert.equal(puts, 1, 'identical check under 24h must not create a commit');
+
+    const stale = JSON.parse(stored);
+    stale._sourceCheckedAt.github = new Date(Date.now() - 25 * 3600000).toISOString();
+    stored = JSON.stringify(stale);
+    await mod.updateProjectStats(env, 'health-demo', 'github', { stars: 3 });
+    const refreshed = JSON.parse(stored);
+    assert.equal(puts, 2, 'heartbeat due after 24h must persist once');
+    assert.equal(refreshed._sourceChangedAt.github, originalChanged,
+      'checking identical values must not claim that the metric changed');
+    assert.notEqual(refreshed._sourceCheckedAt.github, stale._sourceCheckedAt.github);
+  } finally { global.fetch = previousFetch; }
+});
+
 test('Cloudflare connector filters traffic by hostname, not only zone', async () => {
   const connector = require('../connectors/cloudflare.js');
   const previousFetch = global.fetch;
