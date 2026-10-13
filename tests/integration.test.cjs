@@ -152,6 +152,42 @@ test('generated Worker stops further GitHub GraphQL calls after HTTP 429', async
   } finally { global.fetch = previous; }
 });
 
+test('a GitHub GraphQL 429 also stops GitHub Actions in the same cron invocation', async () => {
+  const built = fs.readFileSync(path.join(root, 'worker-built.js'), 'utf8');
+  const match = built.match(/const EXECUTION_PLAN = ([\\s\\S]*?);\\nconst SNAPSHOT_PROJECTS/);
+  assert.ok(match);
+  const plan = JSON.parse(match[1]).plan;
+  const hour = Number(Object.keys(plan).find(h =>
+    (plan[h].github || []).length > 0 &&
+    (plan[h]['github-actions'] || []).length > 0));
+  assert.ok(Number.isInteger(hour), 'need an hour with GitHub and Actions overlap');
+  const uri = 'data:text/javascript;base64,' + Buffer.from(built).toString('base64');
+  const mod = await import(uri);
+  const previous = global.fetch;
+  let graphqlCalls = 0, actionsCalls = 0;
+  try {
+    global.fetch = async url => {
+      const endpoint = String(url);
+      if (endpoint === 'https://api.github.com/graphql') {
+        graphqlCalls++;
+        return { ok: false, status: 429 };
+      }
+      if (endpoint.includes('/actions/runs?')) {
+        actionsCalls++;
+        return { ok: false, status: 429 };
+      }
+      return { ok: false, status: 404 };
+    };
+    await assert.rejects(() => mod.default.scheduled(
+      { scheduledTime: Date.UTC(2026, 9, 13, hour) },
+      { GITHUB_TOKEN_READ: 'mock', GITHUB_TOKEN_WRITE: 'mock' }, {}));
+    assert.equal(graphqlCalls, 1, 'GraphQL should stop after the first 429');
+    assert.equal(actionsCalls, 0, 'Actions must share the GitHub rate-limit breaker');
+  } finally {
+    global.fetch = previous;
+  }
+});
+
 test('GitHub Actions interprets exhausted 403 quota as a stop signal', async () => {
   const c = require('../connectors/github-actions.js');
   const previous = global.fetch;
