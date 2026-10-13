@@ -3,13 +3,35 @@ module.exports = {
   id: 'github-actions',
   hours: [4, 16],
   spreadWindow: 8,
-  externalRequests: 1,
+  externalRequests: 2, // public visibility probe + Actions REST read
+  quotaUnitsPerCall: 2,
   maxDailyCalls: 2,
   async fetchData(projectId, task, env) {
     const token = env.GITHUB_TOKEN_READ;
     if (!token) throw new Error('GITHUB_TOKEN_READ is required');
-    const url = 'https://api.github.com/repos/SolarisPKN/' +
-      encodeURIComponent(projectId) + '/actions/runs?per_page=30&exclude_pull_requests=false';
+
+    // A public Stats.json must never be enriched from a private repository.
+    // Probe *without authorization* so token access cannot hide a privacy change.
+    const repositoryUrl = 'https://api.github.com/repos/SolarisPKN/' +
+      encodeURIComponent(projectId);
+    const publicCheck = await fetch(repositoryUrl, {
+      redirect: 'manual',
+      headers: { Accept: 'application/vnd.github+json',
+        'User-Agent': 'SolarisPKN-Stats/2.0' }
+    });
+    if (!publicCheck.ok) {
+      const error = new Error('GitHub public visibility check HTTP ' + publicCheck.status);
+      const limited = publicCheck.status === 429 || (publicCheck.status === 403 &&
+        (publicCheck.headers?.get?.('x-ratelimit-remaining') === '0' ||
+         !!publicCheck.headers?.get?.('retry-after')));
+      error.httpStatus = limited ? 429 : publicCheck.status;
+      throw error;
+    }
+    const publicRepo = await publicCheck.json();
+    if (publicRepo?.private !== false || publicRepo?.visibility !== 'public') {
+      throw new Error('GitHub Actions public-only policy: private or unverified repository');
+    }
+    const url = repositoryUrl + '/actions/runs?per_page=30&exclude_pull_requests=false';
     const response = await fetch(url, {
       headers: {
         Authorization: 'Bearer ' + token,
