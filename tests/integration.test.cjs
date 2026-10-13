@@ -82,6 +82,44 @@ test('GitHub Actions connector returns aggregate run health without logs', async
     assert.equal(result.successful, 1);
     assert.equal(result.latest.conclusion, 'failure');
     assert.equal(result.latestSuccess.id, 1);
+    assert.equal(result.workflows.length, 1);
+    assert.equal(result.workflows[0].latestFailure.id, 2);
     assert.equal(Object.hasOwn(result, 'logs'), false);
+  } finally { global.fetch = previousFetch; }
+});
+
+test('public discovery excludes nonpublic, forks and unrelated training repos', async () => {
+  const { discoverPublicRepos } = require('../discover-public-repos.js');
+  const projects = [{ id: 'existing-public', platforms: ['github'] }];
+  const response = { ok: true, json: async () => [
+    { name: 'Existing-Public', owner: { login: 'SolarisPKN' }, private: false, visibility: 'public' },
+    { name: 'New-Public', owner: { login: 'SolarisPKN' }, private: false, visibility: 'public' },
+    { name: 'Private-Sandbox', owner: { login: 'SolarisPKN' }, private: true, visibility: 'private' },
+    { name: 'fork-test', owner: { login: 'SolarisPKN' }, private: false, visibility: 'public', fork: true },
+    { name: 'skills-introduction-to-github', owner: { login: 'SolarisPKN' }, private: false, visibility: 'public' }
+  ] };
+  const result = await discoverPublicRepos(projects, async () => response);
+  assert.deepEqual(result, ['new-public']);
+  assert.equal(projects.length, 2);
+  assert.deepEqual(projects[1].platforms, ['github']);
+});
+
+test('HTTP health only checks approved public HTTPS hosts', async () => {
+  const connector = require('../connectors/http-health.js');
+  const previousFetch = global.fetch;
+  let called = 0;
+  try {
+    global.fetch = async () => {
+      called++;
+      return { status: 200, body: { cancel: async () => {} } };
+    };
+    await assert.rejects(() => connector.fetchData('demo', { url: 'http://localhost:4317' }));
+    await assert.rejects(() => connector.fetchData('demo', { url: 'https://example.com/' }));
+    assert.equal(called, 0);
+    const result = await connector.fetchData('solarispkn-labs',
+      { url: 'https://labs.solarispkn.com.ar/' });
+    assert.equal(result.reachable, true);
+    assert.equal(result.hostname, 'labs.solarispkn.com.ar');
+    assert.equal(called, 1);
   } finally { global.fetch = previousFetch; }
 });
