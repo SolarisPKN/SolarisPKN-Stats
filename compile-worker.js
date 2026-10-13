@@ -27,7 +27,8 @@ const {
   WORKER_NAME = 'solarispkn-stats'
 } = process.env;
 
-if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
+const BUILD_ONLY = process.env.STATS_BUILD_ONLY === 'true';
+if (!BUILD_ONLY && (!CF_ACCOUNT_ID || !CF_API_TOKEN)) {
   console.error('❌ Faltan variables de entorno: CF_ACCOUNT_ID y CF_API_TOKEN');
   process.exit(1);
 }
@@ -116,6 +117,7 @@ const zoneIdCache = {}; // por si dos proyectos comparten el mismo dominio
 
 async function getZoneIdForProject(project) {
   if (!project.url) return null;
+  if (BUILD_ONLY) return '00000000000000000000000000000000';
   const hostname = new URL(project.url).hostname;
   if (hostname in zoneIdCache) return zoneIdCache[hostname];
 
@@ -433,6 +435,10 @@ ${indexCode}
   // 7. SUBIR WORKER A CLOUDFLARE
   // ================================================================
 
+  if (BUILD_ONLY) {
+    console.log('Dry-run: generated Worker without network calls or deployment');
+    return;
+  }
   await deployWorker(workerCode, executionPlan, builtPath);
 
   // ================================================================
