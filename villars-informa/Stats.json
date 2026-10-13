@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T09:30:27.268Z",
+  "updatedAt": "2026-10-13T23:00:33.418Z",
   "cloudflare": {
     "requests": 1575,
     "visitors": 199,
@@ -12,13 +12,13 @@
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 1,
-    "pullRequestsMerged": 0,
+    "pullRequestsOpen": 0,
+    "pullRequestsMerged": 13,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 376894,
+    "sizeKB": 377098,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,22 +26,22 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 649266
+        "bytes": 645228
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 281255
+        "bytes": 371245
       },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 106899
+        "bytes": 109156
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 41447
+        "bytes": 42541
       },
       {
         "name": "HTML",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 69,
+    "totalCommits": 87,
     "lastCommit": {
-      "sha": "f3163835c7bc57422b18b6d50b162fae30eff144",
-      "message": "news: publica resolucion del HCD sobre lineas 136 y 163",
-      "date": "2026-10-05T11:20:59Z"
+      "sha": "03b13a305c9a6645411cee2380597c95fdb3c110",
+      "message": "fix(salud): add community-recorded Hornos phone with verification warning (#17)\n\n* fix(salud): include locally saved CAPS Hornos contact with explicit unverified provenance\n\n* test(salud): cross-check saved Hornos number and already-matching USAM Villars numbers\n\n* test(salud): cross-check saved Hornos number and already-matching USAM Villars numbers",
+      "date": "2026-10-13T21:06:01Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-05T11:21:03Z",
-    "pushedAt": "2026-10-05T11:20:59Z",
+    "updatedAt": "2026-10-13T21:06:07Z",
+    "pushedAt": "2026-10-13T21:06:01Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-10-13T10:30:16Z"
+      "remaining": 4995,
+      "resetAt": "2026-10-14T00:00:25Z"
     }
   },
   "pagespeed": {
