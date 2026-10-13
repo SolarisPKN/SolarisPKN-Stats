@@ -6,6 +6,7 @@ module.exports = {
   hours: [6, 18],
   externalRequests: 1,
   maxDailyCalls: 2,
+  requiredSecrets: ['CF_WORKERS_ANALYTICS_TOKEN'],
   async fetchData(projectId, task, env) {
     const scriptName = task.workerScript;
     if (!/^[a-z0-9][a-z0-9-]{1,70}$/.test(scriptName || ''))
