@@ -65,6 +65,22 @@ test('GitHub GraphQL quota error inside HTTP 200 still trips circuit breaker', a
   } finally { global.fetch = previous; }
 });
 
+test('GitHub connector refuses to publish private repository metrics', async () => {
+  const c = require('../connectors/github.js');
+  const previous = global.fetch;
+  try {
+    global.fetch = async () => ({
+      ok: true, status: 200, json: async () => ({
+        data: { repository: { isPrivate: true, stargazerCount: 1000 } }
+      })
+    });
+    await assert.rejects(
+      () => c.fetchData('formerly-public-repo', {}, { GITHUB_TOKEN_READ: 'mock' }),
+      /privadas bloqueadas/
+    );
+  } finally { global.fetch = previous; }
+});
+
 test('YouTube connector uses one channels.list call and preserves public aggregate stats', async () => {
   const connector = require('../connectors/youtube-public.js');
   const previous = global.fetch;
