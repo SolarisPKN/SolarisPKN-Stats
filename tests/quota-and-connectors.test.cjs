@@ -46,6 +46,25 @@ test('quota policy rejects a burst above the Worker Free safe budget', () => {
   assert.throws(() => analyzePlan(plan, projects, c), /estimated external requests/);
 });
 
+test('GitHub GraphQL quota error inside HTTP 200 still trips circuit breaker', async () => {
+  const c = require('../connectors/github.js');
+  const previous = global.fetch;
+  let calls = 0;
+  try {
+    global.fetch = async () => {
+      calls++;
+      return { ok: true, status: 200, json: async () => ({
+        errors: [{ message: 'API rate limit exceeded for this account' }]
+      }) };
+    };
+    await assert.rejects(
+      () => c.fetchData('solarispkn-stats', {}, { GITHUB_TOKEN_READ: 'mock' }),
+      e => e.httpStatus === 429
+    );
+    assert.equal(calls, 1);
+  } finally { global.fetch = previous; }
+});
+
 test('YouTube connector uses one channels.list call and preserves public aggregate stats', async () => {
   const connector = require('../connectors/youtube-public.js');
   const previous = global.fetch;
