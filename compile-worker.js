@@ -142,6 +142,11 @@ async function getZoneIdForProject(project) {
 // subir el Worker), así que va adentro de main().
 
 async function main() {
+  if (!BUILD_ONLY && process.env.STATS_DISCOVER_PUBLIC !== 'false') {
+    const { discoverPublicRepos } = require('./discover-public-repos');
+    const newlyFound = await discoverPublicRepos(registry.projects);
+    console.log('Public repos added to this build: ' + newlyFound.length);
+  }
   const plan = {};
 
   for (const [projectIndex, project] of registry.projects.entries()) {
