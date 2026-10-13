@@ -10,7 +10,10 @@ module.exports = {
   id: 'pagespeed',
 
   // Horas en las que se ejecuta (límite de 250 consultas/día en plan gratuito)
-  hours: [0, 6, 12, 18],
+  hours: [10], // Lighthouse is costly; once daily per public site is enough
+  spreadWindow: 3,
+  externalRequests: 1,
+  maxDailyCalls: 1,
 
   /**
    * Obtiene métricas de PageSpeed Insights para una URL
