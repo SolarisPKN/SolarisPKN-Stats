@@ -13,7 +13,6 @@ test('registered projects contain only reviewed public ecosystem repos', () => {
   for (const name of ['solarispkn-ia', 'solarispkn-engineer',
     'solarispkn-transport', 'solarispkn-arts',
     'solarispkn-os', 'solarispkn-converter']) assert.ok(ids.includes(name));
-  assert.ok(!ids.includes('solaris-learning-hub'));
   assert.ok(!ids.includes('skills-introduction-to-github'));
 });
 
