@@ -21,7 +21,6 @@
       "id": "solarispkn-stats",
       "platforms": [
         "github",
-        "cloudflare",
         "github-actions"
       ]
     },
