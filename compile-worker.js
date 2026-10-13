@@ -262,7 +262,11 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
   };
 
   const failures = [];
+  // GitHub GraphQL and Actions REST share GitHub API rate-limit protection.
+  // A provider-wide 429 must stop both connectors for this cron invocation.
   const rateLimited = new Set();
+  const quotaPool = platform =>
+    (platform === 'github' || platform === 'github-actions') ? 'github-api' : platform;
   for (const [platform, taskList] of Object.entries(tasks)) {
     const connector = connectorMap[platform];
     if (!connector) {
@@ -271,7 +275,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
     }
     for (const task of taskList) {
       const projectId = task.id;
-      if (rateLimited.has(platform)) continue;
+      if (rateLimited.has(quotaPool(platform))) continue;
       // A connector is configured in the public registry without requiring
       // its credentials to be present. Never print missing tokens or call the API.
       const missing = (connector.requiredSecrets || []).filter(name => !env[name]);
@@ -288,7 +292,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
         // No automatic retries or request storms on quota exhaustion.
         // Stop attempts against this provider for the remaining cron batch.
         if (error.httpStatus === 429 || error.status === 429) {
-          rateLimited.add(platform);
+          rateLimited.add(quotaPool(platform));
           console.warn('Rate limit reached for ' + platform + '; no retries this run');
         }
         failures.push({ platform, projectId });
