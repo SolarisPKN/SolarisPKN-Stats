@@ -2,7 +2,9 @@
 // No generic URL fetch: this connector rejects non-HTTPS and off-domain hosts.
 module.exports = {
   id: 'http-health',
-  hours: [1, 7, 13, 19],
+  hours: [5, 11, 17, 23],
+  externalRequests: 1,
+  maxDailyCalls: 4,
   async fetchData(projectId, task) {
     if (!task?.url) throw new Error('HTTP health requires a public URL');
     const u = new URL(task.url);
