@@ -208,7 +208,14 @@ async function main() {
     version: Date.now(),
     generatedAt: new Date().toISOString(),
     registryHash,
-    plan: sortedPlan
+    plan: sortedPlan,
+    quotaBudget: {
+      // These are configuration estimates, not measured API consumption.
+      estimatedSubrequestsByHour: quotaAnalysis.byHour,
+      plannedDailyUnitsByConnector: quotaAnalysis.byConnector,
+      dailyCaps: quotaAnalysis.caps,
+      maxEstimatedSubrequestsPerCron: quotaAnalysis.maxExternalPerCron
+    }
   };
 
   console.log(`📦 Plan compilado:`);
@@ -411,7 +418,9 @@ export default {
     return new Response(JSON.stringify({
       status: 'OK',
       planVersion: EXECUTION_PLAN.version,
-      generatedAt: EXECUTION_PLAN.generatedAt
+      generatedAt: EXECUTION_PLAN.generatedAt,
+      publicProjects: SNAPSHOT_PROJECTS.length,
+      estimatedQuotaBudget: EXECUTION_PLAN.quotaBudget
     }, null, 2), {
       headers: { 'Content-Type': 'application/json' }
     });
