@@ -21,7 +21,10 @@ module.exports = {
     if (!response.ok) {
       // Do not propagate raw API responses; they may contain sensitive metadata.
       const error = new Error('GitHub Actions API HTTP ' + response.status);
-      error.httpStatus = response.status;
+      const limited = response.status === 429 || (response.status === 403 &&
+        (response.headers?.get?.('x-ratelimit-remaining') === '0' ||
+         !!response.headers?.get?.('retry-after')));
+      error.httpStatus = limited ? 429 : response.status;
       throw error;
     }
     const json = await response.json();
