@@ -6,6 +6,7 @@ module.exports = {
   hours: [3, 9, 15, 21], // baseline polling: 4 times/day, not live minute-by-minute
   externalRequests: 2, // OAuth token + Helix streams (worst-case)
   maxDailyCalls: 4,
+  requiredSecrets: ['TWITCH_CLIENT_ID', 'TWITCH_CLIENT_SECRET'],
   async fetchData(projectId, task, env) {
     const login = task.twitchLogin;
     if (!/^[A-Za-z0-9_]{3,25}$/.test(login || ''))
