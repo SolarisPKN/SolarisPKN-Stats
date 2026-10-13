@@ -62,8 +62,9 @@ module.exports = {
     const response = await fetch(apiUrl);
     
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`PageSpeed API error: ${response.status} - ${errorText}`);
+      const error = new Error('PageSpeed API HTTP ' + response.status);
+      error.httpStatus = response.status;
+      throw error;
     }
 
     const data = await response.json();
