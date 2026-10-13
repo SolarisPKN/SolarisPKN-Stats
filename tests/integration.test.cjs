@@ -28,7 +28,9 @@ test('dry-run generates syntactically valid Worker within Free request budget', 
   assert.equal(checked.status, 0, checked.stderr);
   assert.match(built, /const c_github_actionsConnector/);
   assert.match(built, /Manual collection disabled/);
-  assert.match(built, /await createDailySnapshot\(env, hour\)/);
+  assert.ok(built.includes('await createDailySnapshot(env, hour, scheduledAt)'), 'scheduled snapshot invocation');
+  assert.ok(built.includes('event.scheduledTime'), 'cron must use scheduled event time');
+  assert.ok(!built.includes('now.getMinutes()'), 'delayed cron must not be dropped');
   const planMatch = built.match(/const EXECUTION_PLAN = ([\s\S]*?);\nconst SNAPSHOT_PROJECTS/);
   assert.ok(planMatch, 'compiled execution plan must be embedded');
   const plan = JSON.parse(planMatch[1]).plan;
