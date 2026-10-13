@@ -36,7 +36,24 @@ module.exports = {
       completedAt: r.updated_at,
       url: r.html_url
     } : null;
+    // Preserve independent workflow states. A healthy schedules update must not
+    // mask a failed live deployment in the same repository.
+    const byWorkflow = new Map();
+    for (const run of runs) {
+      const key = String(run.workflow_id || run.name || 'unknown');
+      let state = byWorkflow.get(key);
+      if (!state) {
+        state = { workflow: run.name || 'unknown', latest: relevant(run),
+          latestSuccess: null, latestFailure: null };
+        byWorkflow.set(key, state);
+      }
+      if (run.conclusion === 'success' && !state.latestSuccess)
+        state.latestSuccess = relevant(run);
+      if (run.conclusion === 'failure' && !state.latestFailure)
+        state.latestFailure = relevant(run);
+    }
     return {
+      workflows: [...byWorkflow.values()],
       sampleSize: runs.length,
       totalRuns: Number.isFinite(json.total_count) ? json.total_count : null,
       completed: completed.length,
