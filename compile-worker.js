@@ -236,7 +236,7 @@ const ${safeIdentifier(id)}Connector = (function() {
 // RUNTIME
 // ================================================================
 
-async function runRuntime(env, hour) {
+async function runRuntime(env, hour, scheduledAt = new Date()) {
   console.log(\`⏰ Ejecutando runtime para la hora \${hour}...\`);
 
   const tasks = EXECUTION_PLAN.plan[hour] || {};
@@ -268,7 +268,7 @@ ${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector
     }
   }
 
-  await createDailySnapshot(env, hour);
+  await createDailySnapshot(env, hour, scheduledAt);
   console.log(\`✅ Runtime completado para la hora \${hour}\`);
 }
 
@@ -346,9 +346,9 @@ async function updateProjectStats(env, projectId, platform, data) {
   await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`, existing ? existing.sha : null);
 }
 
-async function createDailySnapshot(env, hour) {
+async function createDailySnapshot(env, hour, scheduledAt) {
   console.log('📸 Creando snapshot histórico...');
-  const today = new Date().toISOString().split('T')[0];
+  const today = scheduledAt.toISOString().split('T')[0];
   for (const [projectIndex, projectId] of SNAPSHOT_PROJECTS.entries()) {
     if (projectIndex % 24 !== hour) continue;
     const statsPath = \`\${projectId}/Stats.json\`;
@@ -369,12 +369,11 @@ async function createDailySnapshot(env, hour) {
 
 export default {
   async scheduled(event, env, ctx) {
-    const now = new Date();
-    const hour = now.getHours();
+    const scheduledAt = new Date(event && typeof event.scheduledTime === 'number'
+      ? event.scheduledTime : Date.now());
+    const hour = scheduledAt.getUTCHours();
     // All 24 UTC hours are eligible; snapshots are staggered across them.
-    if (now.getMinutes() === 0) {
-      await runRuntime(env, hour);
-    }
+    await runRuntime(env, hour, scheduledAt);
   },
 
   async fetch(request, env, ctx) {
