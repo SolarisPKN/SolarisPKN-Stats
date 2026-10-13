@@ -21,14 +21,20 @@
       "id": "solarispkn-stats",
       "platforms": [
         "github",
-        "github-actions"
-      ]
+        "github-actions",
+        "cloudflare-workers"
+      ],
+      "workerScript": "solarispkn-stats"
     },
     {
       "id": "solarispkn-livetools",
       "platforms": [
-        "github"
-      ]
+        "github",
+        "youtube-public",
+        "twitch-public"
+      ],
+      "youtubeHandle": "@SolarisPKN",
+      "twitchLogin": "SolarisPKN"
     },
     {
       "id": "villars-informa",
@@ -113,8 +119,10 @@
       "id": "solarispkn-transport",
       "platforms": [
         "github",
-        "github-actions"
-      ]
+        "github-actions",
+        "r2-public-health"
+      ],
+      "r2PublicUrl": "https://transport-data.solarispkn.com.ar/current.json"
     }
   ]
 }
