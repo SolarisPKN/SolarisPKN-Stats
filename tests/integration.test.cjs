@@ -125,3 +125,29 @@ test('HTTP health only checks approved public HTTPS hosts', async () => {
     assert.equal(called, 1);
   } finally { global.fetch = previousFetch; }
 });
+
+test('generated Worker stops further GitHub GraphQL calls after HTTP 429', async () => {
+  const built = fs.readFileSync(path.join(root, 'worker-built.js'), 'utf8');
+  const match = built.match(/const EXECUTION_PLAN = ([\s\S]*?);\nconst SNAPSHOT_PROJECTS/);
+  assert.ok(match);
+  const plan = JSON.parse(match[1]).plan;
+  const hour = Number(Object.keys(plan).find(h => (plan[h].github || []).length >= 2));
+  assert.ok(Number.isInteger(hour));
+  const uri = 'data:text/javascript;base64,' + Buffer.from(built).toString('base64');
+  const mod = await import(uri);
+  const previous = global.fetch;
+  let graphqlCalls = 0;
+  try {
+    global.fetch = async url => {
+      if (String(url) === 'https://api.github.com/graphql') {
+        graphqlCalls++;
+        return { ok: false, status: 429 };
+      }
+      return { ok: false, status: 404 };
+    };
+    const event = { scheduledTime: Date.UTC(2026, 9, 13, hour) };
+    await assert.rejects(() => mod.default.scheduled(event,
+      { GITHUB_TOKEN_READ: 'mock', GITHUB_TOKEN_WRITE: 'mock' }, {}));
+    assert.equal(graphqlCalls, 1, '429 must stop further calls from the same provider');
+  } finally { global.fetch = previous; }
+});
