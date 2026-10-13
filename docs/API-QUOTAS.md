@@ -36,3 +36,17 @@ A minute-by-minute livestream tracker is a different service: it should run only
 Provider documentation: https://developers.cloudflare.com/workers/platform/limits/ , https://developers.cloudflare.com/analytics/graphql-api/limits/ , https://developers.cloudflare.com/r2/pricing/ , https://developers.google.com/youtube/v3/determine_quota_cost , https://dev.twitch.tv/docs/api/guide , https://developers.google.com/webmaster-tools/limits , https://developers.google.com/analytics/devguides/reporting/data/v1/quotas , https://cloud.arduino.cc/plans/ , https://developers.cloudflare.com/analytics/graphql-api/tutorials/querying-workers-metrics/ .
 
 **Offline validation:** `STATS_BUILD_ONLY=true node compile-worker.js`, `node --test tests/*.test.cjs`. CI does not deploy and does not fetch production credentials.
+
+## Data freshness contract for Labs
+
+Stats **collects data**; Labs owns its presentation. Per-project renders stay in their own repositories.
+
+A project's `Stats.json` may provide:
+- `_sourceChangedAt[connector]`: time the recorded metric values actually changed.
+- `_sourceCheckedAt[connector]`: latest **persisted** successful check. When values stay identical it advances no more often than once every 24 hours to avoid hourly Git commits.
+- `_sourceUpdatedAt[connector]`: legacy compatibility; means last **data change**, not necessarily the latest fetch.
+- `updatedAt`: last file persistence; not necessarily the last metric change.
+
+If an older Stats.json lacks `_sourceCheckedAt`, consumers must show "last check unknown" rather than claim it is fresh. Failed collection never advances a successful-check timestamp. A heartbeat does not modify measurements.
+
+Privacy and quota: GitHub GraphQL refuses repositories that turn private. GitHub Actions first checks public visibility **without authentication** before any token-authenticated workflow request. GitHub GraphQL and Actions share a 429 circuit breaker, including quota-exhaustion errors returned inside an HTTP 200 GraphQL response.
