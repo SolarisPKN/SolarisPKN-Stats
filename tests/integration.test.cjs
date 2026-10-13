@@ -151,3 +151,19 @@ test('generated Worker stops further GitHub GraphQL calls after HTTP 429', async
     assert.equal(graphqlCalls, 1, '429 must stop further calls from the same provider');
   } finally { global.fetch = previous; }
 });
+
+test('GitHub Actions interprets exhausted 403 quota as a stop signal', async () => {
+  const c = require('../connectors/github-actions.js');
+  const previous = global.fetch;
+  try {
+    global.fetch = async () => ({
+      status: 403, ok: false, headers: {
+        get: key => key === 'x-ratelimit-remaining' ? '0' : null
+      }
+    });
+    await assert.rejects(
+      () => c.fetchData('solarispkn-engineer', {}, { GITHUB_TOKEN_READ: 'mock' }),
+      e => e.httpStatus === 429
+    );
+  } finally { global.fetch = previous; }
+});
