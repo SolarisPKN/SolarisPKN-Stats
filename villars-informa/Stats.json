@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T22:00:26.455Z",
+  "updatedAt": "2026-10-14T23:00:33.617Z",
   "cloudflare": {
     "requests": 1844,
     "visitors": 465,
@@ -13,12 +13,12 @@
     "watchers": 0,
     "issuesClosed": 0,
     "pullRequestsOpen": 0,
-    "pullRequestsMerged": 13,
+    "pullRequestsMerged": 14,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 377098,
+    "sizeKB": 377069,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -31,7 +31,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 371245
+        "bytes": 381821
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 87,
+    "totalCommits": 92,
     "lastCommit": {
-      "sha": "03b13a305c9a6645411cee2380597c95fdb3c110",
-      "message": "fix(salud): add community-recorded Hornos phone with verification warning (#17)\n\n* fix(salud): include locally saved CAPS Hornos contact with explicit unverified provenance\n\n* test(salud): cross-check saved Hornos number and already-matching USAM Villars numbers\n\n* test(salud): cross-check saved Hornos number and already-matching USAM Villars numbers",
-      "date": "2026-10-13T21:06:01Z"
+      "sha": "31a7b03066fe5d67d2c5e6435ed0426cd4d842bb",
+      "message": "feat(salud): add opt-in private WhatsApp status collector prototype (#18)\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* docs(test): private consent-only status collector, 24h expiry tests and setup guidance\n\n* docs(test): private consent-only status collector, 24h expiry tests and setup guidance\n\n* chore(security): prevent accidental commits of WhatsApp sessions and health status drafts\n\n* fix(salud): normalize WhatsApp phone IDs correctly and strip NUL characters\n\n* docs(salud): private self-hosted six-hour Action template without public account secrets\n\n* fix(salud): use portable CommonJS interop for whatsapp-web.js in ESM collector\n\n* security(salud): keep Chrome sandbox enabled unless isolated operator opts out",
+      "date": "2026-10-14T18:00:42Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-13T21:06:07Z",
-    "pushedAt": "2026-10-13T21:06:01Z",
+    "updatedAt": "2026-10-14T18:00:59Z",
+    "pushedAt": "2026-10-14T18:00:43Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-10-14T18:00:25Z"
+      "resetAt": "2026-10-15T00:00:21Z"
     }
   },
   "pagespeed": {
