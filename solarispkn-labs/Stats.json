@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T18:00:46.168Z",
+  "updatedAt": "2026-10-14T18:00:59.735Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -84,16 +84,16 @@
     "zoneId": "05d145b9d2d4d7c7f635671ca3c8a44f"
   },
   "pagespeed": {
-    "performance": 99,
+    "performance": 100,
     "accessibility": 100,
-    "bestPractices": 92,
+    "bestPractices": 100,
     "seo": 100,
-    "firstContentfulPaint": 494,
-    "largestContentfulPaint": 763,
+    "firstContentfulPaint": 306,
+    "largestContentfulPaint": 771,
     "totalBlockingTime": 0,
-    "cumulativeLayoutShift": 0.02,
-    "speedIndex": 896,
-    "timeToInteractive": 763,
+    "cumulativeLayoutShift": 0,
+    "speedIndex": 523,
+    "timeToInteractive": 771,
     "url": "https://labs.solarispkn.com.ar",
     "strategy": "desktop"
   }
