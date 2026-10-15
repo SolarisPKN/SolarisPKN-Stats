@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T16:00:23.962Z",
+  "updatedAt": "2026-10-15T17:00:31.480Z",
   "cloudflare": {
     "requests": 2994,
     "visitors": 814,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 377069,
+    "sizeKB": 377101,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 645228
+        "bytes": 655563
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 92,
+    "totalCommits": 94,
     "lastCommit": {
-      "sha": "31a7b03066fe5d67d2c5e6435ed0426cd4d842bb",
-      "message": "feat(salud): add opt-in private WhatsApp status collector prototype (#18)\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* feat(salud): optional local WhatsApp Status collector with whitelist and private drafts\n\n* docs(test): private consent-only status collector, 24h expiry tests and setup guidance\n\n* docs(test): private consent-only status collector, 24h expiry tests and setup guidance\n\n* chore(security): prevent accidental commits of WhatsApp sessions and health status drafts\n\n* fix(salud): normalize WhatsApp phone IDs correctly and strip NUL characters\n\n* docs(salud): private self-hosted six-hour Action template without public account secrets\n\n* fix(salud): use portable CommonJS interop for whatsapp-web.js in ESM collector\n\n* security(salud): keep Chrome sandbox enabled unless isolated operator opts out",
-      "date": "2026-10-14T18:00:42Z"
+      "sha": "342459ba473e88804e9e2cab513c59e6641fbd8d",
+      "message": "feat(noticias): balance del Festival N-Escena",
+      "date": "2026-10-15T11:52:44Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-14T18:00:59Z",
-    "pushedAt": "2026-10-14T18:00:43Z",
+    "updatedAt": "2026-10-15T11:52:51Z",
+    "pushedAt": "2026-10-15T11:52:47Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-10-15T12:00:12Z"
+      "resetAt": "2026-10-15T18:00:19Z"
     }
   },
   "pagespeed": {
