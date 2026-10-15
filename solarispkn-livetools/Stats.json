@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T11:00:19.166Z",
+  "updatedAt": "2026-10-15T17:00:28.963Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,12 +7,12 @@
     "watchers": 0,
     "issuesClosed": 0,
     "pullRequestsOpen": 0,
-    "pullRequestsMerged": 1,
+    "pullRequestsMerged": 4,
     "releases": 2,
     "description": "🚀 Solaris Media Production Suite is a modular toolkit for audiovisual production, live streaming, and digital content creation. It combines scripts, automation, configurations, and production resources to optimize workflows, simplify operations, and support scalable, multi-platform content delivery. 🎥📡⚙️",
     "homepageUrl": null,
     "license": null,
-    "sizeKB": 200,
+    "sizeKB": 356,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -23,9 +23,19 @@
         "bytes": 148282
       },
       {
+        "name": "C++",
+        "color": "#f34b7d",
+        "bytes": 54114
+      },
+      {
         "name": "C#",
         "color": "#7355dd",
         "bytes": 30761
+      },
+      {
+        "name": "Java",
+        "color": "#b07219",
+        "bytes": 30404
       },
       {
         "name": "Go",
@@ -43,9 +53,19 @@
         "bytes": 14594
       },
       {
+        "name": "PowerShell",
+        "color": "#012456",
+        "bytes": 5451
+      },
+      {
         "name": "Batchfile",
         "color": "#C1F12E",
         "bytes": 4141
+      },
+      {
+        "name": "CMake",
+        "color": "#DA3434",
+        "bytes": 3326
       }
     ],
     "topics": [
@@ -61,20 +81,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 14,
+    "totalCommits": 21,
     "lastCommit": {
-      "sha": "7380e518b6d54044a802898ccc8a056cd785bcb7",
-      "message": "feat(multichat): integrate browser-free multistream chat in LiveTools\n\nMultiChat Go CLI, Twitch/YouTube/Rumble adapters, local SSE unified chat, security guardrails, bilingual documentation, tests and CI.",
-      "date": "2026-10-13T13:40:25Z"
+      "sha": "6f9f6b373e44eed7240648feadc4ebf56751be0d",
+      "message": "fix(movilcam): native 1080p60 throughout Camera2, ADB, Windows virtual camera\n\n* fix(movilcam): end-to-end 1080p60 defaults, DirectShow frame timing and real FPS diagnostics\n\n* test(movilcam): assert DirectShow exposes actual 1080p60 capture format",
+      "date": "2026-10-15T12:50:01Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
-    "updatedAt": "2026-10-13T13:40:30Z",
-    "pushedAt": "2026-10-13T13:40:25Z",
+    "updatedAt": "2026-10-15T12:50:06Z",
+    "pushedAt": "2026-10-15T12:50:01Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4996,
-      "resetAt": "2026-10-15T12:00:12Z"
+      "resetAt": "2026-10-15T18:00:19Z"
     }
   }
 }
