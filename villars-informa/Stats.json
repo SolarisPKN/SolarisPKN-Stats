@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T16:00:22.292Z",
+  "updatedAt": "2026-10-16T17:00:30.541Z",
   "cloudflare": {
     "requests": 1331,
     "visitors": 451,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 377101,
+    "sizeKB": 377152,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,12 +26,12 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 655563
+        "bytes": 657301
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 381821
+        "bytes": 386290
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 94,
+    "totalCommits": 102,
     "lastCommit": {
-      "sha": "342459ba473e88804e9e2cab513c59e6641fbd8d",
-      "message": "feat(noticias): balance del Festival N-Escena",
-      "date": "2026-10-15T11:52:44Z"
+      "sha": "81286ccda3c4f3a1e77fbe00b85da55cd6b1e71e",
+      "message": "ci: añade control de extensión y calidad de portadas editoriales",
+      "date": "2026-10-16T14:19:49Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-15T11:52:51Z",
-    "pushedAt": "2026-10-15T11:52:47Z",
+    "updatedAt": "2026-10-16T14:19:56Z",
+    "pushedAt": "2026-10-16T14:19:52Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-10-16T12:00:16Z"
+      "remaining": 4997,
+      "resetAt": "2026-10-16T18:00:23Z"
     }
   },
   "pagespeed": {
