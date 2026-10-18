@@ -1,5 +1,20 @@
 # SolarisPKN-Stats
 
+
+**Free API budgets, connector setup and credential guidance:** [Quota-aware connectors](docs/API-QUOTAS.md). Covers GitHub, Cloudflare, YouTube, Twitch, R2, and providers requiring additional authorization.
+
+## Public repository coverage and safety (October 2026)
+
+The registry tracks reviewed **public** SolarisPKN projects only. At deployment time, `discover-public-repos.js` discovers additional public, non-archived, non-fork repositories from GitHub's public API; explicitly excluded training repositories are not added. Private repositories are never discovered or mirrored.
+
+Connectors: **GitHub GraphQL, GitHub Actions health, Cloudflare host-filtered analytics, PageSpeed desktop and allowlisted HTTPS health checks**. All data is published in per-project `Stats.json`; daily `History/YYYY-MM-DD.json` snapshots are staggered across UTC hours.
+
+**Security:** The public Worker HTTP route provides read-only status; `?run` is disabled. Only Cloudflare cron events initiate collection. The build fails if its estimated hourly external-request budget exceeds 39, below the 50-call Workers Free limit. Unchanged metrics are not rewritten. Failed provider calls are logged without overwriting previously valid metrics.
+
+**Offline validation:** Run `STATS_BUILD_ONLY=true node compile-worker.js` (or set that environment variable in PowerShell) followed by `node --input-type=module --check < worker-built.js` and `node --test tests/*.test.cjs`. Dry mode performs no HTTP calls or deployment. See `.github/workflows/ci.yml`.
+
+**Reporting and dashboards:** Existing JSON metric fields remain available; new connectors expose independent service/workflow health. The Figma-Lab landing page is a presentation prototype, **not** a live Stats API consumer yet. Charting and optional artwork will be integrated separately after data integrity is verified.
+
 🇺🇸 English | 🇦🇷 [Español](README.es.md)
 
 ## Overview
@@ -273,7 +288,7 @@ SolarisPKN-Stats aims to use the most efficient query method available for each 
 
 # First Execution
 
-When SolarisPKN-Stats is deployed for the first time, the system performs an initial collection of statistics for the projects registered in the system.
+After deployment, the Worker starts collecting on the next scheduled UTC cron hour; there is no unauthenticated HTTP trigger or forced immediate refresh.
 
 The Worker creates the required structure for storing each project's data.
 
@@ -791,4 +806,4 @@ In simple terms:
 
 # License
 
-License information will be defined in a future version.
+Distributed under the GNU General Public License v3. See [LICENSE](LICENSE).

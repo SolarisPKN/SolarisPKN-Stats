@@ -2,49 +2,127 @@
   "projects": [
     {
       "id": "solarispkn-labs",
-      "platforms": ["github", "cloudflare", "pagespeed"],
+      "platforms": [
+        "github",
+        "cloudflare",
+        "pagespeed",
+        "github-actions",
+        "http-health"
+      ],
       "url": "https://labs.solarispkn.com.ar"
     },
     {
       "id": "solarispkn-control",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "solarispkn-stats",
-      "platforms": ["github", "cloudflare"]
+      "platforms": [
+        "github",
+        "github-actions",
+        "cloudflare-workers"
+      ],
+      "workerScript": "solarispkn-stats"
     },
     {
       "id": "solarispkn-livetools",
-      "platforms": ["github"]
+      "platforms": [
+        "github",
+        "youtube-public",
+        "twitch-public"
+      ],
+      "youtubeHandle": "@SolarisPKN",
+      "twitchLogin": "SolarisPKN"
     },
     {
       "id": "villars-informa",
-      "platforms": ["github", "cloudflare", "pagespeed"],
+      "platforms": [
+        "github",
+        "cloudflare",
+        "pagespeed",
+        "github-actions",
+        "http-health"
+      ],
       "url": "https://villars.solarispkn.com.ar"
     },
     {
       "id": "lubricantes-villars",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "replit-test01-mystic-",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "replit-test02-soldiercards-",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "figma-lab",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "analia-orayen---terapeuta-integral",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
     },
     {
       "id": "la-cascada-de-any-s",
-      "platforms": ["github"]
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-ia",
+      "platforms": [
+        "github",
+        "github-actions"
+      ]
+    },
+    {
+      "id": "solarispkn-engineer",
+      "platforms": [
+        "github",
+        "github-actions"
+      ]
+    },
+    {
+      "id": "solarispkn-os",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-arts",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-converter",
+      "platforms": [
+        "github"
+      ]
+    },
+    {
+      "id": "solarispkn-transport",
+      "platforms": [
+        "github",
+        "github-actions",
+        "r2-public-health"
+      ],
+      "r2PublicUrl": "https://transport-data.solarispkn.com.ar/current.json"
     }
   ]
 }
