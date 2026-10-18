@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T16:00:21.277Z",
+  "updatedAt": "2026-10-18T17:00:27.266Z",
   "cloudflare": {
     "requests": 892,
     "visitors": 187,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 377267,
+    "sizeKB": 377270,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 657301
+        "bytes": 647650
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 103,
+    "totalCommits": 107,
     "lastCommit": {
-      "sha": "cdff7f4f453bb8c02a3dfc88d16b7707f55f826c",
-      "message": "docs: exige análisis causal económico multinivel con atribución verificable",
-      "date": "2026-10-16T17:43:07Z"
+      "sha": "87c0598bb0ad58bd046cc593a1f19f83101354aa",
+      "message": "docs(agenda): registrar eventos existentes y mejoras pendientes",
+      "date": "2026-10-18T13:03:09Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-16T17:43:12Z",
-    "pushedAt": "2026-10-17T12:05:39Z",
+    "updatedAt": "2026-10-18T13:03:12Z",
+    "pushedAt": "2026-10-18T13:03:09Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-10-18T12:00:15Z"
+      "resetAt": "2026-10-18T18:00:16Z"
     }
   },
   "pagespeed": {
