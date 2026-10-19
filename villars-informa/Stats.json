@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T10:00:19.231Z",
+  "updatedAt": "2026-10-19T11:00:24.729Z",
   "cloudflare": {
     "requests": 1085,
     "visitors": 291,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 377270,
+    "sizeKB": 381993,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,12 +26,12 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 647650
+        "bytes": 697158
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 386290
+        "bytes": 386718
       },
       {
         "name": "Astro",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 107,
+    "totalCommits": 115,
     "lastCommit": {
-      "sha": "87c0598bb0ad58bd046cc593a1f19f83101354aa",
-      "message": "docs(agenda): registrar eventos existentes y mejoras pendientes",
-      "date": "2026-10-18T13:03:09Z"
+      "sha": "6aad85d6659ebcd72e21c818873ebc8d0cfc5fde",
+      "message": "docs(agenda): indexar 70 MDX con metadatos y registrar auditoria ampliada",
+      "date": "2026-10-19T10:27:16Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-18T13:03:12Z",
-    "pushedAt": "2026-10-18T13:03:09Z",
+    "updatedAt": "2026-10-19T10:27:23Z",
+    "pushedAt": "2026-10-19T10:27:19Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4995,
-      "resetAt": "2026-10-19T08:52:27Z"
+      "remaining": 4998,
+      "resetAt": "2026-10-19T12:00:20Z"
     }
   },
   "pagespeed": {
