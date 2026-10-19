@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-10-19T22:00:16.072Z",
+  "updatedAt": "2026-10-19T23:00:16.271Z",
   "github": {
     "stars": 0,
     "forks": 0,
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 1,
-    "pullRequestsOpen": 3,
-    "pullRequestsMerged": 5,
+    "pullRequestsOpen": 2,
+    "pullRequestsMerged": 14,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 181678,
+    "sizeKB": 181958,
     "isArchived": false,
     "isFork": false,
-    "primaryLanguage": "MDX",
+    "primaryLanguage": "Astro",
     "languages": [
-      {
-        "name": "MDX",
-        "color": "#fcb32c",
-        "bytes": 135431
-      },
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 119392
+        "bytes": 173406
+      },
+      {
+        "name": "MDX",
+        "color": "#fcb32c",
+        "bytes": 159320
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 79696
+        "bytes": 135346
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 49966
+        "bytes": 50582
       },
       {
         "name": "HTML",
@@ -66,20 +66,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 120,
+    "totalCommits": 129,
     "lastCommit": {
-      "sha": "7e4babbaeb82af55192606c386ff41dfe13a9b76",
-      "message": "feat(mindmap): bilingual descriptions for all 192 knowledge nodes\n\n* docs(mindmap): explain all 192 nodes in ES\n\n* docs(mindmap): explain all 192 nodes in EN\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* test(mindmap): match generic descriptions with correct escaped punctuation",
-      "date": "2026-10-19T14:51:18Z"
+      "sha": "c3d101bd8a28f2ed179ecfe3879c4191cc00e2f7",
+      "message": "feat(nav): scoped Tech/Gaming menus and universal round scroll-to-top\n\n* feat(nav): isolated gateway controls with separate Tech and Gaming bilingual menus\n\n* feat(layout): contextual world header and universal round SVG scroll-to-top control\n\n* i18n(nav): translate contextual Gaming menu and universe switch\n\n* i18n(nav): translate contextual Gaming menu and universe switch\n\n* i18n(gaming): bilingual honest coming-soon sections for Gaming\n\n* i18n(gaming): bilingual honest coming-soon sections for Gaming\n\n* feat(gaming): dedicated bilingual under-construction world with stream/video/community anchors\n\n* feat(nav): send Gaming half to dedicated Gaming entry with its own menu\n\n* feat(nav): show language and account only on split home\n\n* style(layout): universal fully circular back-to-top button with rounded SVG glyph\n\n* fix(layout): handle universal scroll button with hidden state and transition cleanup\n\n* feat(layout): initialize global back-to-top once per Astro navigation and clean listeners\n\n* fix(portfolio): remove emoji back-top duplicate and inherit accessible universal control\n\n* style(portfolio): remove old emoji scroll button styles now maintained globally\n\n* test(home): check gateway keeps header minimal and Gaming route owns its new navigation\n\n* test(nav): protect world-specific bilingual menus and universal circular scroll button\n\n* ci(nav): validate three navigation modes, translated Gaming links and back-top globally",
+      "date": "2026-10-19T22:57:52Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-10-19T14:51:25Z",
-    "pushedAt": "2026-10-19T15:27:31Z",
+    "updatedAt": "2026-10-19T22:57:57Z",
+    "pushedAt": "2026-10-19T22:57:53Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-10-19T18:00:16Z"
+      "resetAt": "2026-10-20T00:00:15Z"
     }
   },
   "cloudflare": {
