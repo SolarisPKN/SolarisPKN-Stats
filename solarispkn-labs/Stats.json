@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-10-19T16:00:19.923Z",
+  "updatedAt": "2026-10-19T17:00:17.380Z",
   "github": {
     "stars": 0,
     "forks": 0,
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 1,
-    "pullRequestsOpen": 2,
-    "pullRequestsMerged": 0,
+    "pullRequestsOpen": 3,
+    "pullRequestsMerged": 5,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182916,
+    "sizeKB": 181678,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -25,22 +25,27 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 114592
+        "bytes": 119392
       },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 61423
+        "bytes": 79696
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 37963
+        "bytes": 49966
       },
       {
         "name": "HTML",
         "color": "#e34c26",
         "bytes": 5270
+      },
+      {
+        "name": "PowerShell",
+        "color": "#012456",
+        "bytes": 3861
       },
       {
         "name": "Batchfile",
@@ -61,20 +66,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 112,
+    "totalCommits": 120,
     "lastCommit": {
-      "sha": "d04842ee46d2f348845de3a08178728b8f23970d",
-      "message": "Fix GitFlic mirror remote URL\n\nUpdate .github/workflows/mirror-gitflic.yml to use the fixed GitFlic repository URL (solarispkn-labs.git) instead of relying on github.event.repository.name. Ensures mirrors are pushed to the correct target repository on GitFlic.",
-      "date": "2026-08-27T19:38:04Z"
+      "sha": "7e4babbaeb82af55192606c386ff41dfe13a9b76",
+      "message": "feat(mindmap): bilingual descriptions for all 192 knowledge nodes\n\n* docs(mindmap): explain all 192 nodes in ES\n\n* docs(mindmap): explain all 192 nodes in EN\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* feat(mindmap): surface bilingual node definitions and prevent placeholder descriptions\n\n* test(mindmap): match generic descriptions with correct escaped punctuation",
+      "date": "2026-10-19T14:51:18Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-08-29T06:09:38Z",
-    "pushedAt": "2026-10-19T10:59:02Z",
+    "updatedAt": "2026-10-19T14:51:25Z",
+    "pushedAt": "2026-10-19T15:27:31Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-10-19T12:00:15Z"
+      "resetAt": "2026-10-19T18:00:16Z"
     }
   },
   "cloudflare": {
