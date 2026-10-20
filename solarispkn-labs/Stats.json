@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T10:00:16.890Z",
+  "updatedAt": "2026-10-20T11:00:16.229Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,12 +7,12 @@
     "watchers": 0,
     "issuesClosed": 1,
     "pullRequestsOpen": 2,
-    "pullRequestsMerged": 14,
+    "pullRequestsMerged": 16,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 181969,
+    "sizeKB": 182004,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 173406
+        "bytes": 176754
       },
       {
         "name": "MDX",
@@ -30,12 +30,12 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 135346
+        "bytes": 140217
       },
       {
         "name": "CSS",
         "color": "#663399",
-        "bytes": 50582
+        "bytes": 55153
       },
       {
         "name": "HTML",
@@ -66,20 +66,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 129,
+    "totalCommits": 131,
     "lastCommit": {
-      "sha": "c3d101bd8a28f2ed179ecfe3879c4191cc00e2f7",
-      "message": "feat(nav): scoped Tech/Gaming menus and universal round scroll-to-top\n\n* feat(nav): isolated gateway controls with separate Tech and Gaming bilingual menus\n\n* feat(layout): contextual world header and universal round SVG scroll-to-top control\n\n* i18n(nav): translate contextual Gaming menu and universe switch\n\n* i18n(nav): translate contextual Gaming menu and universe switch\n\n* i18n(gaming): bilingual honest coming-soon sections for Gaming\n\n* i18n(gaming): bilingual honest coming-soon sections for Gaming\n\n* feat(gaming): dedicated bilingual under-construction world with stream/video/community anchors\n\n* feat(nav): send Gaming half to dedicated Gaming entry with its own menu\n\n* feat(nav): show language and account only on split home\n\n* style(layout): universal fully circular back-to-top button with rounded SVG glyph\n\n* fix(layout): handle universal scroll button with hidden state and transition cleanup\n\n* feat(layout): initialize global back-to-top once per Astro navigation and clean listeners\n\n* fix(portfolio): remove emoji back-top duplicate and inherit accessible universal control\n\n* style(portfolio): remove old emoji scroll button styles now maintained globally\n\n* test(home): check gateway keeps header minimal and Gaming route owns its new navigation\n\n* test(nav): protect world-specific bilingual menus and universal circular scroll button\n\n* ci(nav): validate three navigation modes, translated Gaming links and back-top globally",
-      "date": "2026-10-19T22:57:52Z"
+      "sha": "bf4fa0069e058da22f9a5b878cf44ddcc5ebe0a0",
+      "message": "fix: blog mobile UX, filtering and article SEO\n\n* fix(blog): localized index and mobile-friendly filter markup\n\n* feat(blog): compact responsive tags, accessible article headings\n\n* fix(blog): filter grid items rather than invisible inner cards\n\n* style(blog): responsive reading index aligned to Tech\n\n* i18n(blog): accurately label recent posts and filter results\n\n* i18n(blog): accurately label recent posts and filter results\n\n* seo(blog): forward article metadata through shared layout\n\n* seo(blog): unique canonical Article identifiers and tag keywords\n\n* feat(blog): article breadcrumbs, return links and Article SEO metadata\n\n* style(blog): responsive article readability, tables and code\n\n* test(blog): prevent responsive, localization and SEO regressions\n\n* ci(blog): validate mobile filters, SEO and full Astro build\n\n* fix(blog): keep Astro Vite-analyzable locale imports",
+      "date": "2026-10-20T10:19:25Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-10-19T22:57:57Z",
-    "pushedAt": "2026-10-19T22:57:53Z",
+    "updatedAt": "2026-10-20T10:19:31Z",
+    "pushedAt": "2026-10-20T10:19:26Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-10-20T08:40:50Z"
+      "resetAt": "2026-10-20T12:00:15Z"
     }
   },
   "cloudflare": {
