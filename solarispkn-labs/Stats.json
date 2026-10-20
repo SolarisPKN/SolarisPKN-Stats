@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T16:00:18.091Z",
+  "updatedAt": "2026-10-20T17:00:18.054Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,12 +7,12 @@
     "watchers": 0,
     "issuesClosed": 1,
     "pullRequestsOpen": 2,
-    "pullRequestsMerged": 16,
+    "pullRequestsMerged": 18,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182004,
+    "sizeKB": 182003,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 176754
+        "bytes": 185384
       },
       {
         "name": "MDX",
@@ -30,7 +30,7 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 140217
+        "bytes": 151171
       },
       {
         "name": "CSS",
@@ -66,20 +66,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 131,
+    "totalCommits": 133,
     "lastCommit": {
-      "sha": "bf4fa0069e058da22f9a5b878cf44ddcc5ebe0a0",
-      "message": "fix: blog mobile UX, filtering and article SEO\n\n* fix(blog): localized index and mobile-friendly filter markup\n\n* feat(blog): compact responsive tags, accessible article headings\n\n* fix(blog): filter grid items rather than invisible inner cards\n\n* style(blog): responsive reading index aligned to Tech\n\n* i18n(blog): accurately label recent posts and filter results\n\n* i18n(blog): accurately label recent posts and filter results\n\n* seo(blog): forward article metadata through shared layout\n\n* seo(blog): unique canonical Article identifiers and tag keywords\n\n* feat(blog): article breadcrumbs, return links and Article SEO metadata\n\n* style(blog): responsive article readability, tables and code\n\n* test(blog): prevent responsive, localization and SEO regressions\n\n* ci(blog): validate mobile filters, SEO and full Astro build\n\n* fix(blog): keep Astro Vite-analyzable locale imports",
-      "date": "2026-10-20T10:19:25Z"
+      "sha": "2169ad7850ec92a56b45a598f21877e944dd8244",
+      "message": "fix(analytics): preserve Google tag across Spanish and English navigation\n\n* fix(analytics): preserve consented tag DOM across bilingual Astro navigation\n\n* fix(analytics): keep GA4 script in persisted host without refiring config\n\n* test(analytics): regression for persisted Google tag and localized route coverage",
+      "date": "2026-10-20T13:01:32Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-10-20T10:19:31Z",
-    "pushedAt": "2026-10-20T10:19:26Z",
+    "updatedAt": "2026-10-20T13:01:40Z",
+    "pushedAt": "2026-10-20T13:01:32Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-10-20T12:00:15Z"
+      "resetAt": "2026-10-20T18:00:16Z"
     }
   },
   "cloudflare": {
