@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T16:00:20.745Z",
+  "updatedAt": "2026-10-21T17:00:47.047Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,12 +7,12 @@
     "watchers": 0,
     "issuesClosed": 1,
     "pullRequestsOpen": 2,
-    "pullRequestsMerged": 18,
+    "pullRequestsMerged": 19,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182003,
+    "sizeKB": 182115,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -20,7 +20,7 @@
       {
         "name": "Astro",
         "color": "#ff5a03",
-        "bytes": 185384
+        "bytes": 185536
       },
       {
         "name": "MDX",
@@ -30,12 +30,17 @@
       {
         "name": "JavaScript",
         "color": "#f1e05a",
-        "bytes": 151171
+        "bytes": 152519
       },
       {
         "name": "CSS",
         "color": "#663399",
         "bytes": 55153
+      },
+      {
+        "name": "Python",
+        "color": "#3572A5",
+        "bytes": 15398
       },
       {
         "name": "HTML",
@@ -66,20 +71,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 133,
+    "totalCommits": 134,
     "lastCommit": {
-      "sha": "2169ad7850ec92a56b45a598f21877e944dd8244",
-      "message": "fix(analytics): preserve Google tag across Spanish and English navigation\n\n* fix(analytics): preserve consented tag DOM across bilingual Astro navigation\n\n* fix(analytics): keep GA4 script in persisted host without refiring config\n\n* test(analytics): regression for persisted Google tag and localized route coverage",
-      "date": "2026-10-20T13:01:32Z"
+      "sha": "21a2c0aed5b6f8a93945dee47d5432f4e0285f93",
+      "message": "feat(cv): publish bilingual two-page ATS CVs with localized downloads\n\n* feat(cv): reproducible bilingual two-page ATS resumes from portfolio\n\n* fix(portfolio): download matching English or Spanish CV on both buttons\n\n* ci(cv): generate, verify, and publish localized PDFs with legacy file removal\n\n* docs(cv): publish English and Spanish ATS PDFs, retire legacy URL\n\n* test(cv): ensure bilingual downloads, PDF format and retired URL\n\n* ci(cv): enforce bilingual portfolio links and public binary integrity\n\n* docs(cv): document public bilingual ATS CV source and repeatable release workflow\n\n---------\n\nCo-authored-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>",
+      "date": "2026-10-21T11:18:06Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-10-20T13:01:40Z",
-    "pushedAt": "2026-10-20T13:01:32Z",
+    "updatedAt": "2026-10-21T11:18:11Z",
+    "pushedAt": "2026-10-21T11:18:06Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-10-21T12:00:16Z"
+      "resetAt": "2026-10-21T18:00:45Z"
     }
   },
   "cloudflare": {
