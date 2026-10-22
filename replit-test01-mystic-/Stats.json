@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T11:00:34.870Z",
+  "updatedAt": "2026-10-22T17:00:48.542Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,12 +7,12 @@
     "watchers": 0,
     "issuesClosed": 0,
     "pullRequestsOpen": 1,
-    "pullRequestsMerged": 0,
+    "pullRequestsMerged": 1,
     "releases": 0,
     "description": "Repository for https://replit.com/@SolarisPKN/Mystic-Harmony-Hub",
     "homepageUrl": "https://replit.com/@SolarisPKN/Mystic-Harmony-Hub",
     "license": null,
-    "sizeKB": 286,
+    "sizeKB": 290,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "TypeScript",
@@ -20,7 +20,7 @@
       {
         "name": "TypeScript",
         "color": "#3178c6",
-        "bytes": 534140
+        "bytes": 535579
       },
       {
         "name": "CSS",
@@ -45,20 +45,20 @@
     ],
     "topics": [],
     "defaultBranch": "main",
-    "totalCommits": 3,
+    "totalCommits": 4,
     "lastCommit": {
-      "sha": "9e14dd0b9e69160674f1e764d562b36657f14c22",
-      "message": "Published your App\n\nReplit-Commit-Author: Deployment\nReplit-Commit-Deployment-Build-Id: b8413503-f998-4871-8bfd-9d7c0a69ffdc",
-      "date": "2026-08-02T21:56:33Z"
+      "sha": "a0dd2aaff9644ff7caf31817b060c3fdacb28e1a",
+      "message": "security: October 2026 hardening (#2)\n\n* security: fail closed for sample data API and restrict CORS\n\n* docs: explain fail-closed demo API and deployment secrets",
+      "date": "2026-10-22T13:23:50Z"
     },
     "createdAt": "2026-08-14T07:09:04Z",
-    "updatedAt": "2026-08-14T07:14:30Z",
-    "pushedAt": "2026-09-02T22:06:22Z",
+    "updatedAt": "2026-10-22T13:24:00Z",
+    "pushedAt": "2026-10-22T13:23:51Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-10-22T12:00:19Z"
+      "resetAt": "2026-10-22T18:00:17Z"
     }
   }
 }
