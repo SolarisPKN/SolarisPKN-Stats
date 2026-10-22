@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T16:00:34.814Z",
+  "updatedAt": "2026-10-22T17:00:38.745Z",
   "cloudflare": {
     "requests": 2014,
     "visitors": 606,
@@ -12,13 +12,13 @@
     "issues": 0,
     "watchers": 0,
     "issuesClosed": 0,
-    "pullRequestsOpen": 1,
-    "pullRequestsMerged": 14,
+    "pullRequestsOpen": 0,
+    "pullRequestsMerged": 15,
     "releases": 0,
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 382407,
+    "sizeKB": 382777,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 705415
+        "bytes": 717845
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 118,
+    "totalCommits": 121,
     "lastCommit": {
-      "sha": "9929cfbfaa92fe3f9b8d4ce8338f000ebfec3778",
-      "message": "data(transport): actualizar horarios",
-      "date": "2026-10-21T15:02:13Z"
+      "sha": "3d17a451eab66d415be80e8e3e69cfc3e150bc79",
+      "message": "security: pin patched Node.js in Villars CI (#20)\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory",
+      "date": "2026-10-22T13:24:10Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-21T15:03:30Z",
-    "pushedAt": "2026-10-21T16:08:41Z",
+    "updatedAt": "2026-10-22T13:24:23Z",
+    "pushedAt": "2026-10-22T13:24:10Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4998,
-      "resetAt": "2026-10-22T12:00:16Z"
+      "resetAt": "2026-10-22T18:00:28Z"
     }
   },
   "pagespeed": {
