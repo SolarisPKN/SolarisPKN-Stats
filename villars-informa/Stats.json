@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T16:00:21.552Z",
+  "updatedAt": "2026-10-25T17:00:28.198Z",
   "cloudflare": {
     "requests": 1979,
     "visitors": 545,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 382777,
+    "sizeKB": 381971,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 717845
+        "bytes": 718310
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 121,
+    "totalCommits": 124,
     "lastCommit": {
-      "sha": "3d17a451eab66d415be80e8e3e69cfc3e150bc79",
-      "message": "security: pin patched Node.js in Villars CI (#20)\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory\n\n* ci: pin patched Node.js LTS after October 2026 advisory",
-      "date": "2026-10-22T13:24:10Z"
+      "sha": "4af81f1e5c7d7cd6f82760b691a641bf5152517f",
+      "message": "docs(agenda): registrar CI reparado, auditoría npm y comprobación del despliegue",
+      "date": "2026-10-25T12:56:26Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-22T13:24:23Z",
-    "pushedAt": "2026-10-22T13:24:10Z",
+    "updatedAt": "2026-10-25T12:56:30Z",
+    "pushedAt": "2026-10-25T12:56:26Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-10-25T12:00:17Z"
+      "remaining": 4998,
+      "resetAt": "2026-10-25T18:00:21Z"
     }
   },
   "pagespeed": {
