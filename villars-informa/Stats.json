@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T16:00:18.447Z",
+  "updatedAt": "2026-11-01T17:00:26.341Z",
   "cloudflare": {
     "requests": 2949,
     "visitors": 249,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 381971,
+    "sizeKB": 382085,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 718310
+        "bytes": 724888
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 124,
+    "totalCommits": 130,
     "lastCommit": {
-      "sha": "4af81f1e5c7d7cd6f82760b691a641bf5152517f",
-      "message": "docs(agenda): registrar CI reparado, auditoría npm y comprobación del despliegue",
-      "date": "2026-10-25T12:56:26Z"
+      "sha": "0e5f95e04aa4e14a7534290d538be7715c97e356",
+      "message": "audit: conserva borrador contrastado 2026-11-fiesta-inmigrante-marcos-paz.md",
+      "date": "2026-11-01T12:51:37Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-10-25T12:56:30Z",
-    "pushedAt": "2026-10-25T12:56:26Z",
+    "updatedAt": "2026-11-01T12:51:41Z",
+    "pushedAt": "2026-11-01T12:51:38Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4997,
-      "resetAt": "2026-11-01T12:00:15Z"
+      "remaining": 4999,
+      "resetAt": "2026-11-01T18:00:25Z"
     }
   },
   "pagespeed": {
