@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T16:00:16.368Z",
+  "updatedAt": "2026-11-08T17:00:15.857Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 182162,
+    "sizeKB": 182231,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "Astro",
@@ -84,7 +84,7 @@
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-11-08T12:00:15Z"
+      "resetAt": "2026-11-08T18:00:15Z"
     }
   },
   "cloudflare": {
