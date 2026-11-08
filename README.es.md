@@ -1,5 +1,20 @@
 # SolarisPKN-Stats
 
+
+**Cuotas, conectores gratuitos y secretos:** [Guía de cuotas y conectores gratuitos](docs/API-QUOTAS.es.md). Incluye los horarios de GitHub, Cloudflare, YouTube, Twitch, R2 y las fuentes que todavía requieren autorización.
+
+## Cobertura de repositorios públicos y seguridad (octubre de 2026)
+
+El registro sigue exclusivamente proyectos públicos revisados de SolarisPKN. En cada despliegue, `discover-public-repos.js` descubre nuevos repositorios públicos, no archivados y que no sean forks mediante la API pública de GitHub. Los proyectos de formación expresamente excluidos no se incorporan. **Nunca** se descubren ni exportan repositorios privados.
+
+Conectores: **GitHub GraphQL, salud de GitHub Actions, Cloudflare filtrado por hostname, PageSpeed de escritorio y comprobaciones HTTPS restringidas a dominios públicos de SolarisPKN**. Se conservan `Stats.json` y los snapshots diarios `History/YYYY-MM-DD.json`, distribuidos a lo largo de las horas UTC.
+
+**Seguridad:** El endpoint HTTP del Worker es de estado; `?run` está deshabilitado. Solo el cron de Cloudflare inicia la recopilación. La compilación rechaza planes superiores a 39 solicitudes externas estimadas por hora, dejando margen respecto al límite de 50 de Workers Free. Se omiten escrituras si no cambia la métrica, y los fallos no pisan las estadísticas previas.
+
+**Pruebas sin despliegue:** Ejecutar `STATS_BUILD_ONLY=true node compile-worker.js` (estableciendo la variable de entorno en PowerShell si corresponde), después `node --input-type=module --check < worker-built.js` y `node --test tests/*.test.cjs`. El modo de prueba no hace peticiones HTTP ni despliega. Véase `.github/workflows/ci.yml`.
+
+**Gráficos:** Los JSON siguen disponibles para aplicaciones y dashboards. Figma-Lab es todavía un prototipo visual, no un cliente conectado al API real de Stats. Se integrarán gráficos e imágenes cuando esté verificada la calidad de los datos.
+
 🇦🇷 Español | 🇺🇸 [English](README.md)
 
 ## Descripción
@@ -273,7 +288,7 @@ SolarisPKN-Stats busca utilizar el método de consulta más eficiente disponible
 
 # Primera ejecución
 
-Cuando SolarisPKN-Stats se despliega por primera vez, el sistema realiza una recopilación inicial de las estadísticas correspondientes a los proyectos registrados.
+Tras el despliegue, la primera recopilación se ejecuta en la próxima hora UTC programada; no existe un disparador HTTP público ni una actualización inmediata forzada.
 
 El Worker crea la estructura necesaria para almacenar los datos de cada proyecto.
 
@@ -791,4 +806,4 @@ En términos simples:
 
 # Licencia
 
-La información de licencia será definida en una futura versión.
+Distribuido bajo GNU General Public License v3. Ver [LICENSE](LICENSE).

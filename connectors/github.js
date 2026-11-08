@@ -14,7 +14,11 @@ module.exports = {
   id: 'github',
 
   // Horas en las que se debe ejecutar este conector (formato 0-23)
-  hours: [0, 5, 11, 17, 23],
+  hours: [1, 7, 13, 19],
+  externalRequests: 1,
+  maxDailyCalls: 4,
+  // Spread the five daily polls among six neighboring UTC hours per project.
+  spreadWindow: 6,
 
   /**
    * Obtiene métricas de un repositorio de GitHub vía GraphQL (1 sola petición)
@@ -95,8 +99,12 @@ module.exports = {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`GitHub GraphQL API error: ${response.status} - ${errorText}`);
+      const error = new Error('GitHub GraphQL API HTTP ' + response.status);
+      const limited = response.status === 429 || (response.status === 403 &&
+        (response.headers?.get?.('x-ratelimit-remaining') === '0' ||
+         !!response.headers?.get?.('retry-after')));
+      error.httpStatus = limited ? 429 : response.status;
+      throw error;
     }
 
     const json = await response.json();
@@ -105,12 +113,26 @@ module.exports = {
     // el array "errors" del body además del status HTTP.
     if (json.errors && json.errors.length > 0) {
       const messages = json.errors.map(e => e.message).join('; ');
-      throw new Error(`GitHub GraphQL error: ${messages}`);
+      // GraphQL may return HTTP 200 with a rate-limit failure in the body.
+      // Treat that as the same provider circuit-breaker signal as HTTP 429.
+      const rateLimited = json.errors.some(e => {
+        const code = String(e?.extensions?.code || '').toUpperCase();
+        return code === 'RATE_LIMITED' || code === 'RATE_LIMIT' ||
+          /(?:rate[- ]limit|secondary rate limit|abuse detection|throttl)/i.test(String(e?.message || ''));
+      });
+      const error = new Error(`GitHub GraphQL error: ${messages}`);
+      if (rateLimited) error.httpStatus = 429;
+      throw error;
     }
 
     const repo = json.data && json.data.repository;
     if (!repo) {
       throw new Error(`Repositorio no encontrado o sin acceso: ${owner}/${repoName}`);
+    }
+    // Stats publishes these metrics in a PUBLIC repository. Fail closed if a
+    // registered project has become private or privacy is not confirmed.
+    if (repo.isPrivate !== false) {
+      throw new Error(`Estadísticas privadas bloqueadas para ${owner}/${repoName}`);
     }
 
     const commit = repo.defaultBranchRef && repo.defaultBranchRef.target;

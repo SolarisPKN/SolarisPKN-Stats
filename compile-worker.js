@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { validateConnectorPolicies, analyzePlan } = require('./quota-policy');
 
 // ================================================================
 // 1. CONFIGURACIÓN
@@ -27,7 +28,8 @@ const {
   WORKER_NAME = 'solarispkn-stats'
 } = process.env;
 
-if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
+const BUILD_ONLY = process.env.STATS_BUILD_ONLY === 'true';
+if (!BUILD_ONLY && (!CF_ACCOUNT_ID || !CF_API_TOKEN)) {
   console.error('❌ Faltan variables de entorno: CF_ACCOUNT_ID y CF_API_TOKEN');
   process.exit(1);
 }
@@ -116,6 +118,7 @@ const zoneIdCache = {}; // por si dos proyectos comparten el mismo dominio
 
 async function getZoneIdForProject(project) {
   if (!project.url) return null;
+  if (BUILD_ONLY) return '00000000000000000000000000000000';
   const hostname = new URL(project.url).hostname;
   if (hostname in zoneIdCache) return zoneIdCache[hostname];
 
@@ -140,9 +143,15 @@ async function getZoneIdForProject(project) {
 // subir el Worker), así que va adentro de main().
 
 async function main() {
+  if (!BUILD_ONLY && process.env.STATS_DISCOVER_PUBLIC !== 'false') {
+    const { discoverPublicRepos } = require('./discover-public-repos');
+    const newlyFound = await discoverPublicRepos(registry.projects);
+    console.log('Public repos added to this build: ' + newlyFound.length);
+  }
+  validateConnectorPolicies(connectors);
   const plan = {};
 
-  for (const project of registry.projects) {
+  for (const [projectIndex, project] of registry.projects.entries()) {
     for (const platform of project.platforms) {
       const connector = connectors[platform];
       if (!connector) {
@@ -157,19 +166,32 @@ async function main() {
         zoneId = await getZoneIdForProject(project);
       }
 
-      const hours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
+      const baseHours = connector.hours || Array.from({ length: 24 }, (_, i) => i);
+      const spread = Math.max(1, Math.min(24, Number(connector.spreadWindow) || 1));
+      const hours = [...new Set(baseHours.map(h => (h + projectIndex % spread) % 24))];
       for (const hour of hours) {
         if (!plan[hour]) plan[hour] = {};
         if (!plan[hour][platform]) plan[hour][platform] = [];
         const task = { id: project.id };
         if (project.url) task.url = project.url;
         if (zoneId) task.zoneId = zoneId;
+        // Only public, non-secret account identifiers reach the Worker plan.
+        if (platform === 'youtube-public') task.youtubeHandle = project.youtubeHandle;
+        if (platform === 'twitch-public') task.twitchLogin = project.twitchLogin;
+        if (platform === 'cloudflare-workers') task.workerScript = project.workerScript;
+        if (platform === 'r2-public-health') task.r2PublicUrl = project.r2PublicUrl;
         if (!plan[hour][platform].some(t => t.id === project.id)) {
           plan[hour][platform].push(task);
         }
       }
     }
   }
+
+  // One provider-aware budget gate before any deploy.
+  // GraphQL, OAuth and Twitch have different actual HTTP costs.
+  const quotaAnalysis = analyzePlan(plan, registry.projects, connectors);
+  console.log('📊 Daily API budgets: ' + JSON.stringify(quotaAnalysis.byConnector));
+
 
   // Ordenar horas
   const sortedPlan = {};
@@ -186,7 +208,14 @@ async function main() {
     version: Date.now(),
     generatedAt: new Date().toISOString(),
     registryHash,
-    plan: sortedPlan
+    plan: sortedPlan,
+    quotaBudget: {
+      // These are configuration estimates, not measured API consumption.
+      estimatedSubrequestsByHour: quotaAnalysis.byHour,
+      plannedDailyUnitsByConnector: quotaAnalysis.byConnector,
+      dailyCaps: quotaAnalysis.caps,
+      maxEstimatedSubrequestsPerCron: quotaAnalysis.maxExternalPerCron
+    }
   };
 
   console.log(`📦 Plan compilado:`);
@@ -199,10 +228,11 @@ async function main() {
   // 5b. GENERAR CÓDIGO DEL WORKER
   // ================================================================
 
+  const safeIdentifier = id => 'c_' + id.replace(/[^a-zA-Z0-9_$]/g, '_');
   const connectorsCode = Object.entries(connectorCode).map(([id, code]) => {
     return `
 // --- Conector: ${id} ---
-const ${id}Connector = (function() {
+const ${safeIdentifier(id)}Connector = (function() {
   let module = { exports: {} };
   (function(module, exports) {
     ${code}
@@ -217,19 +247,26 @@ const ${id}Connector = (function() {
 // RUNTIME
 // ================================================================
 
-async function runRuntime(env, hour) {
+async function runRuntime(env, hour, scheduledAt = new Date()) {
   console.log(\`⏰ Ejecutando runtime para la hora \${hour}...\`);
 
   const tasks = EXECUTION_PLAN.plan[hour] || {};
   if (Object.keys(tasks).length === 0) {
-    console.log(\`⏸️ No hay tareas para la hora \${hour}\`);
+    console.log(\`⏸️ No hay consultas para la hora \${hour}; revisando snapshots\`);
+    await createDailySnapshot(env, hour, scheduledAt);
     return;
   }
 
   const connectorMap = {
-${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
+${Object.keys(connectors).map(id => `    "${id}": ${safeIdentifier(id)}Connector`).join(',\n')}
   };
 
+  const failures = [];
+  // GitHub GraphQL and Actions REST share GitHub API rate-limit protection.
+  // A provider-wide 429 must stop both connectors for this cron invocation.
+  const rateLimited = new Set();
+  const quotaPool = platform =>
+    (platform === 'github' || platform === 'github-actions') ? 'github-api' : platform;
   for (const [platform, taskList] of Object.entries(tasks)) {
     const connector = connectorMap[platform];
     if (!connector) {
@@ -238,19 +275,35 @@ ${Object.keys(connectors).map(id => `    "${id}": ${id}Connector`).join(',\n')}
     }
     for (const task of taskList) {
       const projectId = task.id;
+      if (rateLimited.has(quotaPool(platform))) continue;
+      // A connector is configured in the public registry without requiring
+      // its credentials to be present. Never print missing tokens or call the API.
+      const missing = (connector.requiredSecrets || []).filter(name => !env[name]);
+      if (missing.length) {
+        console.log('Optional connector ' + platform + ' not configured; skipped');
+        break;
+      }
       try {
         console.log(\`📊 Consultando \${platform} para \${projectId}...\`);
         // Le pasamos al conector projectId, la tarea completa (id/url/zoneId/lo que traiga) y env
         const data = await connector.fetchData(projectId, task, env);
         await updateProjectStats(env, projectId, platform, data);
       } catch (error) {
+        // No automatic retries or request storms on quota exhaustion.
+        // Stop attempts against this provider for the remaining cron batch.
+        if (error.httpStatus === 429 || error.status === 429) {
+          rateLimited.add(quotaPool(platform));
+          console.warn('Rate limit reached for ' + platform + '; no retries this run');
+        }
+        failures.push({ platform, projectId });
         console.error(\`❌ Error en \${platform} para \${projectId}:\`, error.message);
       }
     }
   }
 
-  if (hour === 0) {
-    await createDailySnapshot(env);
+  await createDailySnapshot(env, hour, scheduledAt);
+  if (failures.length) {
+    throw new Error(\`Collector completed with \${failures.length} source failures: \${failures.map(f => f.platform + '/' + f.projectId).join(', ')}\`);
   }
   console.log(\`✅ Runtime completado para la hora \${hour}\`);
 }
@@ -284,9 +337,11 @@ async function getFromGitHub(env, path) {
   };
 }
 
-async function saveToGitHub(env, path, content, message = 'Update stats') {
+async function saveToGitHub(env, path, content, message = 'Update stats', knownSha = undefined) {
   const url = \`https://api.github.com/repos/SolarisPKN/SolarisPKN-Stats/contents/\${path}\`;
-  const existing = await getFromGitHub(env, path);
+  // Avoid a duplicate GET when the caller already knows the current blob SHA.
+  const existing = knownSha === undefined ? await getFromGitHub(env, path)
+    : knownSha ? { sha: knownSha } : null;
   const body = {
     message: \`\${message} - \${new Date().toISOString()}\`,
     content: Buffer.from(content).toString('base64'),
@@ -315,27 +370,48 @@ async function updateProjectStats(env, projectId, platform, data) {
   const statsPath = \`\${projectId}/Stats.json\`;
   const existing = await getFromGitHub(env, statsPath);
   let stats = existing ? JSON.parse(existing.content) : { updatedAt: new Date().toISOString() };
-  stats[platform] = data;
-  stats.updatedAt = new Date().toISOString();
-  await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`);
+  const normalized = { ...data };
+  delete normalized._rateLimit; // transient telemetry must not trigger a commit
+  const previous = stats[platform] ? { ...stats[platform] } : undefined;
+  if (previous) delete previous._rateLimit;
+  const changed = JSON.stringify(previous) !== JSON.stringify(normalized);
+  const now = new Date();
+  const nowIso = now.toISOString();
+
+  // Successful fetches do not always change values. Persist a heartbeat at
+  // most once every 24 hours when metrics are unchanged. This is already
+  // covered by the worst-case PUT budget of each scheduled collection.
+  stats._sourceCheckedAt = stats._sourceCheckedAt || {};
+  const priorCheckMs = Date.parse(stats._sourceCheckedAt[platform] || '');
+  const heartbeatDue = !Number.isFinite(priorCheckMs) ||
+    now.getTime() - priorCheckMs >= 24 * 60 * 60 * 1000;
+  if (!changed && !heartbeatDue) return;
+
+  stats._sourceUpdatedAt = stats._sourceUpdatedAt || {}; // legacy: last change
+  stats._sourceChangedAt = stats._sourceChangedAt || {};
+  if (changed) {
+    stats[platform] = normalized;
+    stats._sourceUpdatedAt[platform] = nowIso;
+    stats._sourceChangedAt[platform] = nowIso;
+  } else if (!stats._sourceChangedAt[platform] && stats._sourceUpdatedAt[platform]) {
+    stats._sourceChangedAt[platform] = stats._sourceUpdatedAt[platform];
+  }
+  stats._sourceCheckedAt[platform] = nowIso;
+  stats.updatedAt = nowIso; // time when Stats.json was last persisted
+  await saveToGitHub(env, statsPath, JSON.stringify(stats, null, 2), \`Update \${projectId} stats\`, existing ? existing.sha : null);
 }
 
-async function createDailySnapshot(env) {
+async function createDailySnapshot(env, hour, scheduledAt) {
   console.log('📸 Creando snapshot histórico...');
-  const today = new Date().toISOString().split('T')[0];
-  const registryFile = await getFromGitHub(env, 'registry.json');
-  if (!registryFile) {
-    console.error('❌ No se pudo leer registry.json para snapshots');
-    return;
-  }
-  const registry = JSON.parse(registryFile.content);
-  for (const project of registry.projects) {
-    const statsPath = \`\${project.id}/Stats.json\`;
-    const historyPath = \`\${project.id}/History/\${today}.json\`;
+  const today = scheduledAt.toISOString().split('T')[0];
+  for (const [projectIndex, projectId] of SNAPSHOT_PROJECTS.entries()) {
+    if (projectIndex % 24 !== hour) continue;
+    const statsPath = \`\${projectId}/Stats.json\`;
+    const historyPath = \`\${projectId}/History/\${today}.json\`;
     const statsFile = await getFromGitHub(env, statsPath);
     if (statsFile) {
-      await saveToGitHub(env, historyPath, statsFile.content, \`Snapshot \${today} for \${project.id}\`);
-      console.log(\`  ✅ Snapshot guardado para \${project.id}\`);
+      await saveToGitHub(env, historyPath, statsFile.content, \`Snapshot \${today} for \${projectId}\`);
+      console.log(\`  ✅ Snapshot guardado para \${projectId}\`);
     }
   }
 }
@@ -348,30 +424,26 @@ async function createDailySnapshot(env) {
 
 export default {
   async scheduled(event, env, ctx) {
-    const now = new Date();
-    const hour = now.getHours();
-    // La hora 0 (github+cloudflare+pagespeed + snapshot a History/) NO se
-    // dispara acá — la dispara compile-worker.js justo después de cada
-    // deploy (programado o manual), así el deploy siempre deja Stats.json
-    // fresco. Este cron solo cubre las horas 1-23.
-    if (hour === 0) return;
-    if (now.getMinutes() === 0) {
-      await runRuntime(env, hour);
-    }
+    const scheduledAt = new Date(event && typeof event.scheduledTime === 'number'
+      ? event.scheduledTime : Date.now());
+    const hour = scheduledAt.getUTCHours();
+    // All 24 UTC hours are eligible; snapshots are staggered across them.
+    await runRuntime(env, hour, scheduledAt);
   },
 
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.searchParams.has('run')) {
-      const hourParam = url.searchParams.get('hour');
-      const hour = hourParam !== null ? parseInt(hourParam, 10) : new Date().getHours();
-      await runRuntime(env, hour);
-      return new Response(\`Runtime ejecutado para la hora \${hour}\`);
+      return new Response('Manual collection disabled: use the Cloudflare cron event', {
+        status: 403, headers: { 'Cache-Control': 'no-store' }
+      });
     }
     return new Response(JSON.stringify({
       status: 'OK',
       planVersion: EXECUTION_PLAN.version,
-      generatedAt: EXECUTION_PLAN.generatedAt
+      generatedAt: EXECUTION_PLAN.generatedAt,
+      publicProjects: SNAPSHOT_PROJECTS.length,
+      estimatedQuotaBudget: EXECUTION_PLAN.quotaBudget
     }, null, 2), {
       headers: { 'Content-Type': 'application/json' }
     });
@@ -394,6 +466,7 @@ export default {
 
 // PLAN DE EJECUCIÓN INCRUSTADO
 const EXECUTION_PLAN = ${JSON.stringify(executionPlan, null, 2)};
+const SNAPSHOT_PROJECTS = ${JSON.stringify(registry.projects.map(p => p.id))};
 
 // ================================================================
 // CONECTORES
@@ -423,6 +496,10 @@ ${indexCode}
   // 7. SUBIR WORKER A CLOUDFLARE
   // ================================================================
 
+  if (BUILD_ONLY) {
+    console.log('Dry-run: generated Worker without network calls or deployment');
+    return;
+  }
   await deployWorker(workerCode, executionPlan, builtPath);
 
   // ================================================================
@@ -432,17 +509,8 @@ ${indexCode}
   await setCronTrigger();
 
   // ================================================================
-  // 9. DISPARAR LA HORA 0 (github+cloudflare+pagespeed + snapshot)
-  // ================================================================
-  // No fatal: si esto falla, el deploy en sí ya está hecho y el cron
-  // de las horas 1-23 va a seguir andando solo. Un fallo acá solo
-  // significa "no hubo refresh inmediato", no "el sistema está roto".
-  try {
-    await triggerInitialRun();
-  } catch (err) {
-    console.warn(`⚠️ No se pudo disparar la corrida inicial (hora 0): ${err.message}`);
-    console.warn(`⚠️ El deploy y el cron ya están OK — esto solo afecta el refresh inmediato.`);
-  }
+  // 9. Collection is handled by hourly cron, never by public unauthenticated HTTP.
+
 }
 
 // ================================================================
@@ -535,52 +603,7 @@ async function setCronTrigger() {
   console.log(`✅ Cron Trigger configurado: "0 * * * *" (cada hora en punto, UTC)`);
 }
 
-// Resuelve https://{WORKER_NAME}.{subdominio}.workers.dev y le pega a
-// ?run&hour=0 para forzar el refresh completo (github+cloudflare+pagespeed
-// + snapshot a History/) apenas termina el deploy — sin esperar a que
-// llegue la próxima hora en punto.
-async function triggerInitialRun() {
-  console.log(`🔥 Disparando corrida inicial (hora 0)...`);
-
-  // 1. Resolver el subdominio workers.dev de la cuenta
-  const subdomainUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/subdomain`;
-  const subdomainRes = await fetch(subdomainUrl, {
-    headers: { 'Authorization': `Bearer ${CF_API_TOKEN}` }
-  });
-  if (!subdomainRes.ok) {
-    throw new Error(`No se pudo resolver el subdominio workers.dev: ${subdomainRes.status} - ${await subdomainRes.text()}`);
-  }
-  const subdomainJson = await subdomainRes.json();
-  const subdomain = subdomainJson.result && subdomainJson.result.subdomain;
-  if (!subdomain) {
-    throw new Error('La cuenta no tiene un subdominio workers.dev configurado');
-  }
-
-  // 2. Asegurar que este Worker tenga habilitada la ruta *.workers.dev
-  //    (si solo lo estabas usando con un dominio propio, puede estar apagada)
-  const routeUrl = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/${WORKER_NAME}/subdomain`;
-  const routeRes = await fetch(routeUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${CF_API_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ enabled: true })
-  });
-  if (!routeRes.ok) {
-    throw new Error(`No se pudo habilitar la ruta workers.dev: ${routeRes.status} - ${await routeRes.text()}`);
-  }
-
-  // 3. Pegarle al endpoint ?run&hour=0 del Worker recién deployado
-  const runUrl = `https://${WORKER_NAME}.${subdomain}.workers.dev/?run&hour=0`;
-  const runRes = await fetch(runUrl);
-  if (!runRes.ok) {
-    throw new Error(`El Worker respondió ${runRes.status} al disparar la hora 0`);
-  }
-  const runText = await runRes.text();
-  console.log(`✅ Corrida inicial completada: ${runText}`);
-}
-
+// Manual public run endpoint intentionally removed.
 function guardarArtefactoDeError(builtPath) {
   try {
     const artifactPath = path.join(__dirname, 'worker-built-error.js');

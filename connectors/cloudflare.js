@@ -24,7 +24,9 @@ module.exports = {
   id: 'cloudflare',
 
   // Horas en las que se debe ejecutar este conector (formato 0-23)
-  hours: Array.from({ length: 24 }, (_, i) => i), // [0,1,2,3,...,23]
+  hours: [2, 8, 14, 20], // every 6 hours; traffic is a rolling 24h aggregate
+  externalRequests: 1,
+  maxDailyCalls: 4,
 
   /**
    * Obtiene métricas de Cloudflare para una zona específica
@@ -39,6 +41,9 @@ module.exports = {
     // ============================================================
 
     const zoneId = (task && task.zoneId) || env.CF_ZONE_ID;
+    // A zone can host many projects. Without a hostname filter every project
+    // reports the same aggregate traffic and the numbers are misleading.
+    const hostname = task && task.url ? new URL(task.url).hostname.toLowerCase() : null;
 
     if (!zoneId) {
       throw new Error(
@@ -47,6 +52,7 @@ module.exports = {
       );
     }
 
+    if (!hostname) throw new Error('Cloudflare project requires its own URL/hostname');
     const now = new Date();
     const since = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
@@ -55,7 +61,7 @@ module.exports = {
     // ============================================================
 
     const query = `
-      query ZoneStats($zoneTag: string, $start: Time, $end: Time) {
+      query ZoneStats($zoneTag: string, $start: Time, $end: Time, $hostname: string) {
         viewer {
           zones(filter: { zoneTag: $zoneTag }) {
             httpRequestsAdaptiveGroups(
@@ -64,6 +70,7 @@ module.exports = {
                 datetime_geq: $start
                 datetime_lt: $end
                 requestSource: "eyeball"
+                clientRequestHTTPHost: $hostname
               }
             ) {
               count
@@ -91,6 +98,7 @@ module.exports = {
         query,
         variables: {
           zoneTag: zoneId,
+          hostname,
           start: since.toISOString(),
           end: now.toISOString()
         }
@@ -98,8 +106,9 @@ module.exports = {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Cloudflare GraphQL API error: ${response.status} - ${errorText}`);
+      const error = new Error('Cloudflare GraphQL API HTTP ' + response.status);
+      error.httpStatus = response.status;
+      throw error;
     }
 
     const json = await response.json();
@@ -120,15 +129,18 @@ module.exports = {
 
     if (!group) {
       // Sin tráfico en la ventana pedida no es un error, es una zona tranquila
-      return { requests: 0, visitors: 0, bandwidth: 0, zoneId };
+      return { requests: 0, visitors: 0, visits: 0, bandwidth: 0, zoneId, hostname };
     }
 
     return {
       requests: group.count || 0,
       visitors: (group.sum && group.sum.visits) || 0,
       bandwidth: (group.sum && group.sum.edgeResponseBytes) || 0,
-      // Qué zona se consultó — útil para debug con varios proyectos/zonas
-      zoneId
+      // visits is not a unique-visitor count; keep visitors as legacy alias.
+      visits: (group.sum && group.sum.visits) || 0,
+      // The zone alone is not sufficient attribution; persist hostname.
+      zoneId,
+      hostname
     };
   }
 };

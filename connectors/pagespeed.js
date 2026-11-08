@@ -10,7 +10,10 @@ module.exports = {
   id: 'pagespeed',
 
   // Horas en las que se ejecuta (límite de 250 consultas/día en plan gratuito)
-  hours: [0, 6, 12, 18],
+  hours: [10], // Lighthouse is costly; once daily per public site is enough
+  spreadWindow: 3,
+  externalRequests: 1,
+  maxDailyCalls: 1,
 
   /**
    * Obtiene métricas de PageSpeed Insights para una URL
@@ -59,8 +62,9 @@ module.exports = {
     const response = await fetch(apiUrl);
     
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`PageSpeed API error: ${response.status} - ${errorText}`);
+      const error = new Error('PageSpeed API HTTP ' + response.status);
+      error.httpStatus = response.status;
+      throw error;
     }
 
     const data = await response.json();
