@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T10:00:16.401Z",
+  "updatedAt": "2026-11-08T11:00:15.699Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -7,7 +7,7 @@
     "watchers": 0,
     "issuesClosed": 1,
     "pullRequestsOpen": 1,
-    "pullRequestsMerged": 20,
+    "pullRequestsMerged": 21,
     "releases": 2,
     "description": "Open-source technology lab and development hub for SolarisPKN projects, documentation, automation, embedded systems, and infrastructure experiments.",
     "homepageUrl": "https://labs.solarispkn.com.ar",
@@ -71,20 +71,20 @@
       "infrasctructure"
     ],
     "defaultBranch": "main",
-    "totalCommits": 159,
+    "totalCommits": 160,
     "lastCommit": {
-      "sha": "5a76192023c8f23f183353c705b6d296c7bccfaa",
-      "message": "fix(exo-auth-policy): redirect legacy policy URLs to canonical public hub",
-      "date": "2026-10-28T16:15:06Z"
+      "sha": "db4ac15eeb3e94cfb9e2930982cdc72da24c4f13",
+      "message": "fix(security): actualizar undici vulnerable y asegurar el lockfile (#27)\n\n* fix(security): override vulnerable transitive undici to 7.30.1\n\n* fix(security): lock patched undici integrity and version",
+      "date": "2026-11-08T10:33:18Z"
     },
     "createdAt": "2026-06-13T20:34:39Z",
-    "updatedAt": "2026-10-28T16:15:10Z",
-    "pushedAt": "2026-11-08T02:24:33Z",
+    "updatedAt": "2026-11-08T10:33:23Z",
+    "pushedAt": "2026-11-08T10:33:18Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4999,
-      "resetAt": "2026-11-08T10:06:20Z"
+      "resetAt": "2026-11-08T12:00:15Z"
     }
   },
   "cloudflare": {
