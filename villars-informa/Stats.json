@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T22:00:19.795Z",
+  "updatedAt": "2026-11-10T23:00:26.641Z",
   "cloudflare": {
     "requests": 1384,
     "visitors": 304,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 382134,
+    "sizeKB": 382143,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 133,
+    "totalCommits": 134,
     "lastCommit": {
-      "sha": "4c5a69af05d2b7cb8a9bd80c7fffac76f05b798b",
-      "message": "agenda: auditoría semanal 8 noviembre 2026",
-      "date": "2026-11-08T12:46:36Z"
+      "sha": "ab292c4ce0cad0d924522b85c147cebb286d69c9",
+      "message": "data(transport): actualizar horarios",
+      "date": "2026-11-10T17:39:30Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
-    "updatedAt": "2026-11-08T12:46:40Z",
-    "pushedAt": "2026-11-08T12:46:37Z",
+    "updatedAt": "2026-11-10T21:18:03Z",
+    "pushedAt": "2026-11-10T17:39:31Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
       "remaining": 4995,
-      "resetAt": "2026-11-10T18:00:15Z"
+      "resetAt": "2026-11-11T00:00:15Z"
     }
   },
   "pagespeed": {
