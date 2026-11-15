@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T16:00:19.417Z",
+  "updatedAt": "2026-11-15T17:00:25.831Z",
   "cloudflare": {
     "requests": 3227,
     "visitors": 222,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 382153,
+    "sizeKB": 382193,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 135,
+    "totalCommits": 137,
     "lastCommit": {
-      "sha": "d40e35597462f1215d5e2fd51126af348dcc7cd5",
-      "message": "data(transport): actualizar horarios",
-      "date": "2026-11-11T17:50:27Z"
+      "sha": "9a496e0a203bf8f51fced9a191e336f11d75d293",
+      "message": "docs(agenda): auditoría e índice semanal 2026-11-15",
+      "date": "2026-11-15T12:18:23Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
     "updatedAt": "2026-11-11T18:50:34Z",
-    "pushedAt": "2026-11-11T17:50:30Z",
+    "pushedAt": "2026-11-15T12:18:23Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-11-15T12:00:21Z"
+      "remaining": 4998,
+      "resetAt": "2026-11-15T18:00:18Z"
     }
   },
   "pagespeed": {
