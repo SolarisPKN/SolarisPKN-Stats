@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T17:00:28.396Z",
+  "updatedAt": "2026-11-20T23:00:24.500Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -12,7 +12,7 @@
     "description": "🚀 Solaris Media Production Suite is a modular toolkit for audiovisual production, live streaming, and digital content creation. It combines scripts, automation, configurations, and production resources to optimize workflows, simplify operations, and support scalable, multi-platform content delivery. 🎥📡⚙️",
     "homepageUrl": null,
     "license": null,
-    "sizeKB": 356,
+    "sizeKB": 467,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "JavaScript",
@@ -21,6 +21,11 @@
         "name": "JavaScript",
         "color": "#f1e05a",
         "bytes": 148282
+      },
+      {
+        "name": "Python",
+        "color": "#3572A5",
+        "bytes": 99497
       },
       {
         "name": "C++",
@@ -38,6 +43,11 @@
         "bytes": 30404
       },
       {
+        "name": "PowerShell",
+        "color": "#012456",
+        "bytes": 24704
+      },
+      {
         "name": "Go",
         "color": "#00ADD8",
         "bytes": 21523
@@ -53,19 +63,9 @@
         "bytes": 14594
       },
       {
-        "name": "PowerShell",
-        "color": "#012456",
-        "bytes": 5451
-      },
-      {
-        "name": "Batchfile",
-        "color": "#C1F12E",
-        "bytes": 4141
-      },
-      {
-        "name": "CMake",
-        "color": "#DA3434",
-        "bytes": 3326
+        "name": "Inno Setup",
+        "color": "#264b99",
+        "bytes": 6156
       }
     ],
     "topics": [
@@ -81,20 +81,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 24,
+    "totalCommits": 25,
     "lastCommit": {
-      "sha": "c2275b0e5f1b2d66f773d5b7c421bdc2d1b0e326",
-      "message": "fix(anticensor): repair bilingual VB-CABLE helper PowerShell parser error",
-      "date": "2026-11-20T16:44:06Z"
+      "sha": "aff834c24c00b01cfa8cb4e010e95aeace907c64",
+      "message": "feat(anticensor): auto-name VB-CABLE mic SolarisPKN-Mic Lelele after install and reboot",
+      "date": "2026-11-20T18:45:47Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
     "updatedAt": "2026-11-08T02:42:31Z",
-    "pushedAt": "2026-11-20T16:44:07Z",
+    "pushedAt": "2026-11-20T18:45:49Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4996,
-      "resetAt": "2026-11-20T17:37:31Z"
+      "remaining": 4998,
+      "resetAt": "2026-11-21T00:00:18Z"
     }
   }
 }
