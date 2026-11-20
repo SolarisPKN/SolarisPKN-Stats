@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T11:00:23.726Z",
+  "updatedAt": "2026-11-20T17:00:28.396Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -81,20 +81,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 22,
+    "totalCommits": 24,
     "lastCommit": {
-      "sha": "00a75b7e33f0a0f8e8fe51e9a9906e234397a9c2",
-      "message": "feat(multichat): add lightweight browser-free multistream chat MVP (#6)\n\nIntroduce Go headless chat hub, Twitch IRC, YouTube Live, Rumble, authenticated localhost ingest, SSE unified viewer, bilingual documentation, tests and CI. Do not include secrets or binaries.",
-      "date": "2026-11-08T02:42:26Z"
+      "sha": "c2275b0e5f1b2d66f773d5b7c421bdc2d1b0e326",
+      "message": "fix(anticensor): repair bilingual VB-CABLE helper PowerShell parser error",
+      "date": "2026-11-20T16:44:06Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
     "updatedAt": "2026-11-08T02:42:31Z",
-    "pushedAt": "2026-11-08T03:29:57Z",
+    "pushedAt": "2026-11-20T16:44:07Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4988,
-      "resetAt": "2026-11-20T11:07:10Z"
+      "remaining": 4996,
+      "resetAt": "2026-11-20T17:37:31Z"
     }
   }
 }
