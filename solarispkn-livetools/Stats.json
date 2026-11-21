@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T23:00:24.500Z",
+  "updatedAt": "2026-11-21T05:00:23.213Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -81,20 +81,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 25,
+    "totalCommits": 27,
     "lastCommit": {
-      "sha": "aff834c24c00b01cfa8cb4e010e95aeace907c64",
-      "message": "feat(anticensor): auto-name VB-CABLE mic SolarisPKN-Mic Lelele after install and reboot",
-      "date": "2026-11-20T18:45:47Z"
+      "sha": "37e650c006654f897fe19e65284c35d35a106779",
+      "message": "fix(anticensor): handle Windows endpoint access denied without retry loop, bump v0.8.1",
+      "date": "2026-11-21T04:47:02Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
     "updatedAt": "2026-11-08T02:42:31Z",
-    "pushedAt": "2026-11-20T18:45:49Z",
+    "pushedAt": "2026-11-21T04:47:03Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4998,
-      "resetAt": "2026-11-21T00:00:18Z"
+      "remaining": 4995,
+      "resetAt": "2026-11-21T05:42:45Z"
     }
   }
 }
