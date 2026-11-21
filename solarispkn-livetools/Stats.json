@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T17:00:21.909Z",
+  "updatedAt": "2026-11-21T23:00:22.880Z",
   "github": {
     "stars": 0,
     "forks": 0,
@@ -8,24 +8,24 @@
     "issuesClosed": 0,
     "pullRequestsOpen": 0,
     "pullRequestsMerged": 5,
-    "releases": 2,
+    "releases": 3,
     "description": "🚀 Solaris Media Production Suite is a modular toolkit for audiovisual production, live streaming, and digital content creation. It combines scripts, automation, configurations, and production resources to optimize workflows, simplify operations, and support scalable, multi-platform content delivery. 🎥📡⚙️",
     "homepageUrl": null,
     "license": null,
-    "sizeKB": 581,
+    "sizeKB": 786,
     "isArchived": false,
     "isFork": false,
-    "primaryLanguage": "JavaScript",
+    "primaryLanguage": "Python",
     "languages": [
+      {
+        "name": "Python",
+        "color": "#3572A5",
+        "bytes": 180301
+      },
       {
         "name": "JavaScript",
         "color": "#f1e05a",
         "bytes": 148282
-      },
-      {
-        "name": "Python",
-        "color": "#3572A5",
-        "bytes": 126555
       },
       {
         "name": "C++",
@@ -35,7 +35,7 @@
       {
         "name": "PowerShell",
         "color": "#012456",
-        "bytes": 40905
+        "bytes": 41858
       },
       {
         "name": "C#",
@@ -65,7 +65,7 @@
       {
         "name": "Inno Setup",
         "color": "#264b99",
-        "bytes": 8367
+        "bytes": 9623
       }
     ],
     "topics": [
@@ -81,20 +81,20 @@
       "open-source"
     ],
     "defaultBranch": "main",
-    "totalCommits": 28,
+    "totalCommits": 34,
     "lastCommit": {
-      "sha": "9e388f038baa01618fa094ed9a3024b00b37bc99",
-      "message": "fix(anticensor): rename VB-CABLE via Windows Sound UI and lock official updates repository (v0.8.2)",
-      "date": "2026-11-21T05:11:38Z"
+      "sha": "6db7e634f1d048a9d44eeba2bd0542debd03a504",
+      "message": "fix(anticensor-release): install PyInstaller explicitly and make package discovery CI-safe",
+      "date": "2026-11-21T20:57:32Z"
     },
     "createdAt": "2026-06-17T17:02:59Z",
-    "updatedAt": "2026-11-08T02:42:31Z",
-    "pushedAt": "2026-11-21T05:11:41Z",
+    "updatedAt": "2026-11-21T21:19:20Z",
+    "pushedAt": "2026-11-21T20:58:46Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4999,
-      "resetAt": "2026-11-21T18:00:21Z"
+      "remaining": 4997,
+      "resetAt": "2026-11-22T00:00:17Z"
     }
   }
 }
