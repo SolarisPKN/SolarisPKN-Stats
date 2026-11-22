@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T16:00:18.116Z",
+  "updatedAt": "2026-11-22T17:00:25.332Z",
   "cloudflare": {
     "requests": 5401,
     "visitors": 264,
@@ -18,7 +18,7 @@
     "description": "Sitio web informativo de Villars",
     "homepageUrl": "https://villars.solarispkn.com.ar",
     "license": null,
-    "sizeKB": 382193,
+    "sizeKB": 382287,
     "isArchived": false,
     "isFork": false,
     "primaryLanguage": "MDX",
@@ -26,7 +26,7 @@
       {
         "name": "MDX",
         "color": "#fcb32c",
-        "bytes": 725757
+        "bytes": 726607
       },
       {
         "name": "JavaScript",
@@ -72,20 +72,20 @@
       "news-platform"
     ],
     "defaultBranch": "main",
-    "totalCommits": 137,
+    "totalCommits": 142,
     "lastCommit": {
-      "sha": "9a496e0a203bf8f51fced9a191e336f11d75d293",
-      "message": "docs(agenda): auditoría e índice semanal 2026-11-15",
-      "date": "2026-11-15T12:18:23Z"
+      "sha": "fc1cb200868f3338a53dc13f84be8a32061d42c6",
+      "message": "agenda: sincronizar SHA IATI tras corrección YAML",
+      "date": "2026-11-22T12:55:51Z"
     },
     "createdAt": "2026-07-10T22:42:05Z",
     "updatedAt": "2026-11-11T18:50:34Z",
-    "pushedAt": "2026-11-15T12:18:23Z",
+    "pushedAt": "2026-11-22T12:55:51Z",
     "_rateLimit": {
       "limit": 5000,
       "cost": 1,
-      "remaining": 4998,
-      "resetAt": "2026-11-22T12:00:22Z"
+      "remaining": 4996,
+      "resetAt": "2026-11-22T18:00:17Z"
     }
   },
   "pagespeed": {
